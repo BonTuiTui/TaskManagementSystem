@@ -1,0 +1,27 @@
+﻿@model List<TaskManagementSystem.ViewModels.UsersViewModel>
+
+<h1>Manage Users</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Roles</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.UserName</td>
+                <td>@user.Email</td>
+                <td>@string.Join(", ", user.Roles)</td>
+                <td>
+                    <a asp-controller="Admin" asp-action="EditRoles" asp-route-userId="@user.UserId">Edit Roles</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
