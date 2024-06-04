@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using TaskManagementSystem.Areas.Identity.Data;
@@ -6,6 +7,7 @@ using TaskManagementSystem.Models;
 
 namespace TaskManagementSystem.Controllers;
 
+[Authorize]
 public class HomeController : Controller
 {
     private readonly UserManager<ApplicationUser> _userManager;

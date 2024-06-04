@@ -9,51 +9,64 @@
     <link rel="stylesheet" href="~/css/sidebar.css" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"></script>
 </head>
 
 <body>
     <div class="d-flex">
         <div class="flex-shrink-0 p-3" style="width: 240px;">
             <!-- Sidebar content here -->
-                <a href="/"
-                    class="d-flex align-items-center pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom">
-                    <span class="fs-5 fw-semibold">TMSystem</span>
-                </a>
-                <ul class="list-unstyled ps-0">
-                    <li class="mb-1">
-                        <div class="d-flex align-items-center justify-content-between">
-                            <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
-                                data-bs-toggle="collapse" data-bs-target="#projects-collapse" aria-expanded="false">
-                                Projects
-                            </button>
-                            <button class="btn btn-secondary ml-2 text-end"><i class="bi bi-plus"></i></button>
-                        </div>
-
-                        <div class="collapse" id="projects-collapse">
-                            @await Component.InvokeAsync("Projects")
-                        </div>
-                    </li>
-                    <li class="border-top my-3"></li>
-                    <li class="mb-1">
+            <a href="/"
+               class="d-flex align-items-center pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom">
+                <span class="fs-5 fw-semibold">TMSystem</span>
+            </a>
+            <p>Hello, @User.Identity.Name !</p>
+            <ul class="list-unstyled ps-0">
+                <li class="mb-1">
+                    <div class="d-flex align-items-center justify-content-between">
                         <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
-                            data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="true">
-                            Account
+                                data-bs-toggle="collapse" data-bs-target="#projects-collapse" aria-expanded="false">
+                            Projects
                         </button>
-                        <div class="collapse show" id="account-collapse">
-                            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                                <li><a href="#"
-                                        class="link-body-emphasis d-inline-flex text-decoration-none rounded">Profile</a>
-                                </li>
-                                <li><a href="#"
-                                        class="link-body-emphasis d-inline-flex text-decoration-none rounded">Notification</a>
-                                </li>
-                                <li><a href="#"
-                                        class="link-body-emphasis d-inline-flex text-decoration-none rounded">Sign
-                                        out</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                </ul>
+                        <a class="btn btn-secondary ml-2 text-end" asp-area="" asp-controller="Projects" asp-action="Add"><i class="bi bi-plus"></i></a>
+                    </div>
+
+                    <div class="collapse" id="projects-collapse">
+                        @await Component.InvokeAsync("Projects")
+                    </div>
+                </li>
+                <li class="border-top my-3"></li>
+                <li class="mb-1">
+                    <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+                            data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="true">
+                        Account
+                    </button>
+                    <div class="collapse show" id="account-collapse">
+                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                            <li>
+                                <a asp-controller="Account" asp-action="Profile"
+                                   class="link-body-emphasis d-inline-flex text-decoration-none rounded">Profile</a>
+                            </li>
+                            <li>
+                                <a href="#"
+                                   class="link-body-emphasis d-inline-flex text-decoration-none rounded">Notification</a>
+                            </li>
+                            <li>
+                                <form id="logoutForm" asp-area="" asp-controller="Account" asp-action="Logout" method="post" class="form-inline">
+                                    <a href="javascript:void(0);" id="logoutLink" class="nav-link text-dark">
+                                        Sign out
+                                    </a>
+                                </form>
+
+                                <script>document.getElementById('logoutLink').addEventListener('click', function () {
+                                        document.getElementById('logoutForm').submit();
+                                    });</script>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
         </div>
         <div class="col-9 p-4">
             <!-- Main content here -->

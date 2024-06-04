@@ -29,6 +29,7 @@ namespace TaskManagementSystem.Controllers
         {
             var project = new Project
             {
+                User_id = viewModel.UserId,
                 Name = viewModel.Name,
                 Description = viewModel.Description,
                 CreateAt = viewModel.CreatedAt,
