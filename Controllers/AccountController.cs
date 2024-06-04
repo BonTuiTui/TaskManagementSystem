@@ -28,6 +28,8 @@ namespace TaskManagementSystem.Controllers
             return View();
         }
 
+
+
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
@@ -47,7 +49,6 @@ namespace TaskManagementSystem.Controllers
                     ModelState.AddModelError("", error.Description);
                 }
             }
-
             return View(model);
         }
 

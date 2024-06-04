@@ -3,3 +3,4 @@
 
 // Write your JavaScript code.
 
+/* global bootstrap: false */

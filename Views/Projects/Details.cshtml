@@ -1,0 +1,119 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model TaskManagementSystem.Models.Project
+
+@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+@{
+    var antiforgeryTokenSet = Xsrf.GetAndStoreTokens(Context);
+    ViewData["Title"] = "Project Details";
+}
+
+<h2>@Model.Name</h2>
+<p>@Model.Description</p>
+
+<h3>Tasks</h3>
+<div class="row">
+    <div class="col-md-4">
+        <h4>To Do</h4>
+        <div id="todoColumn" class="task-column">
+            @foreach (var task in Model.Tasks.Where(t => t.Status == "To Do"))
+            {
+                <div class="card mb-3 task-card" data-task-id="@task.Task_id">
+                    <div class="card-body">
+                        <h5 class="card-title">@task.Title</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">@task.AssignedUser.UserName</h6>
+                        <p class="card-text">@task.Description</p>
+                        <p class="card-text"><small class="text-muted">Created At: @task.CreateAt</small></p>
+                        <p class="card-text"><small class="text-muted">Due Date: @task.DueDate.ToShortDateString()</small></p>
+                        <a class="btn btn-primary" asp-controller="Tasks" asp-action="Edit" asp-route-id="@task.Task_id">Edit</a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="col-md-4">
+        <h4>In Progress</h4>
+        <div id="inProgressColumn" class="task-column">
+            @foreach (var task in Model.Tasks.Where(t => t.Status == "In Progress"))
+            {
+                <div class="card mb-3 task-card" data-task-id="@task.Task_id">
+                    <div class="card-body">
+                        <h5 class="card-title">@task.Title</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">@task.AssignedUser.UserName</h6>
+                        <p class="card-text">@task.Description</p>
+                        <p class="card-text"><small class="text-muted">Created At: @task.CreateAt</small></p>
+                        <p class="card-text"><small class="text-muted">Due Date: @task.DueDate.ToShortDateString()</small></p>
+                        <a class="btn btn-primary" asp-controller="Tasks" asp-action="Edit" asp-route-id="@task.Task_id">Edit</a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="col-md-4">
+        <h4>Done</h4>
+        <div id="doneColumn" class="task-column">
+            @foreach (var task in Model.Tasks.Where(t => t.Status == "Done"))
+            {
+                <div class="card mb-3 task-card" data-task-id="@task.Task_id">
+                    <div class="card-body">
+                        <h5 class="card-title">@task.Title</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">@task.AssignedUser.UserName</h6>
+                        <p class="card-text">@task.Description</p>
+                        <p class="card-text"><small class="text-muted">Created At: @task.CreateAt</small></p>
+                        <p class="card-text"><small class="text-muted">Due Date: @task.DueDate.ToShortDateString()</small></p>
+                        <a class="btn btn-primary" asp-controller="Tasks" asp-action="Edit" asp-route-id="@task.Task_id">Edit</a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var todoColumn = document.getElementById('todoColumn');
+            var inProgressColumn = document.getElementById('inProgressColumn');
+            var doneColumn = document.getElementById('doneColumn');
+            var csrfToken = '@antiforgeryTokenSet.RequestToken';
+
+            [todoColumn, inProgressColumn, doneColumn].forEach(function (column) {
+                new Sortable(column, {
+                    group: 'shared',
+                    animation: 150,
+                    onEnd: function (evt) {
+                        var taskId = evt.item.getAttribute('data-task-id');
+                        var newStatus;
+                        if (evt.to.id === 'todoColumn') {
+                            newStatus = 'To Do';
+                        } else if (evt.to.id === 'inProgressColumn') {
+                            newStatus = 'In Progress';
+                        } else if (evt.to.id === 'doneColumn') {
+                            newStatus = 'Done';
+                        }
+
+                        // Call your backend to update the status of the task
+                        fetch('/Tasks/UpdateStatus', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-CSRF-TOKEN': csrfToken
+                            },
+                            body: JSON.stringify({ taskId: taskId, status: newStatus })
+                        }).then(response => {
+                            if (!response.ok) {
+                                console.error('Error updating task status');
+                            }
+                        }).catch(error => {
+                            console.error('Error:', error);
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+}

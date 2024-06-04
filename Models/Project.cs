@@ -8,7 +8,7 @@ namespace TaskManagementSystem.Models
     public class Project
     {
         [Key]
-        public int Projects_id { get; set; }
+        public int Project_id { get; set; }
 
         public string User_id { get; set; } // Change to string
 
@@ -24,5 +24,7 @@ namespace TaskManagementSystem.Models
 
         [ForeignKey("User_id")]
         public virtual ApplicationUser User { get; set; } // Navigation property
+
+        public ICollection<Task> Tasks { get; set; }
     }
 }

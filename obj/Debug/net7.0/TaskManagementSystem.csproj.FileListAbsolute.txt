@@ -8,6 +8,8 @@
 /Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/bin/Debug/net7.0/TaskManagementSystem.pdb
 /Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/bin/Debug/net7.0/Azure.Core.dll
 /Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/bin/Debug/net7.0/Azure.Identity.dll
+/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/bin/Debug/net7.0/Humanizer.dll
+/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/bin/Debug/net7.0/Microsoft.AspNet.Identity.Core.dll
 /Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/bin/Debug/net7.0/Microsoft.AspNetCore.Cryptography.Internal.dll
 /Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/bin/Debug/net7.0/Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
 /Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/bin/Debug/net7.0/Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
@@ -15,8 +17,10 @@
 /Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/bin/Debug/net7.0/Microsoft.Data.SqlClient.dll
 /Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/bin/Debug/net7.0/Microsoft.EntityFrameworkCore.dll
 /Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/bin/Debug/net7.0/Microsoft.EntityFrameworkCore.Abstractions.dll
+/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/bin/Debug/net7.0/Microsoft.EntityFrameworkCore.Design.dll
 /Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/bin/Debug/net7.0/Microsoft.EntityFrameworkCore.Relational.dll
 /Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/bin/Debug/net7.0/Microsoft.EntityFrameworkCore.SqlServer.dll
+/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/bin/Debug/net7.0/Microsoft.Extensions.DependencyModel.dll
 /Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/bin/Debug/net7.0/Microsoft.Extensions.Identity.Core.dll
 /Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/bin/Debug/net7.0/Microsoft.Extensions.Identity.Stores.dll
 /Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/bin/Debug/net7.0/Microsoft.Extensions.Options.dll
@@ -30,6 +34,8 @@
 /Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/bin/Debug/net7.0/Microsoft.IdentityModel.Tokens.dll
 /Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/bin/Debug/net7.0/Microsoft.SqlServer.Server.dll
 /Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/bin/Debug/net7.0/Microsoft.Win32.SystemEvents.dll
+/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/bin/Debug/net7.0/Mono.TextTemplating.dll
+/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/bin/Debug/net7.0/System.CodeDom.dll
 /Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/bin/Debug/net7.0/System.Configuration.ConfigurationManager.dll
 /Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/bin/Debug/net7.0/System.Drawing.Common.dll
 /Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/bin/Debug/net7.0/System.IdentityModel.Tokens.Jwt.dll
@@ -73,10 +79,4 @@
 /Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/obj/Debug/net7.0/TaskManagementSystem.pdb
 /Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/obj/Debug/net7.0/TaskManagementSystem.genruntimeconfig.cache
 /Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/obj/Debug/net7.0/ref/TaskManagementSystem.dll
-/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/bin/Debug/net7.0/Humanizer.dll
-/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/bin/Debug/net7.0/Microsoft.EntityFrameworkCore.Design.dll
-/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/bin/Debug/net7.0/Microsoft.Extensions.DependencyModel.dll
-/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/bin/Debug/net7.0/Mono.TextTemplating.dll
-/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/bin/Debug/net7.0/System.CodeDom.dll
 /Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/obj/Debug/net7.0/TaskManagementSystem.csproj.CopyComplete
-/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/bin/Debug/net7.0/Microsoft.AspNet.Identity.Core.dll

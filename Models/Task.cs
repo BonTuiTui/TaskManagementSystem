@@ -10,7 +10,7 @@ namespace TaskManagementSystem.Models
         [Key]
         public int Task_id { get; set; }
 
-        public int? Project_Id { get; set; }
+        public int Project_Id { get; set; }
 
         public string Description { get; set; }
 

@@ -25,6 +25,9 @@
     <None Remove="Areas\Identity\Data\" />
     <None Remove="Data\" />
     <None Remove="Models\" />
+    <None Remove="Views\Shared\Components\" />
+    <None Remove="Views\Shared\Components\Projects\" />
+    <None Remove="ViewComponents\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\" />
@@ -32,5 +35,8 @@
     <Folder Include="Areas\Identity\Data\" />
     <Folder Include="Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\Shared\Components\" />
+    <Folder Include="Views\Shared\Components\Projects\" />
+    <Folder Include="ViewComponents\" />
   </ItemGroup>
 </Project>
