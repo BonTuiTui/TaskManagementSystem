@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
-using TaskManagementSystem.ViewModels;
-using TaskManagementSystem.Areas.Identity.Data;
 using Microsoft.AspNet.Identity;
+using TaskManagementSystem.Areas.Identity.Data;
 using TaskManagementSystem.Proxies;
+using TaskManagementSystem.ViewModels;
 
 namespace TaskManagementSystem.Controllers
 {
@@ -17,18 +17,10 @@ namespace TaskManagementSystem.Controllers
         }
 
         [HttpGet]
-        public IActionResult AccessDenied()
-        {
-            return View();
-        }
-
-        [HttpGet]
         public IActionResult Register()
         {
             return View();
         }
-
-
 
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel model)
@@ -40,6 +32,9 @@ namespace TaskManagementSystem.Controllers
 
                 if (result.Succeeded)
                 {
+                    // Assign the "employee" role to the new user
+                    await _userManagementProxy.AddToRolesAsync(user, new List<string> { "employee" });
+
                     await _userManagementProxy.SignInUserAsync(user.UserName, model.Password, rememberMe: false);
                     return RedirectToAction("Index", "Home");
                 }
@@ -49,6 +44,7 @@ namespace TaskManagementSystem.Controllers
                     ModelState.AddModelError("", error.Description);
                 }
             }
+
             return View(model);
         }
 
@@ -137,5 +133,14 @@ namespace TaskManagementSystem.Controllers
 
             return View(model);
         }
+
+        [HttpGet]
+        public IActionResult AccessDenied()
+        {
+            return View();
+        }
+
     }
 }
+
+

@@ -8,11 +8,13 @@ namespace TaskManagementSystem.Proxies
     {
         private readonly IUserManagementService _realService;
         private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public UserManagementProxy(IUserManagementService realService, IHttpContextAccessor httpContextAccessor)
+        public UserManagementProxy(IUserManagementService realService, IHttpContextAccessor httpContextAccessor, UserManager<ApplicationUser> userManager)
         {
             _realService = realService;
             _httpContextAccessor = httpContextAccessor;
+            _userManager = userManager;
         }
 
         private bool IsAdmin()
@@ -21,12 +23,39 @@ namespace TaskManagementSystem.Proxies
             return user.IsInRole("admin");
         }
 
+        private bool IsManager()
+        {
+            var user = _httpContextAccessor.HttpContext.User;
+            return user.IsInRole("manager");
+        }
+
         private void EnsureAdmin()
         {
             if (!IsAdmin())
             {
                 throw new UnauthorizedAccessException("Only admins can perform this action.");
             }
+        }
+
+        private void EnsureManager()
+        {
+            if (!IsManager())
+            {
+                throw new UnauthorizedAccessException("Only manager can perform this action.");
+            }
+        }
+
+        // Phương thức lấy thông tin người dùng hiện tại
+        public async Task<ApplicationUser> GetCurrentUserAsync()
+        {
+            var user = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
+            return user;
+        }
+
+        // Phương thức kiểm tra người dùng có trong vai trò được chỉ định hay không
+        public async Task<bool> IsUserInRoleAsync(ApplicationUser user, string roleName)
+        {
+            return await _userManager.IsInRoleAsync(user, roleName);
         }
 
         public async Task<IdentityResult> RegisterUserAsync(ApplicationUser user, string password)
@@ -74,7 +103,7 @@ namespace TaskManagementSystem.Proxies
 
         public async Task<IdentityResult> AddToRolesAsync(ApplicationUser user, IEnumerable<string> roles)
         {
-            EnsureAdmin();
+            // No admin check here since it's for regular users
             return await _realService.AddToRolesAsync(user, roles);
         }
 
@@ -82,6 +111,11 @@ namespace TaskManagementSystem.Proxies
         {
             EnsureAdmin();
             return await _realService.RemoveFromRolesAsync(user, roles);
+        }
+
+        internal Task<bool> IsUserInRoleAsync(string currentUser, string v)
+        {
+            throw new NotImplementedException();
         }
     }
 }

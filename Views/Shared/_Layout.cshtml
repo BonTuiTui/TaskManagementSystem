@@ -48,6 +48,15 @@
                                 <a asp-controller="Account" asp-action="Profile"
                                    class="link-body-emphasis d-inline-flex text-decoration-none rounded">Profile</a>
                             </li>
+
+                            @if (User.IsInRole("admin"))
+                            {
+                                <li>
+                                    <a asp-controller="Admin" asp-action="ManageUsers"
+                                       class="link-body-emphasis d-inline-flex text-decoration-none rounded">Manage Users</a>
+                                </li>
+                            }
+
                             <li>
                                 <a href="#"
                                    class="link-body-emphasis d-inline-flex text-decoration-none rounded">Notification</a>

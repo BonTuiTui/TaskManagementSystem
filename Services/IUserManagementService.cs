@@ -10,10 +10,10 @@ namespace TaskManagementSystem.Services
         Task SignOutUserAsync();
         Task<ApplicationUser> GetUserAsync(string userId);
         Task<IdentityResult> UpdateUserAsync(ApplicationUser user);
+        Task<IList<string>> GetAllRolesAsync();
         Task<IList<string>> GetRolesAsync(ApplicationUser user);
         Task<IList<ApplicationUser>> GetAllUsersAsync();
         Task<IdentityResult> AddToRolesAsync(ApplicationUser user, IEnumerable<string> roles);
         Task<IdentityResult> RemoveFromRolesAsync(ApplicationUser user, IEnumerable<string> roles);
-        Task<IList<string>> GetAllRolesAsync(); 
     }
 }

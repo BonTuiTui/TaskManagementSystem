@@ -1,7 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TaskManagementSystem.Data;
 using TaskManagementSystem.Models;
+using TaskManagementSystem.Proxies;
 using TaskManagementSystem.ViewModels;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -11,13 +15,16 @@ namespace TaskManagementSystem.Controllers
     public class ProjectsController : Controller
     {
         private readonly ApplicationDbContext dbContext;
+        private readonly UserManagementProxy _userManagementProxy; // Thêm UserManagementProxy
 
-        public ProjectsController(ApplicationDbContext dbContext)
+        public ProjectsController(ApplicationDbContext dbContext, UserManagementProxy userManagementProxy) // Thêm UserManagementProxy vào constructor
         {
             this.dbContext = dbContext;
+            _userManagementProxy = userManagementProxy; // Khởi tạo UserManagementProxy
         }
 
         [HttpGet]
+        [Authorize(Roles = "admin, manager")]
         public IActionResult Add()
         {
             return View();
@@ -25,6 +32,7 @@ namespace TaskManagementSystem.Controllers
 
         // go to link https://localhost:7050/Projects/Add to add more project
         [HttpPost]
+        [Authorize(Roles = "admin, manager")]
         public async Task<IActionResult> Add(AddProjectViewModel viewModel)
         {
             var project = new Project
@@ -95,18 +103,54 @@ namespace TaskManagementSystem.Controllers
         [HttpGet]
         public async Task<IActionResult> Details(int id)
         {
-            var project = await dbContext.Projects
-                .Include(p => p.Tasks)
-                .ThenInclude(t => t.AssignedUser)
-                //.ThenInclude(t => t.) // Bao gồm thông tin người dùng được giao nhiệm vụ
-                .FirstOrDefaultAsync(p => p.Project_id == id);
+            var currentUser = await _userManagementProxy.GetCurrentUserAsync();
 
-            if (project == null)
+            // Kiểm tra nếu người dùng là admin
+            if (await _userManagementProxy.IsUserInRoleAsync(currentUser, "admin"))
             {
-                return NotFound();
+                // Admin có thể xem toàn bộ dự án
+                var project = await dbContext.Projects
+                    .Include(p => p.Tasks)
+                    .ThenInclude(t => t.AssignedUser)
+                    .FirstOrDefaultAsync(p => p.Project_id == id);
+
+                if (project == null)
+                {
+                    return NotFound();
+                }
+
+                return View(project);
             }
 
-            return View(project);
+            // Nếu không phải admin, kiểm tra tiếp nếu là manager
+            if (await _userManagementProxy.IsUserInRoleAsync(currentUser, "manager"))
+            {
+                // Manager chỉ có thể xem những dự án mà họ tạo ra
+                var project = await dbContext.Projects
+                    .Include(p => p.Tasks)
+                    .ThenInclude(t => t.AssignedUser)
+                    .FirstOrDefaultAsync(p => p.Project_id == id && p.User_id == currentUser.Id);
+
+                if (project == null)
+                {
+                    return Forbid(); // Chuyển hướng đến trang 403 Forbidden nếu không tìm thấy dự án hoặc không phải của manager đó
+                }
+
+                return View(project);
+            }
+
+            // Cuối cùng, nếu là employee thì chỉ có thể xem những dự án mà họ có task
+            var projectAsEmployee = await dbContext.Projects
+                .Include(p => p.Tasks)
+                .ThenInclude(t => t.AssignedUser)
+                .FirstOrDefaultAsync(p => p.Project_id == id && p.Tasks.Any(t => t.AssignedUser.Id == currentUser.Id));
+
+            if (projectAsEmployee == null)
+            {
+                return Forbid(); // Chuyển hướng đến trang 403 Forbidden nếu không tìm thấy dự án hoặc không có task của employee đó
+            }
+
+            return View(projectAsEmployee);
         }
 
     }
