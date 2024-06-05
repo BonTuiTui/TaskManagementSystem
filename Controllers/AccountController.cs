@@ -27,6 +27,22 @@ namespace TaskManagementSystem.Controllers
         {
             if (ModelState.IsValid)
             {
+                // Check if the Username is already taken
+                var existingUsername = await _userManagementProxy.GetUserByNameAsync(model.Username);
+                if (existingUsername != null)
+                {
+                    ModelState.AddModelError("Username", "Username is already taken.");
+                    return View(model);
+                }
+
+                // Check if the Email is already taken
+                var existingEmail = await _userManagementProxy.GetUserByEmailAsync(model.Email);
+                if (existingEmail != null)
+                {
+                    ModelState.AddModelError("Email", "Email is already taken.");
+                    return View(model);
+                }
+
                 var user = new ApplicationUser { UserName = model.Username, Email = model.Email, FullName = model.Fullname, CreateAt = model.CreateAt };
                 var result = await _userManagementProxy.RegisterUserAsync(user, model.Password);
 
@@ -47,6 +63,7 @@ namespace TaskManagementSystem.Controllers
 
             return View(model);
         }
+
 
         [HttpGet]
         public IActionResult Login()

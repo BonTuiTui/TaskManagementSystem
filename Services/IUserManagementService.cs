@@ -15,5 +15,9 @@ namespace TaskManagementSystem.Services
         Task<IList<ApplicationUser>> GetAllUsersAsync();
         Task<IdentityResult> AddToRolesAsync(ApplicationUser user, IEnumerable<string> roles);
         Task<IdentityResult> RemoveFromRolesAsync(ApplicationUser user, IEnumerable<string> roles);
+        Task<ApplicationUser> GetCurrentUserAsync();
+        Task<ApplicationUser> GetUserByEmailAsync(string email);
+        Task<ApplicationUser> GetUserByNameAsync(string userName);
+
     }
 }

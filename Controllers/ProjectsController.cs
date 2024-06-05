@@ -110,7 +110,7 @@ namespace TaskManagementSystem.Controllers
             {
                 // Admin có thể xem toàn bộ dự án
                 var project = await dbContext.Projects
-                    .Include(p => p.Tasks)
+                    .Include(p => p.Task)
                     .ThenInclude(t => t.AssignedUser)
                     .FirstOrDefaultAsync(p => p.Project_id == id);
 
@@ -127,7 +127,7 @@ namespace TaskManagementSystem.Controllers
             {
                 // Manager chỉ có thể xem những dự án mà họ tạo ra
                 var project = await dbContext.Projects
-                    .Include(p => p.Tasks)
+                    .Include(p => p.Task)
                     .ThenInclude(t => t.AssignedUser)
                     .FirstOrDefaultAsync(p => p.Project_id == id && p.User_id == currentUser.Id);
 
@@ -141,9 +141,9 @@ namespace TaskManagementSystem.Controllers
 
             // Cuối cùng, nếu là employee thì chỉ có thể xem những dự án mà họ có task
             var projectAsEmployee = await dbContext.Projects
-                .Include(p => p.Tasks)
+                .Include(p => p.Task)
                 .ThenInclude(t => t.AssignedUser)
-                .FirstOrDefaultAsync(p => p.Project_id == id && p.Tasks.Any(t => t.AssignedUser.Id == currentUser.Id));
+                .FirstOrDefaultAsync(p => p.Project_id == id && p.Task.Any(t => t.AssignedUser.Id == currentUser.Id));
 
             if (projectAsEmployee == null)
             {

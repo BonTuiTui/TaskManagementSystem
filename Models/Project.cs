@@ -25,6 +25,6 @@ namespace TaskManagementSystem.Models
         [ForeignKey("User_id")]
         public virtual ApplicationUser User { get; set; } // Navigation property
 
-        public ICollection<Task> Tasks { get; set; }
+        public ICollection<Task> Task { get; set; }
     }
 }

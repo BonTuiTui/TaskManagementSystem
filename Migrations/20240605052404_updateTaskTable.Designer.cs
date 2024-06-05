@@ -12,8 +12,8 @@ using TaskManagementSystem.Data;
 namespace TaskManagementSystem.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240601050620_AddFirstDatabase")]
-    partial class AddFirstDatabase
+    [Migration("20240605052404_updateTaskTable")]
+    partial class updateTaskTable
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -281,16 +281,16 @@ namespace TaskManagementSystem.Migrations
 
                     b.HasIndex("User_id");
 
-                    b.ToTable("Notifications", (string)null);
+                    b.ToTable("Notification", (string)null);
                 });
 
             modelBuilder.Entity("TaskManagementSystem.Models.Project", b =>
                 {
-                    b.Property<int>("Projects_id")
+                    b.Property<int>("Project_id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Projects_id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Project_id"));
 
                     b.Property<DateTime>("CreateAt")
                         .HasColumnType("datetime2");
@@ -311,11 +311,11 @@ namespace TaskManagementSystem.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("Projects_id");
+                    b.HasKey("Project_id");
 
                     b.HasIndex("User_id");
 
-                    b.ToTable("Projects", (string)null);
+                    b.ToTable("Project", (string)null);
                 });
 
             modelBuilder.Entity("TaskManagementSystem.Models.Task", b =>
@@ -334,17 +334,15 @@ namespace TaskManagementSystem.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("DueDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("Project_Id")
+                    b.Property<int>("Project_Id")
                         .HasColumnType("int");
 
                     b.Property<string>("Status")
-                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
@@ -393,7 +391,7 @@ namespace TaskManagementSystem.Migrations
 
                     b.HasIndex("User_id");
 
-                    b.ToTable("TaskComments", (string)null);
+                    b.ToTable("TaskComment", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -482,12 +480,15 @@ namespace TaskManagementSystem.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("TaskManagementSystem.Models.Project", null)
-                        .WithMany()
+                    b.HasOne("TaskManagementSystem.Models.Project", "Project")
+                        .WithMany("Task")
                         .HasForeignKey("Project_Id")
-                        .OnDelete(DeleteBehavior.NoAction);
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
 
                     b.Navigation("AssignedUser");
+
+                    b.Navigation("Project");
                 });
 
             modelBuilder.Entity("TaskManagementSystem.Models.TaskComment", b =>
@@ -504,6 +505,11 @@ namespace TaskManagementSystem.Migrations
                         .IsRequired();
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("TaskManagementSystem.Models.Project", b =>
+                {
+                    b.Navigation("Task");
                 });
 #pragma warning restore 612, 618
         }

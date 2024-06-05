@@ -12,8 +12,8 @@ using TaskManagementSystem.Data;
 namespace TaskManagementSystem.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240604090800_RenameProjectsIdToProjectId")]
-    partial class RenameProjectsIdToProjectId
+    [Migration("20240605043334_InitDB")]
+    partial class InitDB
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -281,7 +281,7 @@ namespace TaskManagementSystem.Migrations
 
                     b.HasIndex("User_id");
 
-                    b.ToTable("Notifications", (string)null);
+                    b.ToTable("Notification", (string)null);
                 });
 
             modelBuilder.Entity("TaskManagementSystem.Models.Project", b =>
@@ -315,7 +315,7 @@ namespace TaskManagementSystem.Migrations
 
                     b.HasIndex("User_id");
 
-                    b.ToTable("Projects", (string)null);
+                    b.ToTable("Project", (string)null);
                 });
 
             modelBuilder.Entity("TaskManagementSystem.Models.Task", b =>
@@ -343,9 +343,6 @@ namespace TaskManagementSystem.Migrations
                     b.Property<int>("Project_Id")
                         .HasColumnType("int");
 
-                    b.Property<int?>("Project_id")
-                        .HasColumnType("int");
-
                     b.Property<string>("Status")
                         .IsRequired()
                         .HasMaxLength(255)
@@ -364,8 +361,6 @@ namespace TaskManagementSystem.Migrations
                     b.HasIndex("AssignedTo");
 
                     b.HasIndex("Project_Id");
-
-                    b.HasIndex("Project_id");
 
                     b.ToTable("Task", (string)null);
                 });
@@ -398,7 +393,7 @@ namespace TaskManagementSystem.Migrations
 
                     b.HasIndex("User_id");
 
-                    b.ToTable("TaskComments", (string)null);
+                    b.ToTable("TaskComment", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -487,17 +482,15 @@ namespace TaskManagementSystem.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("TaskManagementSystem.Models.Project", null)
-                        .WithMany()
+                    b.HasOne("TaskManagementSystem.Models.Project", "Project")
+                        .WithMany("Task")
                         .HasForeignKey("Project_Id")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("TaskManagementSystem.Models.Project", null)
-                        .WithMany("Tasks")
-                        .HasForeignKey("Project_id");
-
                     b.Navigation("AssignedUser");
+
+                    b.Navigation("Project");
                 });
 
             modelBuilder.Entity("TaskManagementSystem.Models.TaskComment", b =>
@@ -518,7 +511,7 @@ namespace TaskManagementSystem.Migrations
 
             modelBuilder.Entity("TaskManagementSystem.Models.Project", b =>
                 {
-                    b.Navigation("Tasks");
+                    b.Navigation("Task");
                 });
 #pragma warning restore 612, 618
         }

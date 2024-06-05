@@ -1,53 +1,86 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TaskManagementSystem.Data;
+using TaskManagementSystem.Models;
+using TaskManagementSystem.Services;
 using TaskManagementSystem.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Task = TaskManagementSystem.Models.Task;
-// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+using TaskManagementSystem.Areas.Identity.Data;
+using TaskManagementSystem.Proxies;
 
 namespace TaskManagementSystem.Controllers
 {
     public class TasksController : Controller
     {
         private readonly ApplicationDbContext dbContext;
+        private readonly IUserManagementService _userManagementService;
 
-        public TasksController(ApplicationDbContext dbContext)
+        public TasksController(ApplicationDbContext dbContext, IUserManagementService userManagementService)
         {
             this.dbContext = dbContext;
+            _userManagementService = userManagementService;
         }
 
         [HttpGet]
-        public IActionResult Add()
+        public IActionResult Add(int projectId, string status)
         {
-            return View();
+            var viewModel = new AddTaskViewModel
+            {
+                ProjectId = projectId,
+                Status = status
+            };
+            return View(viewModel);
         }
 
-        // go to link https://localhost:7050/Tasks/Add to add more tasks
         [HttpPost]
         public async Task<IActionResult> Add(AddTaskViewModel viewModel)
         {
+            ApplicationUser? assignedUser = null;
+            if (!string.IsNullOrEmpty(viewModel.AssignedTo))
+            {
+                // Check if AssignedTo is a username or an email
+                if (viewModel.AssignedTo.Contains("@"))
+                {
+                    // AssignedTo is an email
+                    assignedUser = await _userManagementService.GetUserByEmailAsync(viewModel.AssignedTo);
+                }
+                else
+                {
+                    // AssignedTo is a username
+                    assignedUser = await _userManagementService.GetUserByNameAsync(viewModel.AssignedTo);
+                }
+
+                // Check if the assigned user exists
+                if (assignedUser == null)
+                {
+                    // Return an error message if the user does not exist
+                    ModelState.AddModelError("AssignedTo", "The specified user does not exist.");
+                    return View(viewModel);
+                }
+            }
             var task = new Task
             {
                 Project_Id = viewModel.ProjectId,
                 Title = viewModel.Title,
                 Description = viewModel.Description,
                 Status = viewModel.Status,
-                AssignedTo = viewModel.AssignedTo,
+                AssignedTo = assignedUser?.Id, // Assign the user's ID or null if not specified
                 CreateAt = viewModel.CreatedAt,
                 UpdateAt = viewModel.UpdatedAt,
                 DueDate = viewModel.DueDate
             };
 
-            await dbContext.Tasks.AddAsync(task);
+            await dbContext.Task.AddAsync(task);
             await dbContext.SaveChangesAsync();
 
-            return View();
+            return RedirectToAction("Details", "Projects", new { id = viewModel.ProjectId });
         }
 
         [HttpGet]
         public async Task<IActionResult> List()
         {
-            var tasks = await dbContext.Tasks.ToListAsync();
+            var tasks = await dbContext.Task.ToListAsync();
 
             return View(tasks);
         }
@@ -55,7 +88,7 @@ namespace TaskManagementSystem.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
-            var task = await dbContext.Tasks.FindAsync(id);
+            var task = await dbContext.Task.FindAsync(id);
 
             return View(task);
         }
@@ -63,9 +96,9 @@ namespace TaskManagementSystem.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(Task viewModel)
         {
-            var task = await dbContext.Tasks.FindAsync(viewModel.Task_id);
+            var task = await dbContext.Task.FindAsync(viewModel.Task_id);
 
-            if (task is not null)
+            if (task != null)
             {
                 task.Project_Id = viewModel.Project_Id;
                 task.Title = viewModel.Title;
@@ -85,13 +118,13 @@ namespace TaskManagementSystem.Controllers
         [HttpPost]
         public async Task<IActionResult> Delete(Task viewModel)
         {
-            var task = await dbContext.Tasks
+            var task = await dbContext.Task
                 .AsNoTracking()
                 .FirstOrDefaultAsync(x => x.Task_id == viewModel.Task_id);
 
-            if (task is not null)
+            if (task != null)
             {
-                dbContext.Tasks.Remove(viewModel);
+                dbContext.Task.Remove(viewModel);
                 await dbContext.SaveChangesAsync();
             }
 
@@ -101,7 +134,7 @@ namespace TaskManagementSystem.Controllers
         [HttpPost]
         public IActionResult UpdateStatus([FromBody] UpdateStatusModel model)
         {
-            var task = dbContext.Tasks.Find(model.TaskId);
+            var task = dbContext.Task.Find(model.TaskId);
             if (task == null)
             {
                 return NotFound();
@@ -113,12 +146,33 @@ namespace TaskManagementSystem.Controllers
             return Ok();
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Details(int id)
+        {
+            var user = await _userManagementService.GetCurrentUserAsync();
+            var project = await dbContext.Projects
+                .Include(p => p.Task)
+                .ThenInclude(t => t.AssignedUser)
+                .FirstOrDefaultAsync(p => p.Project_id == id);
+
+            if (project == null)
+            {
+                return NotFound();
+            }
+
+            var isUserInProject = project.Task.Any(t => t.AssignedTo == user.Id);
+            if (!isUserInProject)
+            {
+                return Forbid("Bạn không có quyền truy cập vào dự án này.");
+            }
+
+            return View(project);
+        }
+
         public class UpdateStatusModel
         {
             public int TaskId { get; set; }
             public string Status { get; set; }
         }
     }
-
 }
-

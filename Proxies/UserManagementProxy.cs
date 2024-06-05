@@ -17,6 +17,16 @@ namespace TaskManagementSystem.Proxies
             _userManager = userManager;
         }
 
+        public async Task<ApplicationUser> GetUserByNameAsync(string username)
+        {
+            return await _userManager.FindByNameAsync(username);
+        }
+
+        public async Task<ApplicationUser> GetUserByEmailAsync(string email)
+        {
+            return await _userManager.FindByEmailAsync(email);
+        }
+
         private bool IsAdmin()
         {
             var user = _httpContextAccessor.HttpContext.User;
@@ -117,5 +127,6 @@ namespace TaskManagementSystem.Proxies
         {
             throw new NotImplementedException();
         }
+
     }
 }

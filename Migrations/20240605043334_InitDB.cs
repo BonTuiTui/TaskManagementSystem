@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace TaskManagementSystem.Migrations
 {
     /// <inheritdoc />
-    public partial class AddFirstDatabase : Migration
+    public partial class InitDB : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -161,10 +161,10 @@ namespace TaskManagementSystem.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Projects",
+                name: "Project",
                 columns: table => new
                 {
-                    Projects_id = table.Column<int>(type: "int", nullable: false)
+                    Project_id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     User_id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -174,9 +174,9 @@ namespace TaskManagementSystem.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Projects", x => x.Projects_id);
+                    table.PrimaryKey("PK_Project", x => x.Project_id);
                     table.ForeignKey(
-                        name: "FK_Projects_AspNetUsers_User_id",
+                        name: "FK_Project_AspNetUsers_User_id",
                         column: x => x.User_id,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id");
@@ -188,7 +188,7 @@ namespace TaskManagementSystem.Migrations
                 {
                     Task_id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Project_Id = table.Column<int>(type: "int", nullable: true),
+                    Project_Id = table.Column<int>(type: "int", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Status = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     CreateAt = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -206,14 +206,14 @@ namespace TaskManagementSystem.Migrations
                         principalTable: "AspNetUsers",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Task_Projects_Project_Id",
+                        name: "FK_Task_Project_Project_Id",
                         column: x => x.Project_Id,
-                        principalTable: "Projects",
-                        principalColumn: "Projects_id");
+                        principalTable: "Project",
+                        principalColumn: "Project_id");
                 });
 
             migrationBuilder.CreateTable(
-                name: "Notifications",
+                name: "Notification",
                 columns: table => new
                 {
                     Notifications_id = table.Column<int>(type: "int", nullable: false)
@@ -226,22 +226,22 @@ namespace TaskManagementSystem.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Notifications", x => x.Notifications_id);
+                    table.PrimaryKey("PK_Notification", x => x.Notifications_id);
                     table.ForeignKey(
-                        name: "FK_Notifications_AspNetUsers_User_id",
+                        name: "FK_Notification_AspNetUsers_User_id",
                         column: x => x.User_id,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Notifications_Task_Task_id",
+                        name: "FK_Notification_Task_Task_id",
                         column: x => x.Task_id,
                         principalTable: "Task",
                         principalColumn: "Task_id");
                 });
 
             migrationBuilder.CreateTable(
-                name: "TaskComments",
+                name: "TaskComment",
                 columns: table => new
                 {
                     Comment_id = table.Column<int>(type: "int", nullable: false)
@@ -253,15 +253,15 @@ namespace TaskManagementSystem.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TaskComments", x => x.Comment_id);
+                    table.PrimaryKey("PK_TaskComment", x => x.Comment_id);
                     table.ForeignKey(
-                        name: "FK_TaskComments_AspNetUsers_User_id",
+                        name: "FK_TaskComment_AspNetUsers_User_id",
                         column: x => x.User_id,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_TaskComments_Task_Task_id",
+                        name: "FK_TaskComment_Task_Task_id",
                         column: x => x.Task_id,
                         principalTable: "Task",
                         principalColumn: "Task_id");
@@ -317,18 +317,18 @@ namespace TaskManagementSystem.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Notifications_Task_id",
-                table: "Notifications",
+                name: "IX_Notification_Task_id",
+                table: "Notification",
                 column: "Task_id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Notifications_User_id",
-                table: "Notifications",
+                name: "IX_Notification_User_id",
+                table: "Notification",
                 column: "User_id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Projects_User_id",
-                table: "Projects",
+                name: "IX_Project_User_id",
+                table: "Project",
                 column: "User_id");
 
             migrationBuilder.CreateIndex(
@@ -342,13 +342,13 @@ namespace TaskManagementSystem.Migrations
                 column: "Project_Id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TaskComments_Task_id",
-                table: "TaskComments",
+                name: "IX_TaskComment_Task_id",
+                table: "TaskComment",
                 column: "Task_id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TaskComments_User_id",
-                table: "TaskComments",
+                name: "IX_TaskComment_User_id",
+                table: "TaskComment",
                 column: "User_id");
         }
 
@@ -371,10 +371,10 @@ namespace TaskManagementSystem.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Notifications");
+                name: "Notification");
 
             migrationBuilder.DropTable(
-                name: "TaskComments");
+                name: "TaskComment");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
@@ -383,7 +383,7 @@ namespace TaskManagementSystem.Migrations
                 name: "Task");
 
             migrationBuilder.DropTable(
-                name: "Projects");
+                name: "Project");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

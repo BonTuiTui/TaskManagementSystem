@@ -1,7 +1,5 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@{
+    var projectId = Model.Project_id;
 }
 
 @model TaskManagementSystem.Models.Project
@@ -17,10 +15,10 @@
 
 <h3>Tasks</h3>
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-4 border-end">
         <h4>To Do</h4>
         <div id="todoColumn" class="task-column">
-            @foreach (var task in Model.Tasks.Where(t => t.Status == "To Do"))
+            @foreach (var task in Model.Task.Where(t => t.Status == "To Do"))
             {
                 <div class="card mb-3 task-card" data-task-id="@task.Task_id">
                     <div class="card-body">
@@ -34,16 +32,19 @@
                 </div>
             }
         </div>
+        <div class="row mx-2">
+            <a class="btn btn-outline-secondary" asp-area="" asp-controller="Tasks" asp-action="Add" asp-route-projectId="@projectId" asp-route-status="To Do"> <i class="bi bi-plus"></i> Add Task</a>
+        </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-4 border-end">
         <h4>In Progress</h4>
         <div id="inProgressColumn" class="task-column">
-            @foreach (var task in Model.Tasks.Where(t => t.Status == "In Progress"))
+            @foreach (var task in Model.Task.Where(t => t.Status == "In Progress"))
             {
                 <div class="card mb-3 task-card" data-task-id="@task.Task_id">
                     <div class="card-body">
                         <h5 class="card-title">@task.Title</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">@task.AssignedUser.UserName</h6>
+                        <h6 class="card-subtitle mb-2 text-muted">@task.AssignedUser?.UserName</h6>
                         <p class="card-text">@task.Description</p>
                         <p class="card-text"><small class="text-muted">Created At: @task.CreateAt</small></p>
                         <p class="card-text"><small class="text-muted">Due Date: @task.DueDate.ToShortDateString()</small></p>
@@ -51,12 +52,15 @@
                     </div>
                 </div>
             }
+        </div>
+        <div class="row mx-2">
+            <a class="btn btn-outline-secondary" asp-area="" asp-controller="Tasks" asp-action="Add" asp-route-projectId="@projectId" asp-route-status="In Progress"> <i class="bi bi-plus"></i> Add Task</a>
         </div>
     </div>
     <div class="col-md-4">
         <h4>Done</h4>
         <div id="doneColumn" class="task-column">
-            @foreach (var task in Model.Tasks.Where(t => t.Status == "Done"))
+            @foreach (var task in Model.Task.Where(t => t.Status == "Done"))
             {
                 <div class="card mb-3 task-card" data-task-id="@task.Task_id">
                     <div class="card-body">
@@ -69,6 +73,9 @@
                     </div>
                 </div>
             }
+        </div>
+        <div class="row mx-2">
+            <a class="btn btn-outline-secondary" asp-area="" asp-controller="Tasks" asp-action="Add" asp-route-projectId="@projectId" asp-route-status="Done"> <i class="bi bi-plus"></i> Add Task</a>
         </div>
     </div>
 </div>

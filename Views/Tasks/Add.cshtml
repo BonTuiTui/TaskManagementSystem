@@ -1,0 +1,52 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model TaskManagementSystem.ViewModels.AddTaskViewModel
+
+<h1>Add Task</h1>
+
+<form asp-action="Add" method="post">
+    <input type="hidden" class="form-control" asp-for="ProjectId" />
+
+    <div class="mt-3">
+        <label class="form-label">Title</label>
+        <input type="text" class="form-control" asp-for="Title" />
+    </div>
+
+    <div class="mt-3">
+        <label class="form-label">Description</label>
+        <input type="text" class="form-control" asp-for="Description" />
+    </div>
+
+    <div class="mt-3">
+        <label class="form-label">Status</label>
+        <input type="text" class="form-control" asp-for="Status" />
+    </div>
+
+    <div class="mt-3">
+        <label class="form-label">Assigned To</label>
+        <input type="text" class="form-control" asp-for="AssignedTo" />
+    </div>
+
+    <div class="mt-3">
+        <label class="form-label">Created At</label>
+        <input type="datetime-local" class="form-control" asp-for="CreatedAt" />
+    </div>
+
+    <div class="mt-3">
+        <label class="form-label">Updated At</label>
+        <input type="datetime-local" class="form-control" asp-for="UpdatedAt" />
+    </div>
+
+    <div class="mt-3">
+        <label class="form-label">Due Date</label>
+        <input type="datetime-local" class="form-control" asp-for="DueDate" />
+    </div>
+
+    <div class="mt-3">
+        <button type="submit" class="btn btn-primary">Add Task</button>
+    </div>
+</form>

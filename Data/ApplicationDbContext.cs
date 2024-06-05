@@ -44,15 +44,15 @@ namespace TaskManagementSystem.Data
             builder.Entity<IdentityRole>().HasData(adminRole, managerRole, employeeRole);
 
             // Configure your existing tables
-            builder.Entity<Project>().ToTable("Projects");
+            builder.Entity<Project>().ToTable("Project");
             builder.Entity<Task>().ToTable("Task");
-            builder.Entity<Notification>().ToTable("Notifications");
-            builder.Entity<TaskComment>().ToTable("TaskComments");
+            builder.Entity<Notification>().ToTable("Notification");
+            builder.Entity<TaskComment>().ToTable("TaskComment");
 
             // Define foreign key relationships
             builder.Entity<Task>()
-                .HasOne<Project>()
-                .WithMany()
+                .HasOne(t => t.Project)
+                .WithMany(p => p.Task)
                 .HasForeignKey(t => t.Project_Id)
                 .OnDelete(DeleteBehavior.NoAction);
 
@@ -81,8 +81,9 @@ namespace TaskManagementSystem.Data
                 .OnDelete(DeleteBehavior.NoAction);
         }
 
+
         public DbSet<Project> Projects { get; set; }
-        public DbSet<Task> Tasks { get; set; }
+        public DbSet<Task> Task { get; set; }
         public DbSet<Notification> Notifications { get; set; }
         public DbSet<TaskComment> TaskComments { get; set; }
     }
