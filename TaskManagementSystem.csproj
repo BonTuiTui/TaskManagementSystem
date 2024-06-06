@@ -29,6 +29,7 @@
     <None Remove="Views\Shared\Components\Projects\" />
     <None Remove="ViewComponents\" />
     <None Remove="Views\Tasks\" />
+    <None Remove="Migrations\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\" />
@@ -40,5 +41,6 @@
     <Folder Include="Views\Shared\Components\Projects\" />
     <Folder Include="ViewComponents\" />
     <Folder Include="Views\Tasks\" />
+    <Folder Include="Migrations\" />
   </ItemGroup>
 </Project>

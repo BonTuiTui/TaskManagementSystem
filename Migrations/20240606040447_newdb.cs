@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace TaskManagementSystem.Migrations
 {
     /// <inheritdoc />
-    public partial class InitDB : Migration
+    public partial class newdb : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -189,11 +189,11 @@ namespace TaskManagementSystem.Migrations
                     Task_id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Project_Id = table.Column<int>(type: "int", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Status = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Status = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
                     CreateAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdateAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    AssignedTo = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    AssignedTo = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     DueDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Title = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false)
                 },

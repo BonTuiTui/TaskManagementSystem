@@ -12,8 +12,8 @@ using TaskManagementSystem.Data;
 namespace TaskManagementSystem.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240605052404_updateTaskTable")]
-    partial class updateTaskTable
+    [Migration("20240606040447_newdb")]
+    partial class newdb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -327,7 +327,6 @@ namespace TaskManagementSystem.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Task_id"));
 
                     b.Property<string>("AssignedTo")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("CreateAt")
@@ -477,8 +476,7 @@ namespace TaskManagementSystem.Migrations
                     b.HasOne("TaskManagementSystem.Areas.Identity.Data.ApplicationUser", "AssignedUser")
                         .WithMany()
                         .HasForeignKey("AssignedTo")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("TaskManagementSystem.Models.Project", "Project")
                         .WithMany("Task")

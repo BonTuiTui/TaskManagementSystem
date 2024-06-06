@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TaskManagementSystem.Data;
 using TaskManagementSystem.Models;
+using TaskManagementSystem.ProjectFactory;
 using TaskManagementSystem.Proxies;
 using TaskManagementSystem.ViewModels;
 
@@ -16,11 +17,13 @@ namespace TaskManagementSystem.Controllers
     {
         private readonly ApplicationDbContext dbContext;
         private readonly UserManagementProxy _userManagementProxy; // Thêm UserManagementProxy
+        private readonly IProjectFactory projectFatory; 
 
-        public ProjectsController(ApplicationDbContext dbContext, UserManagementProxy userManagementProxy) // Thêm UserManagementProxy vào constructor
+        public ProjectsController(ApplicationDbContext dbContext, UserManagementProxy userManagementProxy, IProjectFactory factory) // Thêm UserManagementProxy vào constructor
         {
             this.dbContext = dbContext;
             _userManagementProxy = userManagementProxy; // Khởi tạo UserManagementProxy
+            projectFatory = factory;
         }
 
         [HttpGet]
@@ -35,16 +38,22 @@ namespace TaskManagementSystem.Controllers
         [Authorize(Roles = "admin, manager")]
         public async Task<IActionResult> Add(AddProjectViewModel viewModel)
         {
-            var project = new Project
+            //var project = new Project
+            //{
+            //    User_id = viewModel.UserId,
+            //    Name = viewModel.Name,
+            //    Description = viewModel.Description,
+            //    //CreateAt = viewModel.CreatedAt
+            //    //UpdateAt = viewModel.UpdatedAt
+            //};
+            if (projectFatory == null)
             {
-                User_id = viewModel.UserId,
-                Name = viewModel.Name,
-                Description = viewModel.Description,
-                CreateAt = viewModel.CreatedAt,
-                UpdateAt = viewModel.UpdatedAt
-            };
+                // Handle the error appropriately
+                return StatusCode(StatusCodes.Status500InternalServerError, "Project factory is not initialized");
+            }
 
-            await dbContext.Projects.AddAsync(project);
+            IProjects project = projectFatory.createuser(viewModel.UserId, viewModel.Name, viewModel.Description);
+            await dbContext.Projects.AddAsync((Project)project);
             await dbContext.SaveChangesAsync();
 
             return View();

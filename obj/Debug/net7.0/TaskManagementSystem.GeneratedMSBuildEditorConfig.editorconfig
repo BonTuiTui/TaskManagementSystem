@@ -9,97 +9,97 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = TaskManagementSystem
 build_property.RootNamespace = TaskManagementSystem
-build_property.ProjectDir = /Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/
+build_property.ProjectDir = /Users/vinhpham/Documents/HSU/dotnet_projects/TaskManagementSystem/
 build_property.RazorLangVersion = 7.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = /Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem
+build_property.MSBuildProjectDirectory = /Users/vinhpham/Documents/HSU/dotnet_projects/TaskManagementSystem
 build_property._RazorSourceGeneratorDebug = 
 
-[/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/Views/Account/AccessDenied.cshtml]
+[/Users/vinhpham/Documents/HSU/dotnet_projects/TaskManagementSystem/Views/Account/AccessDenied.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWNjb3VudC9BY2Nlc3NEZW5pZWQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/Views/Account/Login.cshtml]
+[/Users/vinhpham/Documents/HSU/dotnet_projects/TaskManagementSystem/Views/Account/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWNjb3VudC9Mb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/Views/Account/Profile.cshtml]
+[/Users/vinhpham/Documents/HSU/dotnet_projects/TaskManagementSystem/Views/Account/Profile.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWNjb3VudC9Qcm9maWxlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/Views/Account/Register.cshtml]
+[/Users/vinhpham/Documents/HSU/dotnet_projects/TaskManagementSystem/Views/Account/Register.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWNjb3VudC9SZWdpc3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/Views/Admin/EditRoles.cshtml]
+[/Users/vinhpham/Documents/HSU/dotnet_projects/TaskManagementSystem/Views/Admin/EditRoles.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWRtaW4vRWRpdFJvbGVzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/Views/Admin/ManageUsers.cshtml]
+[/Users/vinhpham/Documents/HSU/dotnet_projects/TaskManagementSystem/Views/Admin/ManageUsers.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWRtaW4vTWFuYWdlVXNlcnMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/Views/Home/Index.cshtml]
+[/Users/vinhpham/Documents/HSU/dotnet_projects/TaskManagementSystem/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9JbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/Views/Home/Privacy.cshtml]
+[/Users/vinhpham/Documents/HSU/dotnet_projects/TaskManagementSystem/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9Qcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/Views/Projects/Add.cshtml]
+[/Users/vinhpham/Documents/HSU/dotnet_projects/TaskManagementSystem/Views/Projects/Add.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHJvamVjdHMvQWRkLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/Views/Projects/Details.cshtml]
+[/Users/vinhpham/Documents/HSU/dotnet_projects/TaskManagementSystem/Views/Projects/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHJvamVjdHMvRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/Views/Projects/Edit.cshtml]
+[/Users/vinhpham/Documents/HSU/dotnet_projects/TaskManagementSystem/Views/Projects/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHJvamVjdHMvRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/Views/Projects/List.cshtml]
+[/Users/vinhpham/Documents/HSU/dotnet_projects/TaskManagementSystem/Views/Projects/List.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHJvamVjdHMvTGlzdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/Views/Shared/Components/Projects/Projects.cshtml]
+[/Users/vinhpham/Documents/HSU/dotnet_projects/TaskManagementSystem/Views/Shared/Components/Projects/Projects.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0NvbXBvbmVudHMvUHJvamVjdHMvUHJvamVjdHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/Views/Shared/Error.cshtml]
+[/Users/vinhpham/Documents/HSU/dotnet_projects/TaskManagementSystem/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0Vycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/Views/Shared/_AuthLayout.cshtml]
+[/Users/vinhpham/Documents/HSU/dotnet_projects/TaskManagementSystem/Views/Shared/_AuthLayout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19BdXRoTGF5b3V0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/Views/Shared/_ValidationScriptsPartial.cshtml]
+[/Users/vinhpham/Documents/HSU/dotnet_projects/TaskManagementSystem/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/Views/Tasks/Add.cshtml]
+[/Users/vinhpham/Documents/HSU/dotnet_projects/TaskManagementSystem/Views/Tasks/Add.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVGFza3MvQWRkLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/Views/Tasks/Edit.cshtml]
+[/Users/vinhpham/Documents/HSU/dotnet_projects/TaskManagementSystem/Views/Tasks/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVGFza3MvRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/Views/Tasks/List.cshtml]
+[/Users/vinhpham/Documents/HSU/dotnet_projects/TaskManagementSystem/Views/Tasks/List.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVGFza3MvTGlzdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/Views/_ViewImports.cshtml]
+[/Users/vinhpham/Documents/HSU/dotnet_projects/TaskManagementSystem/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/Views/_ViewStart.cshtml]
+[/Users/vinhpham/Documents/HSU/dotnet_projects/TaskManagementSystem/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/Views/Shared/_Layout.cshtml]
+[/Users/vinhpham/Documents/HSU/dotnet_projects/TaskManagementSystem/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-ikikb6h5oo
