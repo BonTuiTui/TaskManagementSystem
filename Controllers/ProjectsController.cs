@@ -40,8 +40,7 @@ namespace TaskManagementSystem.Controllers
                 User_id = viewModel.UserId,
                 Name = viewModel.Name,
                 Description = viewModel.Description,
-                CreateAt = viewModel.CreatedAt,
-                UpdateAt = viewModel.UpdatedAt
+                CreateAt = viewModel.CreatedAt
             };
 
             await dbContext.Projects.AddAsync(project);

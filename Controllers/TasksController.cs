@@ -67,7 +67,6 @@ namespace TaskManagementSystem.Controllers
                 Status = viewModel.Status,
                 AssignedTo = assignedUser?.Id, // Assign the user's ID or null if not specified
                 CreateAt = viewModel.CreatedAt,
-                UpdateAt = viewModel.UpdatedAt,
                 DueDate = viewModel.DueDate
             };
 
@@ -90,12 +89,61 @@ namespace TaskManagementSystem.Controllers
         {
             var task = await dbContext.Task.FindAsync(id);
 
+            // Check if task is null
+            if (task == null)
+            {
+                return NotFound();
+            }
+
+            // Get the username from AssignedTo (userId)
+            if (!string.IsNullOrEmpty(task.AssignedTo))
+            {
+                var user = await _userManagementService.GetUserByIdAsync(task.AssignedTo);
+                if (user != null)
+                {
+                    ViewData["AssignedUserName"] = user.UserName;
+                }
+            }
+
             return View(task);
         }
+
+
+        //[HttpGet]
+        //public async Task<IActionResult> Edit(int id)
+        //{
+        //    var task = await dbContext.Task.FindAsync(id);
+
+        //    return View(task);
+        //}
 
         [HttpPost]
         public async Task<IActionResult> Edit(Task viewModel)
         {
+            ApplicationUser? assignedUser = null;
+            if (!string.IsNullOrEmpty(viewModel.AssignedTo))
+            {
+                // Check if AssignedTo is a username or an email
+                if (viewModel.AssignedTo.Contains("@"))
+                {
+                    // AssignedTo is an email
+                    assignedUser = await _userManagementService.GetUserByEmailAsync(viewModel.AssignedTo);
+                }
+                else
+                {
+                    // AssignedTo is a username
+                    assignedUser = await _userManagementService.GetUserByNameAsync(viewModel.AssignedTo);
+                }
+
+                // Check if the assigned user exists
+                if (assignedUser == null)
+                {
+                    // Return an error message if the user does not exist
+                    ModelState.AddModelError("AssignedTo", "The specified user does not exist.");
+                    return View(viewModel);
+                }
+            }
+
             var task = await dbContext.Task.FindAsync(viewModel.Task_id);
 
             if (task != null)
@@ -104,15 +152,14 @@ namespace TaskManagementSystem.Controllers
                 task.Title = viewModel.Title;
                 task.Description = viewModel.Description;
                 task.Status = viewModel.Status;
-                task.AssignedTo = viewModel.AssignedTo;
-                task.CreateAt = viewModel.CreateAt;
-                task.UpdateAt = viewModel.UpdateAt;
+                task.AssignedTo = assignedUser?.Id;
+                task.UpdateAt = DateTime.Now;
                 task.DueDate = viewModel.DueDate;
 
                 await dbContext.SaveChangesAsync();
             }
 
-            return RedirectToAction("List", "Tasks");
+            return RedirectToAction("Details", "Projects", new { id = viewModel.Project_Id });
         }
 
         [HttpPost]
@@ -141,6 +188,7 @@ namespace TaskManagementSystem.Controllers
             }
 
             task.Status = model.Status;
+            task.UpdateAt = DateTime.Now;
             dbContext.SaveChanges();
 
             return Ok();

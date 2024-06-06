@@ -1,3 +1,11 @@
+/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/obj/Debug/net7.0/TaskManagementSystem.csproj.AssemblyReference.cache
+/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/obj/Debug/net7.0/TaskManagementSystem.GeneratedMSBuildEditorConfig.editorconfig
+/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/obj/Debug/net7.0/TaskManagementSystem.AssemblyInfoInputs.cache
+/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/obj/Debug/net7.0/TaskManagementSystem.AssemblyInfo.cs
+/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/obj/Debug/net7.0/TaskManagementSystem.csproj.CoreCompileInputs.cache
+/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/obj/Debug/net7.0/TaskManagementSystem.MvcApplicationPartsAssemblyInfo.cache
+/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/obj/Debug/net7.0/TaskManagementSystem.RazorAssemblyInfo.cache
+/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/obj/Debug/net7.0/TaskManagementSystem.RazorAssemblyInfo.cs
 /Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/bin/Debug/net7.0/appsettings.Development.json
 /Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/bin/Debug/net7.0/appsettings.json
 /Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/bin/Debug/net7.0/TaskManagementSystem.staticwebassets.runtime.json
@@ -56,14 +64,6 @@
 /Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/bin/Debug/net7.0/runtimes/win/lib/net6.0/System.Runtime.Caching.dll
 /Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/bin/Debug/net7.0/runtimes/win/lib/net6.0/System.Security.Cryptography.ProtectedData.dll
 /Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/bin/Debug/net7.0/runtimes/win/lib/net6.0/System.Windows.Extensions.dll
-/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/obj/Debug/net7.0/TaskManagementSystem.csproj.AssemblyReference.cache
-/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/obj/Debug/net7.0/TaskManagementSystem.GeneratedMSBuildEditorConfig.editorconfig
-/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/obj/Debug/net7.0/TaskManagementSystem.AssemblyInfoInputs.cache
-/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/obj/Debug/net7.0/TaskManagementSystem.AssemblyInfo.cs
-/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/obj/Debug/net7.0/TaskManagementSystem.csproj.CoreCompileInputs.cache
-/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/obj/Debug/net7.0/TaskManagementSystem.MvcApplicationPartsAssemblyInfo.cache
-/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/obj/Debug/net7.0/TaskManagementSystem.RazorAssemblyInfo.cache
-/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/obj/Debug/net7.0/TaskManagementSystem.RazorAssemblyInfo.cs
 /Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/obj/Debug/net7.0/staticwebassets/msbuild.TaskManagementSystem.Microsoft.AspNetCore.StaticWebAssets.props
 /Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/obj/Debug/net7.0/staticwebassets/msbuild.build.TaskManagementSystem.props
 /Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/obj/Debug/net7.0/staticwebassets/msbuild.buildMultiTargeting.TaskManagementSystem.props
@@ -74,9 +74,9 @@
 /Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/obj/Debug/net7.0/scopedcss/Views/Shared/_Layout.cshtml.rz.scp.css
 /Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/obj/Debug/net7.0/scopedcss/bundle/TaskManagementSystem.styles.css
 /Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/obj/Debug/net7.0/scopedcss/projectbundle/TaskManagementSystem.bundle.scp.css
+/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/obj/Debug/net7.0/TaskManagementSystem.csproj.CopyComplete
 /Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/obj/Debug/net7.0/TaskManagementSystem.dll
 /Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/obj/Debug/net7.0/refint/TaskManagementSystem.dll
 /Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/obj/Debug/net7.0/TaskManagementSystem.pdb
 /Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/obj/Debug/net7.0/TaskManagementSystem.genruntimeconfig.cache
 /Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/obj/Debug/net7.0/ref/TaskManagementSystem.dll
-/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/obj/Debug/net7.0/TaskManagementSystem.csproj.CopyComplete
