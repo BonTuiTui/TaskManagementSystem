@@ -86,5 +86,10 @@ namespace TaskManagementSystem.Services
         {
             return await _userManager.Users.FirstOrDefaultAsync(u => u.UserName == userName);
         }
+
+        public async Task<ApplicationUser> GetUserByIdAsync(string userId)
+        {
+            return await _userManager.Users.FirstOrDefaultAsync(u => u.Id == userId);
+        }
     }
 }

@@ -38,20 +38,14 @@ namespace TaskManagementSystem.Controllers
         [Authorize(Roles = "admin, manager")]
         public async Task<IActionResult> Add(AddProjectViewModel viewModel)
         {
-            //var project = new Project
-            //{
-            //    User_id = viewModel.UserId,
-            //    Name = viewModel.Name,
-            //    Description = viewModel.Description,
-            //    //CreateAt = viewModel.CreatedAt
-            //    //UpdateAt = viewModel.UpdatedAt
-            //};
+            
             if (projectFatory == null)
             {
-                // Handle the error appropriately
+    // Handle the error appropriately
                 return StatusCode(StatusCodes.Status500InternalServerError, "Project factory is not initialized");
             }
-
+ 
+                
             IProjects project = projectFatory.createuser(viewModel.UserId, viewModel.Name, viewModel.Description);
             await dbContext.Projects.AddAsync((Project)project);
             await dbContext.SaveChangesAsync();

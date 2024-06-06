@@ -18,6 +18,7 @@ namespace TaskManagementSystem.Services
         Task<ApplicationUser> GetCurrentUserAsync();
         Task<ApplicationUser> GetUserByEmailAsync(string email);
         Task<ApplicationUser> GetUserByNameAsync(string userName);
+        Task<ApplicationUser> GetUserByIdAsync(string userId);
 
     }
 }
