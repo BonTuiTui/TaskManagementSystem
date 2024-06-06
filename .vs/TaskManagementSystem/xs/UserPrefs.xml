@@ -1,47 +1,42 @@
 ﻿<Properties StartupConfiguration="{57D7654E-C7C7-4A61-B0BB-D1C9EA7A07E3}|https">
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.Workbench ActiveDocument="ProjectFactory/ProjectFactory.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Controllers/TasksController.cs">
     <Files>
-      <File FileName="Controllers/ProjectsController.cs" Line="57" Column="48" IsPinned="True" />
-      <File FileName="Data/ApplicationDbContext.cs" Line="41" Column="15" />
-      <File FileName="Views/Projects/Add.cshtml" Line="23" Column="25" />
-      <File FileName="ViewModels/AddProjectViewModel.cs" Line="14" Column="1" />
-      <File FileName="ProjectFactory/IProjectFactory.cs" Line="10" Column="1" />
-      <File FileName="ProjectFactory/ProjectFactory.cs" Line="26" Column="1" />
-      <File FileName="Models/Project.cs" Line="38" Column="2" />
-      <File FileName="Models/Task.cs" Line="1" Column="1" />
-      <File FileName="ViewModels/UsersViewModel.cs" Line="1" Column="1" />
-      <File FileName="ProjectFactory/IProjects.cs" Line="2" Column="1" />
-      <File FileName="Program.cs" Line="101" Column="38" />
+      <File FileName="Controllers/ProjectsController.cs" Line="41" Column="13" IsPinned="True" />
+      <File FileName="Data/ApplicationDbContext.cs" />
+      <File FileName="Views/Projects/Add.cshtml" />
+      <File FileName="ViewModels/AddProjectViewModel.cs" />
+      <File FileName="ProjectFactory/IProjectFactory.cs" />
+      <File FileName="ProjectFactory/ProjectFactory.cs" />
+      <File FileName="Models/Project.cs" />
+      <File FileName="Models/Task.cs" />
+      <File FileName="ViewModels/UsersViewModel.cs" />
+      <File FileName="ProjectFactory/IProjects.cs" />
+      <File FileName="Program.cs" Line="115" Column="2" />
+      <File FileName="Controllers/AccountController.cs" Line="1" Column="1" />
+      <File FileName="Controllers/AdminController.cs" Line="1" Column="1" />
+      <File FileName="Controllers/HomeController.cs" Line="1" Column="1" />
+      <File FileName="Controllers/TasksController.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="TaskManagementSystem">
             <Node name="TaskManagementSystem">
-              <Node name="Controllers" expanded="True" />
-              <Node name="Data" expanded="True" />
-              <Node name="ProjectFactory" expanded="True">
-                <Node name="ProjectFactory.cs" selected="True" />
-              </Node>
-              <Node name="ViewModels" expanded="True" />
-              <Node name="Views" expanded="True">
-                <Node name="Projects" expanded="True" />
-                <Node name="Shared" expanded="True" />
+              <Node name="Dependencies" expanded="True" />
+              <Node name="Controllers" expanded="True">
+                <Node name="TasksController.cs" selected="True" />
               </Node>
             </Node>
           </Node>
         </State>
       </Pad>
-      <Pad Id="MonoDevelop.Debugger.WatchPad">
-        <State />
-      </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.ItemProperties.TaskManagementSystem PreferredExecutionTarget="/Applications/Arc.app" />
 </Properties>

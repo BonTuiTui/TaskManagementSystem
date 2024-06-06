@@ -81,7 +81,6 @@
 /Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/obj/Debug/net7.0/TaskManagementSystem.genruntimeconfig.cache
 /Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/obj/Debug/net7.0/ref/TaskManagementSystem.dll
 <<<<<<< HEAD
-/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/obj/Debug/net7.0/TaskManagementSystem.csproj.CopyComplete
 /Users/vinhpham/Documents/HSU/dotnet_projects/TaskManagementSystem/bin/Debug/net7.0/appsettings.Development.json
 /Users/vinhpham/Documents/HSU/dotnet_projects/TaskManagementSystem/bin/Debug/net7.0/appsettings.json
 /Users/vinhpham/Documents/HSU/dotnet_projects/TaskManagementSystem/bin/Debug/net7.0/TaskManagementSystem.staticwebassets.runtime.json

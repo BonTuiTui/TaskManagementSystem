@@ -50,7 +50,7 @@ namespace TaskManagementSystem.Controllers
             await dbContext.Projects.AddAsync((Project)project);
             await dbContext.SaveChangesAsync();
 
-            return View();
+            return RedirectToAction("Details", "Projects", new { id = project.Project_id });
         }
 
         [HttpGet]
@@ -78,13 +78,12 @@ namespace TaskManagementSystem.Controllers
             {
                 project.Name = viewModel.Name;
                 project.Description = viewModel.Description;
-                project.CreateAt = viewModel.CreateAt;
-                project.UpdateAt = viewModel.UpdateAt;
+                project.UpdateAt = DateTime.Now;
 
                 await dbContext.SaveChangesAsync();
             }
 
-            return RedirectToAction("List", "Projects");
+            return RedirectToAction("Details", "Projects", new { id = project.Project_id });
         }
 
         [HttpPost]
@@ -100,7 +99,7 @@ namespace TaskManagementSystem.Controllers
                 await dbContext.SaveChangesAsync();
             }
 
-            return RedirectToAction("List", "Projects");
+            return View();
         }
 
         [HttpGet]
