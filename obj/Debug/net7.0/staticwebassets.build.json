@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "zLxJEfkPsdoZAiwUbzC2dOHejjyBj/wp4F0jP7d2yNE=",
+  "Hash": "scQsAmqPigBkXSb8eUgjPfX8u0ks9kJqemDWsH1wkT4=",
   "Source": "TaskManagementSystem",
   "BasePath": "_content/TaskManagementSystem",
   "Mode": "Default",
@@ -68,12 +68,12 @@
       "OriginalItemSpec": "wwwroot/css/login.css"
     },
     {
-      "Identity": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/wwwroot/css/sidebar.css",
+      "Identity": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/wwwroot/css/sidebarStyle.css",
       "SourceId": "TaskManagementSystem",
       "SourceType": "Discovered",
       "ContentRoot": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/wwwroot/",
       "BasePath": "_content/TaskManagementSystem",
-      "RelativePath": "css/sidebar.css",
+      "RelativePath": "css/sidebarStyle.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -82,7 +82,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/css/sidebar.css"
+      "OriginalItemSpec": "wwwroot/css/sidebarStyle.css"
     },
     {
       "Identity": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/wwwroot/css/site.css",

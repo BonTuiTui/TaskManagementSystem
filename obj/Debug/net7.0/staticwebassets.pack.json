@@ -9,8 +9,8 @@
       "PackagePath": "staticwebassets/css/login.css"
     },
     {
-      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/wwwroot/css/sidebar.css",
-      "PackagePath": "staticwebassets/css/sidebar.css"
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/wwwroot/css/sidebarStyle.css",
+      "PackagePath": "staticwebassets/css/sidebarStyle.css"
     },
     {
       "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/wwwroot/css/site.css",

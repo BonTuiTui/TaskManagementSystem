@@ -1,5 +1,6 @@
 ﻿@{
     var userId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+    ViewData["Title"] = "Add new project";
 }
 
 @model TaskManagementSystem.ViewModels.AddProjectViewModel

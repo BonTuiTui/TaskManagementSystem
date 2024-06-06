@@ -10,7 +10,6 @@
     var doneCount = Model.Task.Count(t => t.Status == "Done");
 }
 
-
 <div style="position: relative; margin-bottom: 20px;">
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#updateProjectModal"
             style="position: absolute; top: 0; right: 60px;">
@@ -22,8 +21,12 @@
     </button>
 </div>
 
-<h2>@Model.Name</h2>
+<h2>@Model.Name</h2
+
 <p>@Model.Description</p>
+
+<p>Created At: <span>@Model.CreateAt.ToString("dd MMMM yyyy")</span></p>
+<p>Updated At: <span>@Model.UpdateAt.ToString("dd MMMM yyyy")</span></p>
 
 <!-- Bootstrap Modal for Update Project -->
 <div class="modal fade" id="updateProjectModal" tabindex="-1" aria-labelledby="updateProjectModalLabel"
@@ -74,19 +77,25 @@
                             Updated At: <span class="updated-at">@task.UpdateAt</span>
                         </small>
                     </p>
-                    <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#taskModal"
-                       data-task-id="@task.Task_id" data-status="@task.Status">Edit</a>
-                    <button class="btn btn-danger delete-task-button" data-task-id="@task.Task_id">Delete</button>
+                    @if (User.IsInRole("admin") || User.IsInRole("manager"))
+                    {
+                        <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#taskModal"
+                           data-task-id="@task.Task_id" data-status="@task.Status">Edit</a>
+                        <button class="btn btn-danger delete-task-button" data-task-id="@task.Task_id">Delete</button>
+                        }
                 </div>
 
             }
         </div>
-        <div class="row mx-2">
-            <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#taskModal"
-                    data-status="To Do">
-                Add Task
-            </button>
-        </div>
+        @if (User.IsInRole("admin") || User.IsInRole("manager"))
+        {
+            <div class="row mx-2">
+                <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#taskModal"
+                        data-status="To Do">
+                    Add Task
+                </button>
+            </div>
+        }
     </div>
     <div class="col-md-4 border-end">
         <h4 id="inProgressCountHeader">In Progress (@inProgressCount)</h4>
@@ -104,19 +113,26 @@
                             Updated At: <span class="updated-at">@task.UpdateAt</span>
                         </small>
                     </p>
-                    <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#taskModal"
-                       data-task-id="@task.Task_id" data-status="@task.Status">Edit</a>
-                    <button class="btn btn-danger delete-task-button" data-task-id="@task.Task_id">Delete</button>
+
+                    @if (User.IsInRole("admin") || User.IsInRole("manager"))
+                    {
+                        <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#taskModal"
+                           data-task-id="@task.Task_id" data-status="@task.Status">Edit</a>
+                        <button class="btn btn-danger delete-task-button" data-task-id="@task.Task_id">Delete</button>
+                        }
                 </div>
 
             }
         </div>
-        <div class="row mx-2">
-            <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#taskModal"
-                    data-status="In Progress">
-                Add Task
-            </button>
-        </div>
+        @if (User.IsInRole("admin") || User.IsInRole("manager"))
+        {
+            <div class="row mx-2">
+                <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#taskModal"
+                        data-status="In Progress">
+                    Add Task
+                </button>
+            </div>
+        }
     </div>
     <div class="col-md-4">
         <h4 id="doneCountHeader">Done (@doneCount)</h4>
@@ -134,19 +150,26 @@
                             Updated At: <span class="updated-at">@task.UpdateAt</span>
                         </small>
                     </p>
-                    <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#taskModal"
-                       data-task-id="@task.Task_id" data-status="@task.Status">Edit</a>
-                    <button class="btn btn-danger delete-task-button" data-task-id="@task.Task_id">Delete</button>
+
+                    @if (User.IsInRole("admin") || User.IsInRole("manager"))
+                    {
+                        <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#taskModal"
+                           data-task-id="@task.Task_id" data-status="@task.Status">Edit</a>
+                        <button class="btn btn-danger delete-task-button" data-task-id="@task.Task_id">Delete</button>
+                        }
                 </div>
 
             }
         </div>
-        <div class="row mx-2">
-            <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#taskModal"
-                    data-status="Done">
-                Add Task
-            </button>
-        </div>
+        @if (User.IsInRole("admin") || User.IsInRole("manager"))
+        {
+            <div class="row mx-2">
+                <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#taskModal"
+                        data-status="Done">
+                    Add Task
+                </button>
+            </div>
+        }
     </div>
 </div>
 <!-- Edit/Add Task Modal -->
@@ -312,6 +335,7 @@
                 document.getElementById('TaskId').value = '';
                 document.getElementById('Status').value = status; // Set status to the passed value
                 document.getElementById('taskModalLabel').innerText = 'Add Task';
+                document.getElementById('DueDate').value = new Date().toISOString().split('T')[0];
             }
         });
 

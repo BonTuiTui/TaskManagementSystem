@@ -23,12 +23,13 @@ namespace TaskManagementSystem.Models
         [StringLength(255)]
         public string Name { get; set; }
 
-        public Project (string User_id, string Name, string Description, DateTime CreateAt)
+        public Project (string User_id, string Name, string Description, DateTime CreateAt, DateTime UpdateAt)
         {
             this.User_id = User_id;
             this.Name = Name;
             this.Description = Description;
             this.CreateAt = CreateAt;
+            this.UpdateAt = UpdateAt;
         }
 
         public Project() { }

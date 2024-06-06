@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "a5qNFhx8EM4zdIx0KHX3BrYrBtngvWtB/6FfP6pL9zJFmE+p5zFWM5bxWP+W76Q0ZuZXZr084lWtmCWKqTcjrg==",
+  "dgSpecHash": "MD6Xf2VOOaO5NFBBlTtcTx0AqBuEuv+QB9Fw3347DD2x367LtgVO8M5KJE7PnyIFNBIYOxkbnu65ofFrsFWpSg==",
   "success": true,
   "projectFilePath": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/TaskManagementSystem.csproj",
   "expectedPackageFiles": [
@@ -94,10 +94,7 @@
     "/Users/macs/.nuget/packages/system.text.encodings.web/7.0.0/system.text.encodings.web.7.0.0.nupkg.sha512",
     "/Users/macs/.nuget/packages/system.text.json/7.0.0/system.text.json.7.0.0.nupkg.sha512",
     "/Users/macs/.nuget/packages/system.threading.tasks.extensions/4.5.4/system.threading.tasks.extensions.4.5.4.nupkg.sha512",
-    "/Users/macs/.nuget/packages/system.windows.extensions/6.0.0/system.windows.extensions.6.0.0.nupkg.sha512",
-    "/Users/macs/.nuget/packages/microsoft.netcore.app.ref/7.0.17/microsoft.netcore.app.ref.7.0.17.nupkg.sha512",
-    "/Users/macs/.nuget/packages/microsoft.aspnetcore.app.ref/7.0.17/microsoft.aspnetcore.app.ref.7.0.17.nupkg.sha512",
-    "/Users/macs/.nuget/packages/microsoft.netcore.app.host.osx-arm64/7.0.17/microsoft.netcore.app.host.osx-arm64.7.0.17.nupkg.sha512"
+    "/Users/macs/.nuget/packages/system.windows.extensions/6.0.0/system.windows.extensions.6.0.0.nupkg.sha512"
   ],
   "logs": [
     {

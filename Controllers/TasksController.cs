@@ -102,6 +102,7 @@ namespace TaskManagementSystem.Controllers
                 Status = viewModel.Status,
                 AssignedTo = assignedUser?.Id,
                 CreateAt = viewModel.CreatedAt,
+                UpdateAt = DateTime.Now,
                 DueDate = viewModel.DueDate
             };
 

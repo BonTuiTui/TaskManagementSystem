@@ -19,7 +19,7 @@ namespace TaskManagementSystem.ProjectFactory
             if (string.IsNullOrEmpty(Description))
                 throw new ArgumentNullException(nameof(Description));
 
-            return new Project(User_id, Name, Description, DateTime.Today);
+            return new Project(User_id, Name, Description, DateTime.Today, DateTime.Today);
         }
     }
 }
