@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace TaskManagementSystem.Migrations
 {
     /// <inheritdoc />
-    public partial class InitDB : Migration
+    public partial class dbnew : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -179,7 +179,8 @@ namespace TaskManagementSystem.Migrations
                         name: "FK_Project_AspNetUsers_User_id",
                         column: x => x.User_id,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -189,11 +190,11 @@ namespace TaskManagementSystem.Migrations
                     Task_id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Project_Id = table.Column<int>(type: "int", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Status = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Status = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
                     CreateAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdateAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    AssignedTo = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    AssignedTo = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     DueDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Title = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false)
                 },
@@ -204,7 +205,8 @@ namespace TaskManagementSystem.Migrations
                         name: "FK_Task_AspNetUsers_AssignedTo",
                         column: x => x.AssignedTo,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.SetNull);
                     table.ForeignKey(
                         name: "FK_Task_Project_Project_Id",
                         column: x => x.Project_Id,
@@ -237,7 +239,8 @@ namespace TaskManagementSystem.Migrations
                         name: "FK_Notification_Task_Task_id",
                         column: x => x.Task_id,
                         principalTable: "Task",
-                        principalColumn: "Task_id");
+                        principalColumn: "Task_id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -264,7 +267,8 @@ namespace TaskManagementSystem.Migrations
                         name: "FK_TaskComment_Task_Task_id",
                         column: x => x.Task_id,
                         principalTable: "Task",
-                        principalColumn: "Task_id");
+                        principalColumn: "Task_id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(

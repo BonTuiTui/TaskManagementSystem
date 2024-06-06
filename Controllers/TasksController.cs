@@ -198,7 +198,7 @@ namespace TaskManagementSystem.Controllers
             dbContext.Task.Remove(task);
             await dbContext.SaveChangesAsync();
 
-            return Ok();
+            return RedirectToAction("Index", "Home");
         }
 
 

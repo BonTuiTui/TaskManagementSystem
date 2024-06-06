@@ -18,6 +18,10 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.AspNet.Identity.Core" Version="2.2.4" />
+    <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.4">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <None Remove="Areas\" />
@@ -29,6 +33,7 @@
     <None Remove="Views\Shared\Components\Projects\" />
     <None Remove="ViewComponents\" />
     <None Remove="Views\Tasks\" />
+    <None Remove="Migrations\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\" />
@@ -40,5 +45,6 @@
     <Folder Include="Views\Shared\Components\Projects\" />
     <Folder Include="ViewComponents\" />
     <Folder Include="Views\Tasks\" />
+    <Folder Include="Migrations\" />
   </ItemGroup>
 </Project>

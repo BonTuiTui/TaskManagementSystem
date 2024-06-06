@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using System.Threading.Tasks;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TaskManagementSystem.Data;
 using TaskManagementSystem.Models;
+using TaskManagementSystem.ProjectFactory;
 using TaskManagementSystem.Proxies;
 using TaskManagementSystem.ViewModels;
 
@@ -16,11 +18,13 @@ namespace TaskManagementSystem.Controllers
     {
         private readonly ApplicationDbContext dbContext;
         private readonly UserManagementProxy _userManagementProxy; // Thêm UserManagementProxy
+        private readonly IProjectFactory projectFatory; 
 
-        public ProjectsController(ApplicationDbContext dbContext, UserManagementProxy userManagementProxy) // Thêm UserManagementProxy vào constructor
+        public ProjectsController(ApplicationDbContext dbContext, UserManagementProxy userManagementProxy, IProjectFactory factory) // Thêm UserManagementProxy vào constructor
         {
             this.dbContext = dbContext;
             _userManagementProxy = userManagementProxy; // Khởi tạo UserManagementProxy
+            projectFatory = factory;
         }
 
         [HttpGet]
@@ -35,18 +39,20 @@ namespace TaskManagementSystem.Controllers
         [Authorize(Roles = "admin, manager")]
         public async Task<IActionResult> Add(AddProjectViewModel viewModel)
         {
-            var project = new Project
+            
+            if (projectFatory == null)
             {
-                User_id = viewModel.UserId,
-                Name = viewModel.Name,
-                Description = viewModel.Description,
-                CreateAt = viewModel.CreatedAt
-            };
-
-            await dbContext.Projects.AddAsync(project);
+    // Handle the error appropriately
+                return StatusCode(StatusCodes.Status500InternalServerError, "Project factory is not initialized");
+            }
+ 
+                
+            IProjects project = projectFatory.createuser(viewModel.UserId, viewModel.Name, viewModel.Description);
+            var _project = (Project)project;
+            await dbContext.Projects.AddAsync(_project);
             await dbContext.SaveChangesAsync();
 
-            return RedirectToAction("Details", "Projects", new { id = project.Project_id });
+            return RedirectToAction("Details", "Projects", new { id = _project.Project_id });
         }
 
         [HttpGet]
@@ -83,20 +89,26 @@ namespace TaskManagementSystem.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Delete(Project viewModel)
+        public async Task<IActionResult> Delete(int id)
         {
-            var project = await dbContext.Projects
-                .AsNoTracking()
-                .FirstOrDefaultAsync(x => x.Project_id == viewModel.Project_id);
+            var project = await dbContext.Projects.FindAsync(id);
 
-            if (project is not null)
+            if (project == null)
             {
-                dbContext.Projects.Remove(viewModel);
-                await dbContext.SaveChangesAsync();
+                return NotFound();
             }
 
-            return View();
+            // Xóa các task liên quan
+            var relatedTasks = dbContext.Task.Where(t => t.Project_Id == id);
+            dbContext.Task.RemoveRange(relatedTasks);
+
+            dbContext.Projects.Remove(project);
+            await dbContext.SaveChangesAsync();
+
+            return Ok();
         }
+
+
 
         [HttpGet]
         public async Task<IActionResult> Details(int id)

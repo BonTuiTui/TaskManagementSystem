@@ -1,0 +1,42 @@
+﻿<Properties StartupConfiguration="{57D7654E-C7C7-4A61-B0BB-D1C9EA7A07E3}|https">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Controllers/TasksController.cs">
+    <Files>
+      <File FileName="Controllers/ProjectsController.cs" Line="41" Column="13" IsPinned="True" />
+      <File FileName="Data/ApplicationDbContext.cs" />
+      <File FileName="Views/Projects/Add.cshtml" />
+      <File FileName="ViewModels/AddProjectViewModel.cs" />
+      <File FileName="ProjectFactory/IProjectFactory.cs" />
+      <File FileName="ProjectFactory/ProjectFactory.cs" />
+      <File FileName="Models/Project.cs" />
+      <File FileName="Models/Task.cs" />
+      <File FileName="ViewModels/UsersViewModel.cs" />
+      <File FileName="ProjectFactory/IProjects.cs" />
+      <File FileName="Program.cs" Line="115" Column="2" />
+      <File FileName="Controllers/AccountController.cs" Line="1" Column="1" />
+      <File FileName="Controllers/AdminController.cs" Line="1" Column="1" />
+      <File FileName="Controllers/HomeController.cs" Line="1" Column="1" />
+      <File FileName="Controllers/TasksController.cs" Line="1" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="TaskManagementSystem">
+            <Node name="TaskManagementSystem">
+              <Node name="Dependencies" expanded="True" />
+              <Node name="Controllers" expanded="True">
+                <Node name="TasksController.cs" selected="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.TaskManagementSystem PreferredExecutionTarget="/Applications/Arc.app" />
+</Properties>

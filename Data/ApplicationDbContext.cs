@@ -55,30 +55,30 @@ namespace TaskManagementSystem.Data
                 .WithMany(p => p.Task)
                 .HasForeignKey(t => t.Project_Id)
                 .OnDelete(DeleteBehavior.NoAction);
-
+            
             builder.Entity<Notification>()
                 .HasOne<Task>()
                 .WithMany()
                 .HasForeignKey(n => n.Task_id)
-                .OnDelete(DeleteBehavior.NoAction);
+                .OnDelete(DeleteBehavior.Cascade);
 
             builder.Entity<TaskComment>()
                 .HasOne<Task>()
                 .WithMany()
                 .HasForeignKey(tc => tc.Task_id)
-                .OnDelete(DeleteBehavior.NoAction);
+                .OnDelete(DeleteBehavior.Cascade);
 
             builder.Entity<Project>()
                 .HasOne<ApplicationUser>(p => p.User)
                 .WithMany()
                 .HasForeignKey(p => p.User_id)
-                .OnDelete(DeleteBehavior.NoAction);
+                .OnDelete(DeleteBehavior.Cascade);
 
             builder.Entity<Task>()
                 .HasOne<ApplicationUser>(t => t.AssignedUser)
                 .WithMany()
                 .HasForeignKey(t => t.AssignedTo)
-                .OnDelete(DeleteBehavior.NoAction);
+                .OnDelete(DeleteBehavior.SetNull);
         }
 
 

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "LzJcS+w7C0iRFa0Ri5gywSayV6ytK6/ir5uKja6HOLlG3G+ZN2lVG4mHpPoRsEk6Nh4F521wbIWq3K72fVSfMg==",
+  "dgSpecHash": "a5qNFhx8EM4zdIx0KHX3BrYrBtngvWtB/6FfP6pL9zJFmE+p5zFWM5bxWP+W76Q0ZuZXZr084lWtmCWKqTcjrg==",
   "success": true,
   "projectFilePath": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/TaskManagementSystem.csproj",
   "expectedPackageFiles": [
@@ -26,6 +26,7 @@
     "/Users/macs/.nuget/packages/microsoft.aspnetcore.identity.entityframeworkcore/7.0.18/microsoft.aspnetcore.identity.entityframeworkcore.7.0.18.nupkg.sha512",
     "/Users/macs/.nuget/packages/microsoft.aspnetcore.webutilities/2.2.0/microsoft.aspnetcore.webutilities.2.2.0.nupkg.sha512",
     "/Users/macs/.nuget/packages/microsoft.bcl.asyncinterfaces/1.1.1/microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
+    "/Users/macs/.nuget/packages/microsoft.codeanalysis.analyzers/3.3.4/microsoft.codeanalysis.analyzers.3.3.4.nupkg.sha512",
     "/Users/macs/.nuget/packages/microsoft.csharp/4.5.0/microsoft.csharp.4.5.0.nupkg.sha512",
     "/Users/macs/.nuget/packages/microsoft.data.sqlclient/5.1.5/microsoft.data.sqlclient.5.1.5.nupkg.sha512",
     "/Users/macs/.nuget/packages/microsoft.data.sqlclient.sni.runtime/5.1.1/microsoft.data.sqlclient.sni.runtime.5.1.1.nupkg.sha512",

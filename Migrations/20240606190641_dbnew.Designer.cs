@@ -12,8 +12,8 @@ using TaskManagementSystem.Data;
 namespace TaskManagementSystem.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240605052404_updateTaskTable")]
-    partial class updateTaskTable
+    [Migration("20240606190641_dbnew")]
+    partial class dbnew
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -327,7 +327,6 @@ namespace TaskManagementSystem.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Task_id"));
 
                     b.Property<string>("AssignedTo")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("CreateAt")
@@ -450,7 +449,7 @@ namespace TaskManagementSystem.Migrations
                     b.HasOne("TaskManagementSystem.Models.Task", null)
                         .WithMany()
                         .HasForeignKey("Task_id")
-                        .OnDelete(DeleteBehavior.NoAction);
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("TaskManagementSystem.Areas.Identity.Data.ApplicationUser", "User")
                         .WithMany()
@@ -466,7 +465,7 @@ namespace TaskManagementSystem.Migrations
                     b.HasOne("TaskManagementSystem.Areas.Identity.Data.ApplicationUser", "User")
                         .WithMany()
                         .HasForeignKey("User_id")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("User");
@@ -477,8 +476,7 @@ namespace TaskManagementSystem.Migrations
                     b.HasOne("TaskManagementSystem.Areas.Identity.Data.ApplicationUser", "AssignedUser")
                         .WithMany()
                         .HasForeignKey("AssignedTo")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("TaskManagementSystem.Models.Project", "Project")
                         .WithMany("Task")
@@ -496,7 +494,7 @@ namespace TaskManagementSystem.Migrations
                     b.HasOne("TaskManagementSystem.Models.Task", null)
                         .WithMany()
                         .HasForeignKey("Task_id")
-                        .OnDelete(DeleteBehavior.NoAction);
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("TaskManagementSystem.Areas.Identity.Data.ApplicationUser", "User")
                         .WithMany()
