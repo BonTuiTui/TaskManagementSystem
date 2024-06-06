@@ -31,6 +31,8 @@ namespace TaskManagementSystem.Models
             this.CreateAt = CreateAt;
         }
 
+        public Project() { }
+
         [ForeignKey("User_id")]
         public virtual ApplicationUser User { get; set; } // Navigation property
 

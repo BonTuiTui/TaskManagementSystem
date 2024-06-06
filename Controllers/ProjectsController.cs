@@ -47,10 +47,11 @@ namespace TaskManagementSystem.Controllers
  
                 
             IProjects project = projectFatory.createuser(viewModel.UserId, viewModel.Name, viewModel.Description);
-            await dbContext.Projects.AddAsync((Project)project);
+            var _project = (Project)project;
+            await dbContext.Projects.AddAsync(_project);
             await dbContext.SaveChangesAsync();
 
-            return RedirectToAction("Details", "Projects", new { id = project.Project_id });
+            return RedirectToAction("Details", "Projects", new { id = _project.Project_id });
         }
 
         [HttpGet]
