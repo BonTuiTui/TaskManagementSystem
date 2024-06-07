@@ -19,6 +19,6 @@ namespace TaskManagementSystem.Models
         public DateTime CreateAt { get; set; }
 
         [ForeignKey("User_id")]
-        public virtual ApplicationUser User { get; set; } // Navigation property
+        public virtual ApplicationUser? User { get; set; } // Navigation property
     }
 }
