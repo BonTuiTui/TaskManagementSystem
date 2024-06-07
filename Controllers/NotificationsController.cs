@@ -32,15 +32,20 @@ namespace TaskManagementSystem.Controllers
         [HttpPost]
         public async Task<IActionResult> MarkAsRead(int notificationId)
         {
+            Console.WriteLine("MarkAsRead method called with notificationId: " + notificationId);
+
             var notification = await _context.Notifications.FindAsync(notificationId);
             if (notification != null)
             {
                 notification.IsRead = true;
                 await _context.SaveChangesAsync();
+                Console.WriteLine("Notification marked as read.");
                 return Ok();
             }
+            Console.WriteLine("Notification not found with ID: " + notificationId);
             return NotFound();
         }
+
 
         // Create notification when a new comment is added
         public async Task<IActionResult> CreateNotificationForComment(TaskComment taskComment, string receiverUser)
@@ -50,8 +55,7 @@ namespace TaskManagementSystem.Controllers
                 User_id = taskComment.User_id,
                 Notification_text = $"New comment on task {taskComment.Task_id}: {taskComment.Comment_text}",
                 CreateAt = DateTime.UtcNow,
-                IsRead = false,
-                TaskComment_id = taskComment.Comment_id
+                IsRead = false
             };
 
             _context.Notifications.Add(notification);

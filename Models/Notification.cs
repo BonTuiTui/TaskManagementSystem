@@ -17,10 +17,5 @@ namespace TaskManagementSystem.Models
 
         [ForeignKey("User_id")]
         public virtual ApplicationUser User { get; set; } // Navigation property
-
-        // Additional fields for task comment notifications
-        public int? TaskComment_id { get; set; }
-        [ForeignKey("TaskComment_id")]
-        public virtual TaskComment TaskComment { get; set; } // Navigation property
     }
 }

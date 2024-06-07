@@ -14,13 +14,42 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"></script>
+    <style>
+
+        /* Màu cho thông báo chưa đọc */
+        .unread-notification {
+            color: red;
+            font-weight: bold;
+        }
+
+        /* Màu cho thông báo đã đọc */
+        .read-notification {
+            color: black;
+        }
+
+        /* Biểu tượng cho thông báo chưa đọc */
+        .unread-notification::before {
+            content: "\2022"; /* Biểu tượng hình tròn */
+            margin-right: 5px;
+            color: red;
+        }
+
+        /* Biểu tượng cho thông báo đã đọc */
+        .read-notification::before {
+            content: "\2713"; /* Biểu tượng đánh dấu tick */
+            margin-right: 5px;
+            color: green;
+        }
+
+    </style>
 </head>
 
 <body>
     <div class="d-flex">
         <div class="flex-shrink-0 p-3" style="width: 240px;">
             <!-- Sidebar content here -->
-            <a href="/" class="d-flex align-items-center pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom">
+            <a href="/"
+               class="d-flex align-items-center pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom">
                 <span class="fs-5 fw-semibold">TMSystem</span>
             </a>
             <p>Hello, @User.Identity.Name !</p>
@@ -31,7 +60,8 @@
                                 data-bs-toggle="collapse" data-bs-target="#projects-collapse" aria-expanded="false">
                             Projects
                         </button>
-                        <a class="btn btn-outline-primary ml-2 text-end" asp-area="" asp-controller="Projects" asp-action="Add"><i class="bi bi-plus"></i></a>
+                        <a class="btn btn-outline-primary ml-2 text-end" asp-area="" asp-controller="Projects"
+                           asp-action="Add"><i class="bi bi-plus"></i></a>
                     </div>
                     <div class="collapse" id="projects-collapse">
                         @await Component.InvokeAsync("Projects")
@@ -53,14 +83,20 @@
                             {
                                 <li>
                                     <a asp-controller="Admin" asp-action="ManageUsers"
-                                       class="link-body-emphasis d-inline-flex text-decoration-none rounded">Manage Users</a>
+                                       class="link-body-emphasis d-inline-flex text-decoration-none rounded">
+                                        Manage
+                                        Users
+                                    </a>
                                 </li>
                             }
                             <li>
-                                <a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded" data-bs-toggle="modal" data-bs-target="#notificationModal" id="notificationLink">Notification</a>
+                                <a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded"
+                                   data-bs-toggle="modal" data-bs-target="#notificationModal"
+                                   id="notificationLink">Notification</a>
                             </li>
                             <li>
-                                <form id="logoutForm" asp-area="" asp-controller="Account" asp-action="Logout" method="post" class="form-inline">
+                                <form id="logoutForm" asp-area="" asp-controller="Account" asp-action="Logout"
+                                      method="post" class="form-inline">
                                     <a href="javascript:void(0);" id="logoutLink" class="nav-link text-dark">
                                         Sign out
                                     </a>
@@ -102,6 +138,7 @@
         </div>
     </div>
 
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/sidebar.js" asp-append-version="true"></script>
@@ -120,7 +157,21 @@
                 $('#notificationList').empty();
                 data.forEach(function (notification) {
                     console.log(notification);
-                    $('#notificationList').append('<p>' + notification.notification_text + ' - ' + new Date(notification.createAt).toLocaleString() + '</p>');
+                    var notificationHtml = '<p class="';
+                    notificationHtml += notification.isRead ? 'read-notification' : 'unread-notification';
+                    notificationHtml += '">' + notification.notification_text + ' - ' + new Date(notification.createAt).toLocaleString() + '</p>';
+                    $('#notificationList').append(notificationHtml);
+
+                    // Thêm sự kiện click để đánh dấu thông báo là đã đọc
+                    $('#notificationList').on('click', 'p', function () {
+                        // Kiểm tra xem thông báo đã đọc hay chưa
+                        if (!notification.isRead) {
+                            // Thực hiện cập nhật trạng thái đã đọc
+                            markNotificationAsRead(notification.notification_id);
+                            // Thay đổi lớp CSS để hiển thị trạng thái đã đọc
+                            $(this).removeClass('unread-notification').addClass('read-notification');
+                        }
+                    });
                 });
             },
             error: function () {
@@ -130,6 +181,29 @@
     });
 });
 
+        // Hàm để đánh dấu thông báo là đã đọc
+        function markNotificationAsRead(notification_id) {
+
+            console.log("notificationId is: " + notification_id);
+            $.ajax({
+                url: '/Notifications/MarkAsRead',
+                method: 'POST',
+                data: { notificationId: notification_id },
+
+
+                success: function (response) {
+                    console.log('Notification marked as read.');
+                    // Tùy chỉnh mã JS ở đây nếu cần
+                },
+                error: function (xhr, status, error) {
+                    console.error('Failed to mark notification as read.');
+                    console.error(xhr.responseText);
+                    console.error(status);
+                    console.error(error);
+                }
+            });
+        }
+ 
     </script>
 
     @RenderSection("Scripts", required: false)
