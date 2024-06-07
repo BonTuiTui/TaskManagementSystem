@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@{
+    var userId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+}
+
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -9,7 +13,6 @@
     <link rel="stylesheet" href="~/css/sidebarStyle.css" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"></script>
 </head>
 
@@ -17,8 +20,7 @@
     <div class="d-flex">
         <div class="flex-shrink-0 p-3" style="width: 240px;">
             <!-- Sidebar content here -->
-            <a href="/"
-               class="d-flex align-items-center pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom">
+            <a href="/" class="d-flex align-items-center pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom">
                 <span class="fs-5 fw-semibold">TMSystem</span>
             </a>
             <p>Hello, @User.Identity.Name !</p>
@@ -31,7 +33,6 @@
                         </button>
                         <a class="btn btn-outline-primary ml-2 text-end" asp-area="" asp-controller="Projects" asp-action="Add"><i class="bi bi-plus"></i></a>
                     </div>
-
                     <div class="collapse" id="projects-collapse">
                         @await Component.InvokeAsync("Projects")
                     </div>
@@ -48,7 +49,6 @@
                                 <a asp-controller="Account" asp-action="Profile"
                                    class="link-body-emphasis d-inline-flex text-decoration-none rounded">Profile</a>
                             </li>
-
                             @if (User.IsInRole("admin"))
                             {
                                 <li>
@@ -56,10 +56,8 @@
                                        class="link-body-emphasis d-inline-flex text-decoration-none rounded">Manage Users</a>
                                 </li>
                             }
-
                             <li>
-                                <a href="#"
-                                   class="link-body-emphasis d-inline-flex text-decoration-none rounded">Notification</a>
+                                <a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded" data-bs-toggle="modal" data-bs-target="#notificationModal" id="notificationLink">Notification</a>
                             </li>
                             <li>
                                 <form id="logoutForm" asp-area="" asp-controller="Account" asp-action="Logout" method="post" class="form-inline">
@@ -67,7 +65,6 @@
                                         Sign out
                                     </a>
                                 </form>
-
                                 <script>document.getElementById('logoutLink').addEventListener('click', function () {
                                         document.getElementById('logoutForm').submit();
                                     });</script>
@@ -84,10 +81,57 @@
             </main>
         </div>
     </div>
+
+    <!-- Notification Modal -->
+    <div class="modal fade" id="notificationModal" tabindex="-1" aria-labelledby="notificationModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="notificationModalLabel">Notifications</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="notificationList">
+                        <!-- Notifications will be displayed here -->
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/sidebar.js" asp-append-version="true"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <script>
+       $(document).ready(function () {
+    // Load notifications when the modal is opened
+    $('#notificationLink').on('click', function () {
+        var userId = '@userId'; // Đảm bảo rằng @userId là giá trị đúng của userId
+        $.ajax({
+            url: '/Notifications/GetUserNotifications',
+            method: 'GET',
+            data: { userId: userId },
+            success: function (data) {
+                $('#notificationList').empty();
+                data.forEach(function (notification) {
+                    console.log(notification);
+                    $('#notificationList').append('<p>' + notification.notification_text + ' - ' + new Date(notification.createAt).toLocaleString() + '</p>');
+                });
+            },
+            error: function () {
+                $('#notificationList').append('<p>Failed to load notifications.</p>');
+            }
+        });
+    });
+});
+
+    </script>
+
     @RenderSection("Scripts", required: false)
 </body>
 

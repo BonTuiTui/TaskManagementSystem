@@ -1,7 +1,22 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿//$(document).ready(function () {
+//    // Gọi AJAX để lấy thông tin notifications của userId
+//    $('#notificationLink').on('click', function () {
 
-// Write your JavaScript code.
-
-/* global bootstrap: false */
-
+//        var userId = '@userId';
+//        console.log("site js is " + userId);
+//        $.ajax({
+//            url: '/Notifications/GetUserNotifications',
+//            method: 'GET',
+//            data: { userId: userId }, // Truyền userId qua query string
+//            success: function (data) {
+//                $('#notificationList').empty();
+//                data.forEach(function (notification) {
+//                    $('#notificationList').append('<p>' + notification.message + ' - ' + new Date(notification.createAt).toLocaleString() + '</p>');
+//                });
+//            },
+//            error: function () {
+//                $('#notificationList').append('<p>Failed to load notifications.</p>');
+//            }
+//        });
+//    });
+//});

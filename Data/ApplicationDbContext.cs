@@ -55,12 +55,6 @@ namespace TaskManagementSystem.Data
                 .WithMany(p => p.Task)
                 .HasForeignKey(t => t.Project_Id)
                 .OnDelete(DeleteBehavior.NoAction);
-            
-            builder.Entity<Notification>()
-                .HasOne<Task>()
-                .WithMany()
-                .HasForeignKey(n => n.Task_id)
-                .OnDelete(DeleteBehavior.Cascade);
 
             builder.Entity<TaskComment>()
                 .HasOne<Task>()

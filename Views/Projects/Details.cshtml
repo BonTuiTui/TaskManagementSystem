@@ -9,304 +9,306 @@
     var inProgressCount = Model.Task.Count(t => t.Status == "In Progress");
     var doneCount = Model.Task.Count(t => t.Status == "Done");
 }
+@if (User.IsInRole("admin") || User.IsInRole("manager"))
+    {
+    <div style="position: relative; margin-bottom: 20px;">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#updateProjectModal"
+                style="position: absolute; top: 0; right: 60px;">
+            <i class="bi bi-pencil-square"></i>
+        </button>
 
-<div style="position: relative; margin-bottom: 20px;">
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#updateProjectModal"
-            style="position: absolute; top: 0; right: 60px;">
-        <i class="bi bi-pencil-square"></i>
-    </button>
+        <button class="btn btn-danger delete-project-button" style="position: absolute; top: 0; right: 0;">
+            <i class="bi bi-trash"></i>
+        </button>
+    </div>
+    }
 
-    <button class="btn btn-danger delete-project-button" style="position: absolute; top: 0; right: 0;">
-        <i class="bi bi-trash"></i>
-    </button>
-</div>
+    <h2>
+        @Model.Name
+    </h2>
 
-<h2>
-    @Model.Name
-</h2>
+    <p>@Model.Description</p>
 
-<p>@Model.Description</p>
+    <p>Created At: <span>@Model.CreateAt.ToString("dd MMMM yyyy")</span></p>
+    <p>Updated At: <span>@Model.UpdateAt.ToString("dd MMMM yyyy")</span></p>
 
-<p>Created At: <span>@Model.CreateAt.ToString("dd MMMM yyyy")</span></p>
-<p>Updated At: <span>@Model.UpdateAt.ToString("dd MMMM yyyy")</span></p>
-
-<!-- Bootstrap Modal for Update Project -->
-<div class="modal fade" id="updateProjectModal" tabindex="-1" aria-labelledby="updateProjectModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="updateProjectModalLabel">Update Project</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form asp-action="Edit" method="post">
-                    <input type="hidden" asp-for="Project_id" />
-                    <div class="mb-3">
-                        <label asp-for="Name" class="form-label">Project Name</label>
-                        <input asp-for="Name" class="form-control" />
-                    </div>
-                    <div class="mb-3">
-                        <label asp-for="Description" class="form-label">Description</label>
-                        <textarea asp-for="Description" class="form-control"></textarea>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save changes</button>
-                    </div>
-                </form>
+    <!-- Bootstrap Modal for Update Project -->
+    <div class="modal fade" id="updateProjectModal" tabindex="-1" aria-labelledby="updateProjectModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="updateProjectModalLabel">Update Project</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form asp-action="Edit" method="post">
+                        <input type="hidden" asp-for="Project_id" />
+                        <div class="mb-3">
+                            <label asp-for="Name" class="form-label">Project Name</label>
+                            <input asp-for="Name" class="form-control" />
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="Description" class="form-label">Description</label>
+                            <textarea asp-for="Description" class="form-control"></textarea>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<h3>Tasks</h3>
-<div class="row">
-    <div class="col-md-4 border-end">
-        <h4 id="todoCountHeader">To Do (@todoCount)</h4>
+    <h3>Tasks</h3>
+    <div class="row">
+        <div class="col-md-4 border-end">
+            <h4 id="todoCountHeader">To Do (@todoCount)</h4>
 
-        <div id="todoColumn" class="task-column">
-            @foreach (var task in Model.Task.Where(t => t.Status == "To Do"))
-            {
-                <div class="card-body" data-task-id="@task.Task_id">
-                    <h5 class="card-title">@task.Title</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">@task.AssignedUser?.UserName</h6>
-                    <p class="card-text">@task.Description</p>
-                    <p class="card-text"><small class="text-muted">Created At: @task.CreateAt</small></p>
-                    <p class="card-text"><small class="text-muted">Due Date: @task.DueDate.ToShortDateString()</small></p>
-                    <p class="card-text">
-                        <small class="text-muted">
-                            Updated At: <span class="updated-at">@task.UpdateAt</span>
-                        </small>
-                    </p>
-                    <div class="mt-3">
-                        <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-secondary mr-2 btn-comment" data-bs-toggle="modal" data-bs-target="#taskCommentModal">
-                            Comment
-                        </button>
+            <div id="todoColumn" class="task-column">
+                @foreach (var task in Model.Task.Where(t => t.Status == "To Do"))
+                {
+                    <div class="card-body" data-task-id="@task.Task_id">
+                        <h5 class="card-title">@task.Title</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">@task.AssignedUser?.UserName</h6>
+                        <p class="card-text">@task.Description</p>
+                        <p class="card-text"><small class="text-muted">Created At: @task.CreateAt</small></p>
+                        <p class="card-text"><small class="text-muted">Due Date: @task.DueDate.ToShortDateString()</small></p>
+                        <p class="card-text">
+                            <small class="text-muted">
+                                Updated At: <span class="updated-at">@task.UpdateAt</span>
+                            </small>
+                        </p>
+                        <div class="mt-3">
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-secondary mr-2 btn-comment" data-bs-toggle="modal" data-bs-target="#taskCommentModal">
+                                Comment
+                            </button>
 
-                        <!-- Edit and delete buttons -->
-                        @if (User.IsInRole("admin") || User.IsInRole("manager"))
-                        {
-                            <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#taskModal"
-                               data-task-id="@task.Task_id" data-status="@task.Status">Edit</a>
-                            <button class="btn btn-danger delete-task-button" data-task-id="@task.Task_id">Delete</button>
-                        }
+                            <!-- Edit and delete buttons -->
+                            @if (User.IsInRole("admin") || User.IsInRole("manager"))
+                            {
+                                <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#taskModal"
+                                   data-task-id="@task.Task_id" data-status="@task.Status">Edit</a>
+                                <button class="btn btn-danger delete-task-button" data-task-id="@task.Task_id">Delete</button>
+                            }
+                        </div>
                     </div>
-                </div>
 
+                }
+            </div>
+            @if (User.IsInRole("admin") || User.IsInRole("manager"))
+            {
+                <div class="row mx-2">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#taskModal"
+                            data-status="To Do">
+                        Add Task
+                    </button>
+                </div>
             }
         </div>
-        @if (User.IsInRole("admin") || User.IsInRole("manager"))
-        {
-            <div class="row mx-2">
-                <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#taskModal"
-                        data-status="To Do">
-                    Add Task
-                </button>
-            </div>
-        }
-    </div>
-    <div class="col-md-4 border-end">
-        <h4 id="inProgressCountHeader">In Progress (@inProgressCount)</h4>
-        <div id="inProgressColumn" class="task-column">
-            @foreach (var task in Model.Task.Where(t => t.Status == "In Progress"))
-            {
-                <div class="card-body" data-task-id="@task.Task_id">
-                    <h5 class="card-title">@task.Title</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">@task.AssignedUser?.UserName</h6>
-                    <p class="card-text">@task.Description</p>
-                    <p class="card-text"><small class="text-muted">Created At: @task.CreateAt</small></p>
-                    <p class="card-text"><small class="text-muted">Due Date: @task.DueDate.ToShortDateString()</small></p>
-                    <p class="card-text">
-                        <small class="text-muted">
-                            Updated At: <span class="updated-at">@task.UpdateAt</span>
-                        </small>
-                    </p>
-                    <div class="mt-3">
-                        <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-secondary mr-2 btn-comment" data-bs-toggle="modal" data-bs-target="#taskCommentModal">
-                            Comment
-                        </button>
+        <div class="col-md-4 border-end">
+            <h4 id="inProgressCountHeader">In Progress (@inProgressCount)</h4>
+            <div id="inProgressColumn" class="task-column">
+                @foreach (var task in Model.Task.Where(t => t.Status == "In Progress"))
+                {
+                    <div class="card-body" data-task-id="@task.Task_id">
+                        <h5 class="card-title">@task.Title</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">@task.AssignedUser?.UserName</h6>
+                        <p class="card-text">@task.Description</p>
+                        <p class="card-text"><small class="text-muted">Created At: @task.CreateAt</small></p>
+                        <p class="card-text"><small class="text-muted">Due Date: @task.DueDate.ToShortDateString()</small></p>
+                        <p class="card-text">
+                            <small class="text-muted">
+                                Updated At: <span class="updated-at">@task.UpdateAt</span>
+                            </small>
+                        </p>
+                        <div class="mt-3">
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-secondary mr-2 btn-comment" data-bs-toggle="modal" data-bs-target="#taskCommentModal">
+                                Comment
+                            </button>
 
-                        <!-- Edit and delete buttons -->
-                        @if (User.IsInRole("admin") || User.IsInRole("manager"))
-                        {
-                            <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#taskModal"
-                               data-task-id="@task.Task_id" data-status="@task.Status">Edit</a>
-                            <button class="btn btn-danger delete-task-button" data-task-id="@task.Task_id">Delete</button>
-                        }
+                            <!-- Edit and delete buttons -->
+                            @if (User.IsInRole("admin") || User.IsInRole("manager"))
+                            {
+                                <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#taskModal"
+                                   data-task-id="@task.Task_id" data-status="@task.Status">Edit</a>
+                                <button class="btn btn-danger delete-task-button" data-task-id="@task.Task_id">Delete</button>
+                            }
+                        </div>
                     </div>
-                </div>
 
+                }
+            </div>
+            @if (User.IsInRole("admin") || User.IsInRole("manager"))
+            {
+                <div class="row mx-2">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#taskModal"
+                            data-status="In Progress">
+                        Add Task
+                    </button>
+                </div>
             }
         </div>
-        @if (User.IsInRole("admin") || User.IsInRole("manager"))
-        {
-            <div class="row mx-2">
-                <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#taskModal"
-                        data-status="In Progress">
-                    Add Task
-                </button>
-            </div>
-        }
-    </div>
-    <div class="col-md-4">
-        <h4 id="doneCountHeader">Done (@doneCount)</h4>
-        <div id="doneColumn" class="task-column">
-            @foreach (var task in Model.Task.Where(t => t.Status == "Done"))
-            {
-                <div class="card-body" data-task-id="@task.Task_id">
-                    <h5 class="card-title">@task.Title</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">@task.AssignedUser?.UserName</h6>
-                    <p class="card-text">@task.Description</p>
-                    <p class="card-text"><small class="text-muted">Created At: @task.CreateAt</small></p>
-                    <p class="card-text"><small class="text-muted">Due Date: @task.DueDate.ToShortDateString()</small></p>
-                    <p class="card-text">
-                        <small class="text-muted">
-                            Updated At: <span class="updated-at">@task.UpdateAt</span>
-                        </small>
-                    </p>
-                    <div class="mt-3">
-                        <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-secondary mr-2 btn-comment" data-bs-toggle="modal" data-bs-target="#taskCommentModal">
-                            Comment
-                        </button>
+        <div class="col-md-4">
+            <h4 id="doneCountHeader">Done (@doneCount)</h4>
+            <div id="doneColumn" class="task-column">
+                @foreach (var task in Model.Task.Where(t => t.Status == "Done"))
+                {
+                    <div class="card-body" data-task-id="@task.Task_id">
+                        <h5 class="card-title">@task.Title</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">@task.AssignedUser?.UserName</h6>
+                        <p class="card-text">@task.Description</p>
+                        <p class="card-text"><small class="text-muted">Created At: @task.CreateAt</small></p>
+                        <p class="card-text"><small class="text-muted">Due Date: @task.DueDate.ToShortDateString()</small></p>
+                        <p class="card-text">
+                            <small class="text-muted">
+                                Updated At: <span class="updated-at">@task.UpdateAt</span>
+                            </small>
+                        </p>
+                        <div class="mt-3">
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-secondary mr-2 btn-comment" data-bs-toggle="modal" data-bs-target="#taskCommentModal">
+                                Comment
+                            </button>
 
-                        <!-- Edit and delete buttons -->
-                        @if (User.IsInRole("admin") || User.IsInRole("manager"))
-                        {
-                            <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#taskModal"
-                               data-task-id="@task.Task_id" data-status="@task.Status">Edit</a>
-                            <button class="btn btn-danger delete-task-button" data-task-id="@task.Task_id">Delete</button>
-                        }
+                            <!-- Edit and delete buttons -->
+                            @if (User.IsInRole("admin") || User.IsInRole("manager"))
+                            {
+                                <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#taskModal"
+                                   data-task-id="@task.Task_id" data-status="@task.Status">Edit</a>
+                                <button class="btn btn-danger delete-task-button" data-task-id="@task.Task_id">Delete</button>
+                            }
+                        </div>
                     </div>
-                </div>
 
+                }
+            </div>
+            @if (User.IsInRole("admin") || User.IsInRole("manager"))
+            {
+                <div class="row mx-2">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#taskModal"
+                            data-status="Done">
+                        Add Task
+                    </button>
+                </div>
             }
         </div>
-        @if (User.IsInRole("admin") || User.IsInRole("manager"))
-        {
-            <div class="row mx-2">
-                <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#taskModal"
-                        data-status="Done">
-                    Add Task
-                </button>
-            </div>
-        }
     </div>
-</div>
-<!-- Edit/Add Task Modal -->
-<div class="modal fade" id="taskModal" tabindex="-1" aria-labelledby="taskModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="taskModalLabel">Add Task</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form id="taskForm">
-                    <input type="hidden" id="TaskId" name="TaskId" />
-                    <input type="hidden" id="ProjectId" name="ProjectId" value="@Model.Project_id" />
-                    <input type="hidden" id="Status" name="Status" />
-                    <div class="mb-3">
-                        <label for="Title" class="form-label">Title</label>
-                        <input type="text" class="form-control" id="Title" name="Title" required />
-                    </div>
-                    <div class="mb-3">
-                        <label for="Description" class="form-label">Description</label>
-                        <textarea class="form-control" id="TaskDescription" name="Description" required></textarea>
-                    </div>
-                    <div class="mb-3">
-                        <label for="AssignedTo" class="form-label">Assigned To</label>
-                        <input type="text" class="form-control" id="AssignedTo" name="AssignedTo" />
-                    </div>
-                    <div class="mb-3">
-                        <label for="DueDate" class="form-label">Due Date</label>
-                        <input type="date" class="form-control" id="DueDate" name="DueDate" />
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="saveTaskButton">Save Task</button>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Task Comment Modal -->
-<div class="modal fade" id="taskCommentModal" tabindex="-1" aria-labelledby="taskCommentModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="taskCommentModalLabel">Task Comment</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <!-- Form for adding/editing task comment -->
-                <form id="taskCommentForm">
-                    <input type="hidden" id="TaskId" name="TaskId" />
-                    <input type="hidden" id="UserId" name="UserId" value="@userId" /> <!-- Add this line -->
-                    <div class="mb-3">
-                        <label for="comment" class="form-label">Comment</label>
-                        <textarea class="form-control" id="comment" name="Comment" required></textarea>
-                    </div>
-                </form>
-
-                <!-- Display task comments -->
-                <div id="taskCommentList">
-                    <!-- Task comments will be displayed here -->
+    <!-- Edit/Add Task Modal -->
+    <div class="modal fade" id="taskModal" tabindex="-1" aria-labelledby="taskModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="taskModalLabel">Add Task</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="taskForm">
+                        <input type="hidden" id="TaskId" name="TaskId" />
+                        <input type="hidden" id="ProjectId" name="ProjectId" value="@Model.Project_id" />
+                        <input type="hidden" id="Status" name="Status" />
+                        <div class="mb-3">
+                            <label for="Title" class="form-label">Title</label>
+                            <input type="text" class="form-control" id="Title" name="Title" required />
+                        </div>
+                        <div class="mb-3">
+                            <label for="Description" class="form-label">Description</label>
+                            <textarea class="form-control" id="TaskDescription" name="Description" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="AssignedTo" class="form-label">Assigned To</label>
+                            <input type="text" class="form-control" id="AssignedTo" name="AssignedTo" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="DueDate" class="form-label">Due Date</label>
+                            <input type="date" class="form-control" id="DueDate" name="DueDate" />
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="saveTaskButton">Save Task</button>
                 </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="saveCommentButton">Save Comment</button>
-            </div>
         </div>
     </div>
-</div>
-<!-- Confirmation delete task modal -->
-<div class="modal fade" id="confirmDeleteTaskModal" tabindex="-1" aria-labelledby="confirmationModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="confirmationModalLabel">Confirmation</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                Are you sure you want to delete this task?
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-danger" id="confirmDeleteButton">Delete</button>
-            </div>
-        </div>
-    </div>
-</div>
+    <!-- Task Comment Modal -->
+    <div class="modal fade" id="taskCommentModal" tabindex="-1" aria-labelledby="taskCommentModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="taskCommentModalLabel">Task Comment</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Form for adding/editing task comment -->
+                    <form id="taskCommentForm">
+                        <input type="hidden" id="TaskId" name="TaskId" />
+                        <input type="hidden" id="UserId" name="UserId" value="@userId" /> <!-- Add this line -->
+                        <div class="mb-3">
+                            <label for="comment" class="form-label">Comment</label>
+                            <textarea class="form-control" id="comment" name="Comment" required></textarea>
+                        </div>
+                    </form>
 
-<!-- Confirmation delete project modal -->
-<div class="modal fade" id="confirmDeleteProjectModal" tabindex="-1" aria-labelledby="confirmationModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="confirmationModalLabel">Confirmation</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                Are you sure you want to delete this project?
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-danger" id="confirmDeleteProjectButton">Delete</button>
+                    <!-- Display task comments -->
+                    <div id="taskCommentList">
+                        <!-- Task comments will be displayed here -->
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="saveCommentButton">Save Comment</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
+    <!-- Confirmation delete task modal -->
+    <div class="modal fade" id="confirmDeleteTaskModal" tabindex="-1" aria-labelledby="confirmationModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmationModalLabel">Confirmation</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to delete this task?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-danger" id="confirmDeleteButton">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
-@section Scripts {
-    <script>
+    <!-- Confirmation delete project modal -->
+    <div class="modal fade" id="confirmDeleteProjectModal" tabindex="-1" aria-labelledby="confirmationModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmationModalLabel">Confirmation</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to delete this project?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-danger" id="confirmDeleteProjectButton">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @section Scripts {
+        <script>
     document.addEventListener('DOMContentLoaded', function () {
         var todoColumn = document.getElementById('todoColumn');
         var inProgressColumn = document.getElementById('inProgressColumn');
@@ -418,40 +420,40 @@
 
         updateTaskCounts();
     });
-    </script>
+        </script>
 
-    <script>document.addEventListener('DOMContentLoaded', function () {
-            var deleteButtons = document.querySelectorAll('.delete-task-button');
-            var confirmDeleteButton = document.getElementById('confirmDeleteButton');
-            var confirmDeleteTaskModal = new bootstrap.Modal(document.getElementById('confirmDeleteTaskModal'));
+        <script>document.addEventListener('DOMContentLoaded', function () {
+                var deleteButtons = document.querySelectorAll('.delete-task-button');
+                var confirmDeleteButton = document.getElementById('confirmDeleteButton');
+                var confirmDeleteTaskModal = new bootstrap.Modal(document.getElementById('confirmDeleteTaskModal'));
 
-            deleteButtons.forEach(function (button) {
-                button.addEventListener('click', function () {
-                    var taskId = this.getAttribute('data-task-id');
-                    confirmDeleteTaskModal.show();
+                deleteButtons.forEach(function (button) {
+                    button.addEventListener('click', function () {
+                        var taskId = this.getAttribute('data-task-id');
+                        confirmDeleteTaskModal.show();
 
-                    confirmDeleteButton.addEventListener('click', function () {
-                        fetch('/Tasks/Delete/' + taskId, {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json'
-                            }
-                        }).then(response => {
-                            if (response.ok || response.status === 200 || response.statusText.toLowerCase() === 'ok') {
-                                confirmDeleteTaskModal.hide(); // Ẩn modal sau khi xóa thành công
-                                location.reload(); // Reload the page after deleting the task
+                        confirmDeleteButton.addEventListener('click', function () {
+                            fetch('/Tasks/Delete/' + taskId, {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                }
+                            }).then(response => {
+                                if (response.ok || response.status === 200 || response.statusText.toLowerCase() === 'ok') {
+                                    confirmDeleteTaskModal.hide(); // Ẩn modal sau khi xóa thành công
+                                    location.reload(); // Reload the page after deleting the task
 
-                            } else {
-                                console.error('Error deleting task');
-                            }
-                        }).catch(error => {
-                            console.error('Error:', error);
+                                } else {
+                                    console.error('Error deleting task');
+                                }
+                            }).catch(error => {
+                                console.error('Error:', error);
+                            });
                         });
                     });
                 });
-            });
-        });</script>
-    <script>document.addEventListener('DOMContentLoaded', function () {
+            });</script>
+        <script>document.addEventListener('DOMContentLoaded', function () {
         var deleteButtons = document.querySelectorAll('.delete-project-button');
         var confirmDeleteProjectButton = document.getElementById('confirmDeleteProjectButton');
         var confirmDeleteProjectModal = new bootstrap.Modal(document.getElementById('confirmDeleteProjectModal'));
@@ -485,51 +487,96 @@
             });
         });
     });</script>
-    <script>$(document).ready(function () {
-            // Function to load comments for a specific task
-            function loadTaskComments(taskId) {
-                console.log("Loading comments for task ID: " + taskId);
-                $.get('/TaskComments/GetTaskComments', { taskId: taskId }, function (data) {
-                    console.log(data); // Add this line to inspect the response
-                    $('#taskCommentList').empty();
-                    if (data.length === 0) {
-                        $('#taskCommentList').append('<p>No comments available</p>');
-                    } else {
-                        data.forEach(function (comment) {
-                            $('#taskCommentList').append('<p>' + comment.userName + ': ' + comment.comment_text + ' - ' + new Date(comment.createAt).toLocaleString() + '</p>');
-                        });
-                    }
-                }).fail(function () {
-                    console.error('Failed to load comments');
+        <script>$(document).ready(function () {
+    // Lấy taskId từ URL
+    function getParameterByName(name, url) {
+        if (!url) url = window.location.href;
+        name = name.replace(/[\[\]]/g, "\\$&");
+        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
+    }
+
+    // Sử dụng hàm để lấy giá trị của taskId từ URL
+    var taskId = getParameterByName('taskId');
+
+    // Kiểm tra xem taskId có giá trị không và gọi hàm để load comments và hiển thị modal
+    if (taskId) {
+        loadTaskCommentsAndShowModal(taskId);
+    }
+
+    // Function to load comments for a specific task and show modal
+    function loadTaskCommentsAndShowModal(taskId) {
+        console.log("Loading comments for task ID: " + taskId);
+        $.get('/TaskComments/GetTaskComments', { taskId: taskId }, function (data) {
+            console.log(data); // Add this line to inspect the response
+            $('#taskCommentList').empty();
+            if (data.length === 0) {
+                $('#taskCommentList').append('<p>No comments available</p>');
+            } else {
+                data.forEach(function (comment) {
+                    $('#taskCommentList').append('<p>' + comment.userName + ': ' + comment.comment_text + ' - ' + new Date(comment.createAt).toLocaleString() + '</p>');
                 });
             }
+            $('#taskCommentModal').modal('show'); // Show modal after loading comments
+        }).fail(function () {
+            console.error('Failed to load comments');
+        });
+    }
 
-            // Event listener for opening the comment modal
-            $('.btn-comment').click(function () {
-                var taskId = $(this).closest('.card-body').data('task-id');
-                $('#TaskId').val(taskId);
-                loadTaskComments(taskId);
-                $('#taskCommentModal').modal('show');
-            });
+    // Event listener for opening the comment modal
+    $('.btn-comment').click(function () {
+        var taskId = $(this).closest('.card-body').data('task-id');
+        $('#TaskId').val(taskId);
+        loadTaskCommentsAndShowModal(taskId); // Call the new function to load comments and show modal
+    });
 
-            // Event listener for saving a new comment
-            $('#saveCommentButton').click(function () {
-                var taskComment = {
-                    Task_id: $('#TaskId').val(),
-                    Comment_text: $('#comment').val(),
-                    CreateAt: new Date().toISOString(),
-                    User_id: $('#UserId').val()  // Assuming UserId is stored in a hidden field
-                };
+                //// Function to load comments for a specific task
+                //function loadTaskComments(taskId) {
+                //    console.log("Loading comments for task ID: " + taskId);
+                //    $.get('/TaskComments/GetTaskComments', { taskId: taskId }, function (data) {
+                //        console.log(data); // Add this line to inspect the response
+                //        $('#taskCommentList').empty();
+                //        if (data.length === 0) {
+                //            $('#taskCommentList').append('<p>No comments available</p>');
+                //        } else {
+                //            data.forEach(function (comment) {
+                //                $('#taskCommentList').append('<p>' + comment.userName + ': ' + comment.comment_text + ' - ' + new Date(comment.createAt).toLocaleString() + '</p>');
+                //            });
+                //        }
+                //    }).fail(function () {
+                //        console.error('Failed to load comments');
+                //    });
+                //}
 
-                console.log("Saving comment:", taskComment);
+                //// Event listener for opening the comment modal
+                //$('.btn-comment').click(function () {
+                //    var taskId = $(this).closest('.card-body').data('task-id');
+                //    $('#TaskId').val(taskId);
+                //    loadTaskComments(taskId);
+                //    $('#taskCommentModal').modal('show');
+                //});
 
-                $.post('/TaskComments/AddTaskComment', taskComment, function () {
-                    loadTaskComments(taskComment.Task_id);
-                    $('#comment').val('');
-                }).fail(function (response) {
-                    console.error('Failed to add comment:', response.responseText);
-                    alert('Failed to add comment');
+                // Event listener for saving a new comment
+                $('#saveCommentButton').click(function () {
+                    var taskComment = {
+                        Task_id: $('#TaskId').val(),
+                        Comment_text: $('#comment').val(),
+                        CreateAt: new Date().toISOString(),
+                        User_id: $('#UserId').val()  // Assuming UserId is stored in a hidden field
+                    };
+
+                    console.log("Saving comment:", taskComment);
+
+                    $.post('/TaskComments/AddTaskComment', taskComment, function () {
+                        loadTaskCommentsAndShowModal(taskComment.Task_id);
+                        $('#comment').val('');
+                    }).fail(function (response) {
+                        console.error('Failed to add comment:', response.responseText);
+                        alert('Failed to add comment');
+                    });
                 });
-            });
-        });</script>
-}
+            });</script>
+    }

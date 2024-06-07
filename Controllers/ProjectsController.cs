@@ -89,6 +89,7 @@ namespace TaskManagementSystem.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "admin, manager")]
         public async Task<IActionResult> Delete(int id)
         {
             var project = await dbContext.Projects.FindAsync(id);
