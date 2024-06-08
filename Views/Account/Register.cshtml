@@ -55,17 +55,18 @@
                         <div>
                             @foreach (var provider in Model.ExternalLogins)
                             {
-                                <button type="submit" class="btn btn-primary"
+                                <button type="submit" class="btn btn-secondary mx-1"
                                         name="provider" value="@provider.Name"
                                         title="Log in using your @provider.DisplayName account">
-                                    @provider.DisplayName
+                                    <i class="bi bi-google"></i>
                                 </button>
+                                <a asp-controller="Account" asp-action="Login" class="btn btn-secondary mx-1">Login</a>
                             }
                         </div>
                     </form>
                 }
             }
-            <a asp-controller="Account" asp-action="Login" class="btn btn-secondary mx-1">Login</a>
+            
         </div>
     </div>
 </div>
