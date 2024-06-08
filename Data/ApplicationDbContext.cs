@@ -9,18 +9,16 @@ namespace TaskManagementSystem.Data
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        // Constructor nhận các tùy chọn DbContextOptions và truyền chúng cho lớp cơ sở
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
         }
 
-        // Override phương thức OnModelCreating để cấu hình mô hình dữ liệu
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
 
-            // Định nghĩa các vai trò
+            // Define roles
             var adminRole = new IdentityRole
             {
                 Id = "1",
@@ -42,38 +40,48 @@ namespace TaskManagementSystem.Data
                 NormalizedName = "EMPLOYEE"
             };
 
-            // Seed các vai trò vào cơ sở dữ liệu
+            // Seed roles
             builder.Entity<IdentityRole>().HasData(adminRole, managerRole, employeeRole);
 
-            // Cấu hình các bảng hiện có
+            // Configure your existing tables
             builder.Entity<Project>().ToTable("Project");
             builder.Entity<Task>().ToTable("Task");
             builder.Entity<Notification>().ToTable("Notification");
             builder.Entity<TaskComment>().ToTable("TaskComment");
 
-            // Định nghĩa các mối quan hệ khóa ngoại
-            // Một Task thuộc về một Project, một Project có nhiều Task
+            // Configure the ProjectMember table
+            builder.Entity<ProjectMember>().ToTable("ProjectMember");
+            builder.Entity<ProjectMember>()
+                .HasOne(pm => pm.Project)
+                .WithMany(p => p.ProjectMembers)
+                .HasForeignKey(pm => pm.ProjectId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<ProjectMember>()
+                .HasOne(pm => pm.User)
+                .WithMany()
+                .HasForeignKey(pm => pm.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // Define foreign key relationships
             builder.Entity<Task>()
                 .HasOne(t => t.Project)
                 .WithMany(p => p.Task)
                 .HasForeignKey(t => t.Project_Id)
                 .OnDelete(DeleteBehavior.NoAction);
 
-            // Một TaskComment thuộc về một Task, và khi Task bị xóa thì các TaskComment cũng bị xóa theo
             builder.Entity<TaskComment>()
                 .HasOne<Task>()
                 .WithMany()
                 .HasForeignKey(tc => tc.Task_id)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            // Một Project thuộc về một ApplicationUser (User), và khi User bị xóa thì Project cũng bị xóa theo
             builder.Entity<Project>()
                 .HasOne<ApplicationUser>(p => p.User)
                 .WithMany()
                 .HasForeignKey(p => p.User_id)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Restrict);
 
-            // Một Task thuộc về một ApplicationUser (AssignedUser), và khi AssignedUser bị xóa thì Task sẽ có trường AssignedTo null
             builder.Entity<Task>()
                 .HasOne<ApplicationUser>(t => t.AssignedUser)
                 .WithMany()
@@ -81,10 +89,10 @@ namespace TaskManagementSystem.Data
                 .OnDelete(DeleteBehavior.SetNull);
         }
 
-        // DbSet cho các bảng trong cơ sở dữ liệu
         public DbSet<Project> Projects { get; set; }
         public DbSet<Task> Task { get; set; }
         public DbSet<Notification> Notifications { get; set; }
         public DbSet<TaskComment> TaskComments { get; set; }
+        public DbSet<ProjectMember> ProjectMembers { get; set; }
     }
 }

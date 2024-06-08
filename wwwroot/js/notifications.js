@@ -10,18 +10,19 @@
                 $('#notificationList').empty();
                 data.forEach(function (notification) {
                     console.log(notification);
-                    var notificationHtml = '<p class="';
+                    var notificationHtml = '<p class="notification-item ';
                     notificationHtml += notification.isRead ? 'read-notification' : 'unread-notification';
-                    notificationHtml += '">' + notification.notification_text + ' - ' + new Date(notification.createAt).toLocaleString() + '</p>';
+                    notificationHtml += '" data-id="' + notification.notification_id + '">' + notification.notification_text + ' - ' + new Date(notification.createAt).toLocaleString() + '</p>';
                     $('#notificationList').append(notificationHtml);
+                });
 
-                    // Add click event to mark notification as read
-                    $('#notificationList').on('click', 'p', function () {
-                        if (!notification.isRead) {
-                            markNotificationAsRead(notification.notification_id);
-                            $(this).removeClass('unread-notification').addClass('read-notification');
-                        }
-                    });
+                // Add click event to each notification item
+                $('.notification-item').on('click', function () {
+                    var notificationId = $(this).data('id');
+                    if (!$(this).hasClass('read-notification')) {
+                        markNotificationAsRead(notificationId);
+                        $(this).removeClass('unread-notification').addClass('read-notification');
+                    }
                 });
             },
             error: function () {

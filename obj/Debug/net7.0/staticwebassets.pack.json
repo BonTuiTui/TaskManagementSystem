@@ -29,6 +29,10 @@
       "PackagePath": "staticwebassets/js/.DS_Store"
     },
     {
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/wwwroot/js/add-user-to-project.js",
+      "PackagePath": "staticwebassets/js/add-user-to-project.js"
+    },
+    {
       "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/wwwroot/js/delete-project.js",
       "PackagePath": "staticwebassets/js/delete-project.js"
     },

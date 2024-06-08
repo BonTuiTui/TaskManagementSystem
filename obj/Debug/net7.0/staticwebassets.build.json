@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "hu+IkdVeXc9QiPeym13WccwWlXXiPt/jp8Y2w5LkHF4=",
+  "Hash": "QweZOqIGKfTAt854zppaQDrCqeFlFkHm9C9jVoubp/U=",
   "Source": "TaskManagementSystem",
   "BasePath": "_content/TaskManagementSystem",
   "Mode": "Default",
@@ -151,6 +151,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/js/.DS_Store"
+    },
+    {
+      "Identity": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/wwwroot/js/add-user-to-project.js",
+      "SourceId": "TaskManagementSystem",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/wwwroot/",
+      "BasePath": "_content/TaskManagementSystem",
+      "RelativePath": "js/add-user-to-project.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/js/add-user-to-project.js"
     },
     {
       "Identity": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/wwwroot/js/delete-project.js",

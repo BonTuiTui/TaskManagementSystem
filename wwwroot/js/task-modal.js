@@ -1,32 +1,53 @@
 ﻿document.addEventListener('DOMContentLoaded', function () {
     var taskModal = document.getElementById('taskModal');
+
     taskModal.addEventListener('show.bs.modal', function (event) {
         var button = event.relatedTarget;
         var taskId = button.getAttribute('data-task-id');
         var status = button.getAttribute('data-status');
+        var projectId = $('#ProjectId').val();
+        var assignedToSelect = $('#AssignedTo');
 
         console.log("Test status here " + status);
 
-        if (taskId) {
-            fetch('/Tasks/GetTask/' + taskId)
-                .then(response => response.json())
-                .then(task => {
-                    document.getElementById('TaskId').value = task.task_id;
-                    document.getElementById('Title').value = task.title;
-                    document.getElementById('TaskDescription').value = task.description;
-                    document.getElementById('AssignedTo').value = task.assignedToUsername;
-                    document.getElementById('DueDate').value = task.dueDate ? new Date(task.dueDate).toISOString().split('T')[0] : '';
-                    document.getElementById('Status').value = task.status;
-                    document.getElementById('taskModalLabel').innerText = 'Edit Task';
+        // Clear the existing options
+        assignedToSelect.empty();
+
+        // Load project members
+        $.ajax({
+            url: '/Projects/GetProjectMembers',
+            method: 'GET',
+            data: { projectId: projectId },
+            success: function (data) {
+                data.forEach(function (member) {
+                    assignedToSelect.append(new Option(member.userName, member.id));
                 });
-        } else {
-            // Reset form fields
-            document.getElementById('taskForm').reset();
-            document.getElementById('TaskId').value = '';
-            document.getElementById('Status').value = status; // Set status to the passed value
-            document.getElementById('taskModalLabel').innerText = 'Add Task';
-            document.getElementById('DueDate').value = new Date().toISOString().split('T')[0];
-        }
+
+                if (taskId) {
+                    fetch('/Tasks/GetTask/' + taskId)
+                        .then(response => response.json())
+                        .then(task => {
+                            document.getElementById('TaskId').value = task.task_id;
+                            document.getElementById('Title').value = task.title;
+                            document.getElementById('TaskDescription').value = task.description;
+                            document.getElementById('AssignedTo').value = task.assignedToId; // Use the user ID instead of username
+                            document.getElementById('DueDate').value = task.dueDate ? new Date(task.dueDate).toISOString().split('T')[0] : '';
+                            document.getElementById('Status').value = task.status;
+                            document.getElementById('taskModalLabel').innerText = 'Edit Task';
+                        });
+                } else {
+                    // Reset form fields
+                    document.getElementById('taskForm').reset();
+                    document.getElementById('TaskId').value = '';
+                    document.getElementById('Status').value = status; // Set status to the passed value
+                    document.getElementById('taskModalLabel').innerText = 'Add Task';
+                    document.getElementById('DueDate').value = new Date().toISOString().split('T')[0];
+                }
+            },
+            error: function () {
+                console.error('Failed to load project members.');
+            }
+        });
     });
 
     document.getElementById('saveTaskButton').addEventListener('click', function () {

@@ -48,9 +48,9 @@ namespace TaskManagementSystem.ViewComponents
             }
             else
             {
-                // Nếu người dùng là Employee, hiển thị các project mà họ được giao task
+                // Nếu người dùng là thành viên của dự án, hiển thị các project mà họ là thành viên
                 projectsToShow = _context.Projects
-                    .Where(p => p.Task.Any(t => t.AssignedTo == currentUser.Id))
+                    .Where(p => p.ProjectMembers.Any(pm => pm.UserId == currentUser.Id))
                     .ToList();
             }
 
