@@ -15,7 +15,7 @@
     var doneCount = Model.Task.Count(t => t.Status == "Done");
 }
 
-<p>Created By: <span>@ViewBag.CreatedByUsername</span></p>
+<p>Created by <span>@ViewBag.CreatedByUsername</span> on <span>@Model.CreateAt.ToString("dd MMMM yyyy")</span></p>
 
 
 <div style="position: relative; margin-bottom: 20px;">
@@ -41,8 +41,7 @@
 
 <p>@Model.Description</p>
 
-<p>Created At: <span>@Model.CreateAt.ToString("dd MMMM yyyy")</span></p>
-<p>Updated At: <span>@Model.UpdateAt.ToString("dd MMMM yyyy")</span></p>
+<p>Updated lastest on <span>@Model.UpdateAt.ToString("dd MMMM yyyy")</span></p>
 
 <h3>Tasks</h3>
 <div class="row">

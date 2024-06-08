@@ -67,7 +67,10 @@ namespace TaskManagementSystem.Controllers
         [Authorize(Roles = "admin, manager")]
         public async Task<IActionResult> Delete(int id)
         {
-            var project = await dbContext.Projects.FindAsync(id);
+            var project = await dbContext.Projects
+                .Include(p => p.Task)
+                .Include(p => p.ProjectMembers) // Bao gồm ProjectMembers để xóa
+                .FirstOrDefaultAsync(p => p.Project_id == id);
 
             if (project == null)
             {
@@ -77,6 +80,10 @@ namespace TaskManagementSystem.Controllers
             // Xóa các task liên quan
             var relatedTasks = dbContext.Task.Where(t => t.Project_Id == id);
             dbContext.Task.RemoveRange(relatedTasks);
+
+            // Xóa các ProjectMember liên quan
+            var relatedProjectMembers = dbContext.ProjectMembers.Where(pm => pm.ProjectId == id);
+            dbContext.ProjectMembers.RemoveRange(relatedProjectMembers);
 
             dbContext.Projects.Remove(project);
             await dbContext.SaveChangesAsync();
