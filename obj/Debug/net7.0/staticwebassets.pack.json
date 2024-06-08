@@ -9,7 +9,15 @@
       "PackagePath": "staticwebassets/css/login.css"
     },
     {
+<<<<<<< HEAD
       "Id": "/Users/sinhattoan/Documents/HSU/project/TaskManagementSystem/wwwroot/css/sidebarStyle.css",
+=======
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/wwwroot/css/notifications.css",
+      "PackagePath": "staticwebassets/css/notifications.css"
+    },
+    {
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/wwwroot/css/sidebarStyle.css",
+>>>>>>> a9a3a2e67cdf53da341cdb10ac6358e1fb48c9e6
       "PackagePath": "staticwebassets/css/sidebarStyle.css"
     },
     {
@@ -33,7 +41,15 @@
       "PackagePath": "staticwebassets/js/delete-task.js"
     },
     {
+<<<<<<< HEAD
       "Id": "/Users/sinhattoan/Documents/HSU/project/TaskManagementSystem/wwwroot/js/sidebar.js",
+=======
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/wwwroot/js/notifications.js",
+      "PackagePath": "staticwebassets/js/notifications.js"
+    },
+    {
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/wwwroot/js/sidebar.js",
+>>>>>>> a9a3a2e67cdf53da341cdb10ac6358e1fb48c9e6
       "PackagePath": "staticwebassets/js/sidebar.js"
     },
     {

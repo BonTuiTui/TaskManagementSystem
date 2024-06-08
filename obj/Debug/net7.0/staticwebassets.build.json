@@ -1,6 +1,10 @@
 {
   "Version": 1,
+<<<<<<< HEAD
   "Hash": "/cF64bik6IAw0R9blIoY4Tg87ejjozF9HzNC+HKBmZw=",
+=======
+  "Hash": "hu+IkdVeXc9QiPeym13WccwWlXXiPt/jp8Y2w5LkHF4=",
+>>>>>>> a9a3a2e67cdf53da341cdb10ac6358e1fb48c9e6
   "Source": "TaskManagementSystem",
   "BasePath": "_content/TaskManagementSystem",
   "Mode": "Default",
@@ -68,7 +72,28 @@
       "OriginalItemSpec": "wwwroot/css/login.css"
     },
     {
+<<<<<<< HEAD
       "Identity": "/Users/sinhattoan/Documents/HSU/project/TaskManagementSystem/wwwroot/css/sidebarStyle.css",
+=======
+      "Identity": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/wwwroot/css/notifications.css",
+      "SourceId": "TaskManagementSystem",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/wwwroot/",
+      "BasePath": "_content/TaskManagementSystem",
+      "RelativePath": "css/notifications.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/css/notifications.css"
+    },
+    {
+      "Identity": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/wwwroot/css/sidebarStyle.css",
+>>>>>>> a9a3a2e67cdf53da341cdb10ac6358e1fb48c9e6
       "SourceId": "TaskManagementSystem",
       "SourceType": "Discovered",
       "ContentRoot": "/Users/sinhattoan/Documents/HSU/project/TaskManagementSystem/wwwroot/",
@@ -170,7 +195,28 @@
       "OriginalItemSpec": "wwwroot/js/delete-task.js"
     },
     {
+<<<<<<< HEAD
       "Identity": "/Users/sinhattoan/Documents/HSU/project/TaskManagementSystem/wwwroot/js/sidebar.js",
+=======
+      "Identity": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/wwwroot/js/notifications.js",
+      "SourceId": "TaskManagementSystem",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/wwwroot/",
+      "BasePath": "_content/TaskManagementSystem",
+      "RelativePath": "js/notifications.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/js/notifications.js"
+    },
+    {
+      "Identity": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/wwwroot/js/sidebar.js",
+>>>>>>> a9a3a2e67cdf53da341cdb10ac6358e1fb48c9e6
       "SourceId": "TaskManagementSystem",
       "SourceType": "Discovered",
       "ContentRoot": "/Users/sinhattoan/Documents/HSU/project/TaskManagementSystem/wwwroot/",

@@ -10,23 +10,12 @@
         <h1 class="h3 mb-3 fw-normal text-center">Create an Account</h1>
 
         <form asp-action="Register">
-            @*<div class="form-floating mb-3">
-            <input asp-for="Username" type="text" class="form-control" id="floatingUsername" placeholder="Username">
-            <label asp-for="Username" for="floatingUsername">Username</label>
-            <span asp-validation-for="Username" class="text-danger"></span>
-        </div>*@
 
             <div class="form-floating mb-3">
                 <input asp-for="Email" type="email" class="form-control" id="floatingEmail" placeholder="Email">
                 <label asp-for="Email" for="floatingEmail">Email</label>
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
-
-            @*<div class="form-floating mb-3">
-            <input asp-for="Fullname" type="text" class="form-control" id="floatingFullname" placeholder="Fullname">
-            <label asp-for="Fullname" for="floatingFullname">Fullname</label>
-            <span asp-validation-for="Fullname" class="text-danger"></span>
-        </div>*@
 
             <div class="form-floating mb-3">
                 <input asp-for="Password" type="password" class="form-control" id="floatingPassword" placeholder="Password">

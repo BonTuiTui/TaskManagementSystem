@@ -18,6 +18,8 @@ build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = TaskManagementSystem
 build_property.RootNamespace = TaskManagementSystem
 build_property.ProjectDir = /Users/sinhattoan/Documents/HSU/project/TaskManagementSystem/
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 7.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
@@ -50,10 +52,6 @@ build_metadata.AdditionalFiles.CssScope =
 
 [/Users/sinhattoan/Documents/HSU/project/TaskManagementSystem/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9JbmRleC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[/Users/sinhattoan/Documents/HSU/project/TaskManagementSystem/Views/Home/Privacy.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9Qcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/sinhattoan/Documents/HSU/project/TaskManagementSystem/Views/Projects/Add.cshtml]
