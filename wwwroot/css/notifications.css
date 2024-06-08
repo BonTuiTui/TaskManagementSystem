@@ -1,0 +1,24 @@
+﻿/* Màu cho thông báo chưa đọc */
+.unread-notification {
+    color: red;
+    font-weight: bold;
+}
+
+/* Màu cho thông báo đã đọc */
+.read-notification {
+    color: black;
+}
+
+/* Biểu tượng cho thông báo chưa đọc */
+.unread-notification::before {
+    content: "\2022"; /* Biểu tượng hình tròn */
+    margin-right: 5px;
+    color: red;
+}
+
+/* Biểu tượng cho thông báo đã đọc */
+.read-notification::before {
+    content: "\2713"; /* Biểu tượng đánh dấu tick */
+    margin-right: 5px;
+    color: green;
+}

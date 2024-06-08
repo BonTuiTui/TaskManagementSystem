@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "KsdmDnStCvl/AvQd/4AicJy6vJPTInG/h8MMuI1Rjac=",
+  "Hash": "hu+IkdVeXc9QiPeym13WccwWlXXiPt/jp8Y2w5LkHF4=",
   "Source": "TaskManagementSystem",
   "BasePath": "_content/TaskManagementSystem",
   "Mode": "Default",
@@ -66,6 +66,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/css/login.css"
+    },
+    {
+      "Identity": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/wwwroot/css/notifications.css",
+      "SourceId": "TaskManagementSystem",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/wwwroot/",
+      "BasePath": "_content/TaskManagementSystem",
+      "RelativePath": "css/notifications.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/css/notifications.css"
     },
     {
       "Identity": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/wwwroot/css/sidebarStyle.css",
@@ -168,6 +185,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/js/delete-task.js"
+    },
+    {
+      "Identity": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/wwwroot/js/notifications.js",
+      "SourceId": "TaskManagementSystem",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/wwwroot/",
+      "BasePath": "_content/TaskManagementSystem",
+      "RelativePath": "js/notifications.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/js/notifications.js"
     },
     {
       "Identity": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/wwwroot/js/sidebar.js",

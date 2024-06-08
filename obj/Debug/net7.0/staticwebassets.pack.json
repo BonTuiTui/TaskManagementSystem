@@ -9,6 +9,10 @@
       "PackagePath": "staticwebassets/css/login.css"
     },
     {
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/wwwroot/css/notifications.css",
+      "PackagePath": "staticwebassets/css/notifications.css"
+    },
+    {
       "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/wwwroot/css/sidebarStyle.css",
       "PackagePath": "staticwebassets/css/sidebarStyle.css"
     },
@@ -31,6 +35,10 @@
     {
       "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/wwwroot/js/delete-task.js",
       "PackagePath": "staticwebassets/js/delete-task.js"
+    },
+    {
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/wwwroot/js/notifications.js",
+      "PackagePath": "staticwebassets/js/notifications.js"
     },
     {
       "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/wwwroot/js/sidebar.js",
