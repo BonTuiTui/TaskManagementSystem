@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace TaskManagementSystem.Migrations
 {
     /// <inheritdoc />
-    public partial class dbnew : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -161,6 +161,28 @@ namespace TaskManagementSystem.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Notification",
+                columns: table => new
+                {
+                    Notification_id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    User_id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Notification_text = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreateAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IsRead = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Notification", x => x.Notification_id);
+                    table.ForeignKey(
+                        name: "FK_Notification_AspNetUsers_User_id",
+                        column: x => x.User_id,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Project",
                 columns: table => new
                 {
@@ -212,35 +234,6 @@ namespace TaskManagementSystem.Migrations
                         column: x => x.Project_Id,
                         principalTable: "Project",
                         principalColumn: "Project_id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Notification",
-                columns: table => new
-                {
-                    Notifications_id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    User_id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Task_id = table.Column<int>(type: "int", nullable: true),
-                    Message = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IsRead = table.Column<bool>(type: "bit", nullable: false),
-                    CreateAt = table.Column<DateTime>(type: "datetime2", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Notification", x => x.Notifications_id);
-                    table.ForeignKey(
-                        name: "FK_Notification_AspNetUsers_User_id",
-                        column: x => x.User_id,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Notification_Task_Task_id",
-                        column: x => x.Task_id,
-                        principalTable: "Task",
-                        principalColumn: "Task_id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -319,11 +312,6 @@ namespace TaskManagementSystem.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Notification_Task_id",
-                table: "Notification",
-                column: "Task_id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Notification_User_id",

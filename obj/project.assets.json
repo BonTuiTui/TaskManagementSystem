@@ -146,6 +146,22 @@
           }
         }
       },
+      "Microsoft.AspNetCore.Authentication.Google/7.0.19": {
+        "type": "package",
+        "compile": {
+          "lib/net7.0/Microsoft.AspNetCore.Authentication.Google.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net7.0/Microsoft.AspNetCore.Authentication.Google.dll": {
+            "related": ".xml"
+          }
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
+      },
       "Microsoft.AspNetCore.Cryptography.Internal/7.0.18": {
         "type": "package",
         "compile": {
@@ -1713,6 +1729,21 @@
         "lib/netstandard2.0/Microsoft.AspNetCore.Authentication.Core.xml",
         "microsoft.aspnetcore.authentication.core.2.2.0.nupkg.sha512",
         "microsoft.aspnetcore.authentication.core.nuspec"
+      ]
+    },
+    "Microsoft.AspNetCore.Authentication.Google/7.0.19": {
+      "sha512": "0ZkYxh2/5nrDEqWdaZQaqXjXOMMJHgT3Yeq7seYaTIIsoHry5f4cxALQGdKgXEnA98+KrXm3w2w/u/1zKo+G+g==",
+      "type": "package",
+      "path": "microsoft.aspnetcore.authentication.google/7.0.19",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net7.0/Microsoft.AspNetCore.Authentication.Google.dll",
+        "lib/net7.0/Microsoft.AspNetCore.Authentication.Google.xml",
+        "microsoft.aspnetcore.authentication.google.7.0.19.nupkg.sha512",
+        "microsoft.aspnetcore.authentication.google.nuspec"
       ]
     },
     "Microsoft.AspNetCore.Cryptography.Internal/7.0.18": {
@@ -4546,6 +4577,7 @@
   "projectFileDependencyGroups": {
     "net7.0": [
       "Microsoft.AspNet.Identity.Core >= 2.2.4",
+      "Microsoft.AspNetCore.Authentication.Google >= 7.0.19",
       "Microsoft.AspNetCore.Identity >= 2.2.0",
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 7.0.18",
       "Microsoft.CodeAnalysis.Analyzers >= 3.3.4",
@@ -4555,24 +4587,26 @@
     ]
   },
   "packageFolders": {
-    "/Users/macs/.nuget/packages/": {}
+    "C:\\Users\\vuobg\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/TaskManagementSystem.csproj",
+      "projectUniqueName": "C:\\Users\\vuobg\\source\\repos\\TaskManagementSystem\\TaskManagementSystem.csproj",
       "projectName": "TaskManagementSystem",
-      "projectPath": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/TaskManagementSystem.csproj",
-      "packagesPath": "/Users/macs/.nuget/packages/",
-      "outputPath": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/obj/",
+      "projectPath": "C:\\Users\\vuobg\\source\\repos\\TaskManagementSystem\\TaskManagementSystem.csproj",
+      "packagesPath": "C:\\Users\\vuobg\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\vuobg\\source\\repos\\TaskManagementSystem\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/macs/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\vuobg\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -4585,11 +4619,6 @@
         "warnAsError": [
           "NU1605"
         ]
-      },
-      "restoreAuditProperties": {
-        "enableAudit": "true",
-        "auditLevel": "low",
-        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -4599,6 +4628,10 @@
           "Microsoft.AspNet.Identity.Core": {
             "target": "Package",
             "version": "[2.2.4, )"
+          },
+          "Microsoft.AspNetCore.Authentication.Google": {
+            "target": "Package",
+            "version": "[7.0.19, )"
           },
           "Microsoft.AspNetCore.Identity": {
             "target": "Package",
@@ -4640,20 +4673,6 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "downloadDependencies": [
-          {
-            "name": "Microsoft.AspNetCore.App.Ref",
-            "version": "[7.0.17, 7.0.17]"
-          },
-          {
-            "name": "Microsoft.NETCore.App.Host.osx-arm64",
-            "version": "[7.0.17, 7.0.17]"
-          },
-          {
-            "name": "Microsoft.NETCore.App.Ref",
-            "version": "[7.0.17, 7.0.17]"
-          }
-        ],
         "frameworkReferences": {
           "Microsoft.AspNetCore.App": {
             "privateAssets": "none"
@@ -4662,7 +4681,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.203/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
       }
     }
   },

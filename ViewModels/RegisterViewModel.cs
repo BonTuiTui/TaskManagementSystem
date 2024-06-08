@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Authentication;
+using System.ComponentModel.DataAnnotations;
 
 namespace TaskManagementSystem.ViewModels
 {
@@ -30,5 +31,7 @@ namespace TaskManagementSystem.ViewModels
 
         [Required]
         public DateTime CreateAt { get; set; } = DateTime.Now;
+        public string? ReturnUrl { get; set; }
+        public IList<AuthenticationScheme>? ExternalLogins { get; set; }
     }
 }

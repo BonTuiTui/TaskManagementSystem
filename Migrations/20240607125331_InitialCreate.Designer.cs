@@ -12,8 +12,8 @@ using TaskManagementSystem.Data;
 namespace TaskManagementSystem.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240607091206_TenMigrationMoi")]
-    partial class TenMigrationMoi
+    [Migration("20240607125331_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -268,16 +268,11 @@ namespace TaskManagementSystem.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("TaskComment_id")
-                        .HasColumnType("int");
-
                     b.Property<string>("User_id")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Notification_id");
-
-                    b.HasIndex("TaskComment_id");
 
                     b.HasIndex("User_id");
 
@@ -446,17 +441,11 @@ namespace TaskManagementSystem.Migrations
 
             modelBuilder.Entity("TaskManagementSystem.Models.Notification", b =>
                 {
-                    b.HasOne("TaskManagementSystem.Models.TaskComment", "TaskComment")
-                        .WithMany()
-                        .HasForeignKey("TaskComment_id");
-
                     b.HasOne("TaskManagementSystem.Areas.Identity.Data.ApplicationUser", "User")
                         .WithMany()
                         .HasForeignKey("User_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("TaskComment");
 
                     b.Navigation("User");
                 });

@@ -9,6 +9,7 @@
       "TaskManagementSystem/1.0.0": {
         "dependencies": {
           "Microsoft.AspNet.Identity.Core": "2.2.4",
+          "Microsoft.AspNetCore.Authentication.Google": "7.0.19",
           "Microsoft.AspNetCore.Identity": "2.2.0",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "7.0.18",
           "Microsoft.CodeAnalysis.Analyzers": "3.3.4",
@@ -98,6 +99,14 @@
           "Microsoft.AspNetCore.Authentication.Abstractions": "2.2.0",
           "Microsoft.AspNetCore.Http": "2.2.0",
           "Microsoft.AspNetCore.Http.Extensions": "2.2.0"
+        }
+      },
+      "Microsoft.AspNetCore.Authentication.Google/7.0.19": {
+        "runtime": {
+          "lib/net7.0/Microsoft.AspNetCore.Authentication.Google.dll": {
+            "assemblyVersion": "7.0.19.0",
+            "fileVersion": "7.0.1924.22306"
+          }
         }
       },
       "Microsoft.AspNetCore.Cryptography.Internal/7.0.18": {
@@ -252,22 +261,22 @@
           "runtimes/win-arm/native/Microsoft.Data.SqlClient.SNI.dll": {
             "rid": "win-arm",
             "assetType": "native",
-            "fileVersion": "0.0.0.0"
+            "fileVersion": "5.1.1.0"
           },
           "runtimes/win-arm64/native/Microsoft.Data.SqlClient.SNI.dll": {
             "rid": "win-arm64",
             "assetType": "native",
-            "fileVersion": "0.0.0.0"
+            "fileVersion": "5.1.1.0"
           },
           "runtimes/win-x64/native/Microsoft.Data.SqlClient.SNI.dll": {
             "rid": "win-x64",
             "assetType": "native",
-            "fileVersion": "0.0.0.0"
+            "fileVersion": "5.1.1.0"
           },
           "runtimes/win-x86/native/Microsoft.Data.SqlClient.SNI.dll": {
             "rid": "win-x86",
             "assetType": "native",
-            "fileVersion": "0.0.0.0"
+            "fileVersion": "5.1.1.0"
           }
         }
       },
@@ -844,6 +853,13 @@
       "sha512": "sha512-XlVJzJ5wPOYW+Y0J6Q/LVTEyfS4ssLXmt60T0SPP+D8abVhBTl+cgw2gDHlyKYIkcJg7btMVh383NDkMVqD/fg==",
       "path": "microsoft.aspnetcore.authentication.core/2.2.0",
       "hashPath": "microsoft.aspnetcore.authentication.core.2.2.0.nupkg.sha512"
+    },
+    "Microsoft.AspNetCore.Authentication.Google/7.0.19": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-0ZkYxh2/5nrDEqWdaZQaqXjXOMMJHgT3Yeq7seYaTIIsoHry5f4cxALQGdKgXEnA98+KrXm3w2w/u/1zKo+G+g==",
+      "path": "microsoft.aspnetcore.authentication.google/7.0.19",
+      "hashPath": "microsoft.aspnetcore.authentication.google.7.0.19.nupkg.sha512"
     },
     "Microsoft.AspNetCore.Cryptography.Internal/7.0.18": {
       "type": "package",
