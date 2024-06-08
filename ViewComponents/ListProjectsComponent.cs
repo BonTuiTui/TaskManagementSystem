@@ -1,25 +1,29 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TaskManagementSystem.Data;
 using TaskManagementSystem.Models;
-using TaskManagementSystem.Proxies; // Import proxy class
+using TaskManagementSystem.Proxies; // Import lớp proxy
 
 namespace TaskManagementSystem.ViewComponents
 {
+    // Đặt tên cho ViewComponent là "Projects"
     [ViewComponent(Name = "Projects")]
     public class ProjectsViewComponent : ViewComponent
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManagementProxy _userManagementProxy; // Proxy injection
 
+        // Constructor nhận ApplicationDbContext và UserManagementProxy thông qua Dependency Injection
         public ProjectsViewComponent(ApplicationDbContext applicationDbContext, UserManagementProxy userManagementProxy)
         {
             _context = applicationDbContext;
-            _userManagementProxy = userManagementProxy; // Assign proxy instance
+            _userManagementProxy = userManagementProxy; // Gán instance của proxy
         }
 
+        // Phương thức InvokeAsync là điểm vào của ViewComponent
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            var currentUser = await _userManagementProxy.GetCurrentUserAsync(); // Get current user via proxy
+            // Lấy người dùng hiện tại thông qua proxy
+            var currentUser = await _userManagementProxy.GetCurrentUserAsync();
 
             if (currentUser == null)
             {
@@ -32,18 +36,19 @@ namespace TaskManagementSystem.ViewComponents
             // Kiểm tra vai trò của người dùng
             if (await _userManagementProxy.IsUserInRoleAsync(currentUser, "admin"))
             {
-                // Nếu người dùng là Admin hiển thị tất cả các project
+                // Nếu người dùng là Admin, hiển thị tất cả các project
                 projectsToShow = _context.Projects.ToList();
-            } else if (await _userManagementProxy.IsUserInRoleAsync(currentUser, "manager"))
+            }
+            else if (await _userManagementProxy.IsUserInRoleAsync(currentUser, "manager"))
             {
-                // Nếu người dùng là Manager hiển thị tất cả các project
+                // Nếu người dùng là Manager, hiển thị các project mà họ tạo ra
                 projectsToShow = _context.Projects
                     .Where(p => p.User_id == currentUser.Id)
                     .ToList();
             }
             else
             {
-                // Nếu người dùng là Employee, chỉ hiển thị các project mà họ được giao task
+                // Nếu người dùng là Employee, hiển thị các project mà họ được giao task
                 projectsToShow = _context.Projects
                     .Where(p => p.Task.Any(t => t.AssignedTo == currentUser.Id))
                     .ToList();

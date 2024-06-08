@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using TaskManagementSystem.Areas.Identity.Data;
 
@@ -36,5 +35,4 @@ namespace TaskManagementSystem.Models
         [ForeignKey("Project_Id")]
         public virtual Project Project { get; set; } // Navigation property
     }
-
 }

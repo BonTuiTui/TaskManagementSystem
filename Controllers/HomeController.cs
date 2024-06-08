@@ -1,9 +1,5 @@
-﻿using System.Diagnostics;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using TaskManagementSystem.Areas.Identity.Data;
-using TaskManagementSystem.Models;
 using TaskManagementSystem.Proxies;
 
 namespace TaskManagementSystem.Controllers;

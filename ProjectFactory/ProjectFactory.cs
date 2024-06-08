@@ -1,5 +1,4 @@
-﻿
-using TaskManagementSystem.Models;
+﻿using TaskManagementSystem.Models;
 
 namespace TaskManagementSystem.ProjectFactory
 {
@@ -23,4 +22,3 @@ namespace TaskManagementSystem.ProjectFactory
         }
     }
 }
-
