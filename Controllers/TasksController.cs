@@ -236,7 +236,7 @@ namespace TaskManagementSystem.Controllers
             var isUserInProject = project.Task.Any(t => t.AssignedTo == user.Id);
             if (!isUserInProject)
             {
-                return Forbid("Bạn không có quyền truy cập vào dự án này.");
+                return Forbid("You don't have permition to here");
             }
 
             return View(project);

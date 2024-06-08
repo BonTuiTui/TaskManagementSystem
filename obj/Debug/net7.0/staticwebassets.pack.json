@@ -25,12 +25,32 @@
       "PackagePath": "staticwebassets/js/.DS_Store"
     },
     {
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/wwwroot/js/delete-project.js",
+      "PackagePath": "staticwebassets/js/delete-project.js"
+    },
+    {
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/wwwroot/js/delete-task.js",
+      "PackagePath": "staticwebassets/js/delete-task.js"
+    },
+    {
       "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/wwwroot/js/sidebar.js",
       "PackagePath": "staticwebassets/js/sidebar.js"
     },
     {
       "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/wwwroot/js/site.js",
       "PackagePath": "staticwebassets/js/site.js"
+    },
+    {
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/wwwroot/js/sortable-tasks.js",
+      "PackagePath": "staticwebassets/js/sortable-tasks.js"
+    },
+    {
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/wwwroot/js/task-comments.js",
+      "PackagePath": "staticwebassets/js/task-comments.js"
+    },
+    {
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/wwwroot/js/task-modal.js",
+      "PackagePath": "staticwebassets/js/task-modal.js"
     },
     {
       "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/wwwroot/lib/bootstrap/LICENSE",
