@@ -1,7 +1,4 @@
-﻿using System.Threading.Tasks;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TaskManagementSystem.Data;
@@ -10,65 +7,62 @@ using TaskManagementSystem.ProjectFactory;
 using TaskManagementSystem.Proxies;
 using TaskManagementSystem.ViewModels;
 
-// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace TaskManagementSystem.Controllers
 {
     public class ProjectsController : Controller
     {
         private readonly ApplicationDbContext dbContext;
-        private readonly UserManagementProxy _userManagementProxy; // Thêm UserManagementProxy
-        private readonly IProjectFactory projectFatory; 
+        private readonly UserManagementProxy _userManagementProxy;
+        private readonly IProjectFactory projectFatory;
 
-        public ProjectsController(ApplicationDbContext dbContext, UserManagementProxy userManagementProxy, IProjectFactory factory) // Thêm UserManagementProxy vào constructor
+        public ProjectsController(ApplicationDbContext dbContext, UserManagementProxy userManagementProxy, IProjectFactory factory)
         {
-            this.dbContext = dbContext;
-            _userManagementProxy = userManagementProxy; // Khởi tạo UserManagementProxy
-            projectFatory = factory;
+            // Khởi tạo các thành viên và kiểm tra null
+            this.dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
+            _userManagementProxy = userManagementProxy ?? throw new ArgumentNullException(nameof(userManagementProxy));
+            projectFatory = factory ?? throw new ArgumentNullException(nameof(factory));
         }
 
         [HttpGet]
         [Authorize(Roles = "admin, manager")]
         public IActionResult Add()
         {
+            // Trả về view để thêm dự án mới
             return View();
         }
 
-        // go to link https://localhost:7050/Projects/Add to add more project
         [HttpPost]
         [Authorize(Roles = "admin, manager")]
         public async Task<IActionResult> Add(AddProjectViewModel viewModel)
         {
-            
-            if (projectFatory == null)
+            // Kiểm tra tính hợp lệ của ModelState
+            if (!ModelState.IsValid)
             {
-    // Handle the error appropriately
-                return StatusCode(StatusCodes.Status500InternalServerError, "Project factory is not initialized");
+                return View(viewModel);
             }
- 
-                
-            IProjects project = projectFatory.createuser(viewModel.UserId, viewModel.Name, viewModel.Description);
-            var _project = (Project)project;
-            await dbContext.Projects.AddAsync(_project);
-            await dbContext.SaveChangesAsync();
 
-            return RedirectToAction("Details", "Projects", new { id = _project.Project_id });
-        }
+            try
+            {
+                // Kiểm tra nếu projectFatory là null
+                if (projectFatory == null)
+                {
+                    return StatusCode(StatusCodes.Status500InternalServerError, "Project factory is not initialized");
+                }
 
-        [HttpGet]
-        public async Task<IActionResult> List()
-        {
-            var projects = await dbContext.Projects.ToListAsync();
+                // Tạo dự án mới thông qua factory
+                IProjects project = projectFatory.createuser(viewModel.UserId, viewModel.Name, viewModel.Description);
+                var _project = (Project)project;
+                await dbContext.Projects.AddAsync(_project);
+                await dbContext.SaveChangesAsync();
 
-            return View(projects);
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> Edit(int id)
-        {
-            var project = await dbContext.Projects.FindAsync(id);
-
-            return View(project);
+                // Chuyển hướng đến trang chi tiết dự án
+                return RedirectToAction("Details", "Projects", new { id = _project.Project_id });
+            }
+            catch (Exception ex)
+            {
+                // Log the exception (ex) here
+                return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while adding the project");
+            }
         }
 
         [HttpPost]
@@ -76,15 +70,20 @@ namespace TaskManagementSystem.Controllers
         {
             var project = await dbContext.Projects.FindAsync(viewModel.Project_id);
 
-            if (project is not null)
+            // Kiểm tra nếu dự án không tồn tại
+            if (project == null)
             {
-                project.Name = viewModel.Name;
-                project.Description = viewModel.Description;
-                project.UpdateAt = DateTime.Now;
-
-                await dbContext.SaveChangesAsync();
+                return NotFound();
             }
 
+            // Cập nhật thông tin dự án
+            project.Name = viewModel.Name;
+            project.Description = viewModel.Description;
+            project.UpdateAt = DateTime.Now;
+
+            await dbContext.SaveChangesAsync();
+
+            // Chuyển hướng đến trang chi tiết dự án sau khi chỉnh sửa
             return RedirectToAction("Details", "Projects", new { id = project.Project_id });
         }
 
@@ -94,6 +93,7 @@ namespace TaskManagementSystem.Controllers
         {
             var project = await dbContext.Projects.FindAsync(id);
 
+            // Kiểm tra nếu dự án không tồn tại
             if (project == null)
             {
                 return NotFound();
@@ -103,33 +103,33 @@ namespace TaskManagementSystem.Controllers
             var relatedTasks = dbContext.Task.Where(t => t.Project_Id == id);
             dbContext.Task.RemoveRange(relatedTasks);
 
+            // Xóa dự án
             dbContext.Projects.Remove(project);
             await dbContext.SaveChangesAsync();
 
             return Ok();
         }
 
-
-
         [HttpGet]
         public async Task<IActionResult> Details(int id)
         {
+            // Kiểm tra nếu ID project không tồn tại
+            var project = await dbContext.Projects
+                .Include(p => p.Task)
+                .ThenInclude(t => t.AssignedUser)
+                .FirstOrDefaultAsync(p => p.Project_id == id);
+
+            if (project == null)
+            {
+                return View("NotFound"); // Trả về view NotFound nếu không tìm thấy project
+            }
+
             var currentUser = await _userManagementProxy.GetCurrentUserAsync();
 
             // Kiểm tra nếu người dùng là admin
             if (await _userManagementProxy.IsUserInRoleAsync(currentUser, "admin"))
             {
                 // Admin có thể xem toàn bộ dự án
-                var project = await dbContext.Projects
-                    .Include(p => p.Task)
-                    .ThenInclude(t => t.AssignedUser)
-                    .FirstOrDefaultAsync(p => p.Project_id == id);
-
-                if (project == null)
-                {
-                    return NotFound();
-                }
-
                 return View(project);
             }
 
@@ -137,33 +137,21 @@ namespace TaskManagementSystem.Controllers
             if (await _userManagementProxy.IsUserInRoleAsync(currentUser, "manager"))
             {
                 // Manager chỉ có thể xem những dự án mà họ tạo ra
-                var project = await dbContext.Projects
-                    .Include(p => p.Task)
-                    .ThenInclude(t => t.AssignedUser)
-                    .FirstOrDefaultAsync(p => p.Project_id == id && p.User_id == currentUser.Id);
-
-                if (project == null)
+                if (project.User_id != currentUser.Id)
                 {
-                    return Forbid(); // Chuyển hướng đến trang 403 Forbidden nếu không tìm thấy dự án hoặc không phải của manager đó
+                    return Forbid(); // Chuyển hướng đến trang 403 Forbidden nếu không phải của manager đó
                 }
 
                 return View(project);
             }
 
             // Cuối cùng, nếu là employee thì chỉ có thể xem những dự án mà họ có task
-            var projectAsEmployee = await dbContext.Projects
-                .Include(p => p.Task)
-                .ThenInclude(t => t.AssignedUser)
-                .FirstOrDefaultAsync(p => p.Project_id == id && p.Task.Any(t => t.AssignedUser.Id == currentUser.Id));
-
-            if (projectAsEmployee == null)
+            if (project.Task.Any(t => t.AssignedUser.Id == currentUser.Id))
             {
-                return Forbid(); // Chuyển hướng đến trang 403 Forbidden nếu không tìm thấy dự án hoặc không có task của employee đó
+                return View(project);
             }
 
-            return View(projectAsEmployee);
+            return Forbid(); // Chuyển hướng đến trang 403 Forbidden nếu không có task của employee đó
         }
-
     }
 }
-

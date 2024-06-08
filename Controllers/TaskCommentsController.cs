@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
-using System.Threading.Tasks;
 using TaskManagementSystem.Data;
 using TaskManagementSystem.Models;
 
@@ -16,7 +14,7 @@ namespace TaskManagementSystem.Controllers
             _context = context;
         }
 
-        // Action to load comments of a specific task
+        // Phương thức GET để lấy các bình luận của một task
         [HttpGet]
         public async Task<IActionResult> GetTaskComments(int taskId)
         {
@@ -26,18 +24,20 @@ namespace TaskManagementSystem.Controllers
                 {
                     c.Comment_text,
                     c.CreateAt,
-                    UserName = c.User.UserName // Assuming UserName is the field in ApplicationUser
+                    UserName = c.User.UserName
                 })
                 .ToListAsync();
 
             return Json(taskComments);
         }
 
+        // Phương thức POST để thêm một bình luận vào task
         [HttpPost]
         public async Task<IActionResult> AddTaskComment(TaskComment taskComment)
         {
             Console.WriteLine("AddTaskComment started");
 
+            // Kiểm tra tính hợp lệ của ModelState
             if (ModelState.IsValid)
             {
                 taskComment.CreateAt = DateTime.UtcNow;
@@ -45,11 +45,11 @@ namespace TaskManagementSystem.Controllers
                 await _context.SaveChangesAsync();
                 Console.WriteLine("Task comment saved");
 
-                // Xác định người nhận thông báo
+                // Lấy thông tin task liên quan
                 var task = await _context.Task
-                                         .Include(t => t.Project)
-                                         .Include(t => t.AssignedUser)
-                                         .FirstOrDefaultAsync(t => t.Task_id == taskComment.Task_id);
+                    .Include(t => t.Project)
+                    .Include(t => t.AssignedUser)
+                    .FirstOrDefaultAsync(t => t.Task_id == taskComment.Task_id);
 
                 if (task == null)
                 {
@@ -59,10 +59,12 @@ namespace TaskManagementSystem.Controllers
 
                 Console.WriteLine($"Task found: {task.Task_id}");
 
+                // Tạo danh sách các thông báo cần gửi
                 var notifications = new List<Notification>();
-                var userName = User.Identity.Name; // or any other method to get the user's name
+                var userName = User.Identity.Name;
                 var userRole = User.IsInRole("admin") ? "Admin" : User.IsInRole("manager") ? "Manager" : "Employee";
 
+                // Kiểm tra vai trò của người dùng và tạo thông báo phù hợp
                 if (User.IsInRole("employee"))
                 {
                     Console.WriteLine("User role detected");
@@ -138,6 +140,7 @@ namespace TaskManagementSystem.Controllers
                     }
                 }
 
+                // Lưu các thông báo vào cơ sở dữ liệu
                 if (notifications.Any())
                 {
                     _context.Notifications.AddRange(notifications);
@@ -157,7 +160,5 @@ namespace TaskManagementSystem.Controllers
                 return BadRequest(ModelState);
             }
         }
-
-
     }
 }

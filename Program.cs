@@ -12,7 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddScoped<IProjectFactory, ProjectFactory>();//Vinh them
+builder.Services.AddScoped<IProjectFactory, ProjectFactory>();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
@@ -20,13 +20,15 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultTokenProviders();
-//Google Authentication Vuong them
+
+// Google Authentication
 builder.Services.AddAuthentication()
 .AddGoogle(options =>
 {
     options.ClientId = "271910572021-f32fpqaasav094d48ere0f99f10av66o.apps.googleusercontent.com";
     options.ClientSecret = "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";
 });
+
 builder.Services.Configure<IdentityOptions>(options =>
 {
     options.Password.RequireDigit = true;
@@ -56,6 +58,7 @@ var app = builder.Build();
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
+    app.UseStatusCodePagesWithReExecute("/Home/Error", "?statusCode={0}");
     app.UseHsts();
 }
 
@@ -67,7 +70,7 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.UseMiddleware<CustomExceptionMiddleware>(); // Thêm dòng này
+app.UseMiddleware<CustomExceptionMiddleware>();
 
 app.MapControllerRoute(
     name: "default",

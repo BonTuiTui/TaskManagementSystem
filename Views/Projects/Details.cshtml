@@ -23,7 +23,7 @@
             <i class="bi bi-pencil-square"></i>
         </button>
 
-        <button class="btn btn-danger delete-project-button" style="position: absolute; top: 0; right: 0;">
+        <button class="btn btn-danger delete-project-button" style="position: absolute; top: 0; right: 0;" data-project-id="@Model.Project_id">
             <i class="bi bi-trash"></i>
         </button>
     </div>
@@ -169,7 +169,6 @@
         }
     </div>
 </div>
-
 
 <!-- Update Project Modal -->
 <div class="modal fade" id="updateProjectModal" tabindex="-1" aria-labelledby="updateProjectModalLabel"

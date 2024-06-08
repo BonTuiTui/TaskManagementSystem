@@ -4,33 +4,39 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using TaskManagementSystem.Areas.Identity.Data;
 using TaskManagementSystem.Models;
+using TaskManagementSystem.Proxies;
 
 namespace TaskManagementSystem.Controllers;
 
 [Authorize]
 public class HomeController : Controller
 {
-    private readonly UserManager<ApplicationUser> _userManager;
+    private readonly UserManagementProxy _userManagementProxy;
 
-    public HomeController(UserManager<ApplicationUser> userManager)
+    // Khởi tạo HomeController với UserManagementProxy thông qua Dependency Injection
+    public HomeController(UserManagementProxy userManagementProxy)
     {
-        _userManager = userManager;
+        _userManagementProxy = userManagementProxy;
     }
+
+    // Phương thức Index hiển thị thông tin người dùng hiện tại
     public async Task<IActionResult> Index()
     {
-        var user = await _userManager.GetUserAsync(User);
+        // Lấy thông tin người dùng hiện tại
+        var user = await _userManagementProxy.GetCurrentUserAsync();
         return View(user);
     }
 
-    public IActionResult Privacy()
+    // Phương thức xử lý lỗi và chuyển hướng đến trang NotFound cho lỗi 404
+    [AllowAnonymous]
+    public IActionResult Error(int statusCode)
     {
-        return View();
-    }
+        if (statusCode == 404)
+        {
+            return View("NotFound");
+        }
 
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
-    {
-        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        // Xử lý các mã trạng thái khác nếu cần thiết
+        return View("Error");
     }
 }
-

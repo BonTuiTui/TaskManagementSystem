@@ -64,14 +64,6 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHJvamVjdHMvRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/Views/Projects/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHJvamVjdHMvRWRpdC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/Views/Projects/List.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHJvamVjdHMvTGlzdC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
 [/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/Views/Shared/Components/Projects/Projects.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0NvbXBvbmVudHMvUHJvamVjdHMvUHJvamVjdHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -80,24 +72,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0Vycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/Views/Shared/NotFound.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL05vdEZvdW5kLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/Views/Shared/_AuthLayout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19BdXRoTGF5b3V0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/Views/Tasks/Add.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVGFza3MvQWRkLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/Views/Tasks/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVGFza3MvRWRpdC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/Views/Tasks/List.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVGFza3MvTGlzdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/Views/_ViewImports.cshtml]

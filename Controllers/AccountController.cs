@@ -1,12 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using TaskManagementSystem.Areas.Identity.Data;
 using TaskManagementSystem.Proxies;
 using TaskManagementSystem.ViewModels;
-using System.Threading.Tasks;
-using System.Linq;
-using System.Collections.Generic;
 using System.Security.Claims;
 
 namespace TaskManagementSystem.Controllers
