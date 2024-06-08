@@ -15,24 +15,27 @@
     var doneCount = Model.Task.Count(t => t.Status == "Done");
 }
 
-@if (User.IsInRole("admin") || User.IsInRole("manager"))
-{
-    <div style="position: relative; margin-bottom: 20px;">
+<p>Created By: <span>@ViewBag.CreatedByUsername</span></p>
+
+
+<div style="position: relative; margin-bottom: 20px;">
+    @if (User.IsInRole("admin") || User.IsInRole("manager"))
+    {
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#updateProjectModal"
                 style="position: absolute; top: 0; right: 120px;">
             <i class="bi bi-pencil-square"></i>
         </button>
 
-        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUserToProjectModal"
-                style="position: absolute; top: 0; right: 60px;">
-            <i class="bi bi-person-plus"></i>
-        </button>
-
-        <button class="btn btn-danger delete-project-button" style="position: absolute; top: 0; right: 0;" data-project-id="@Model.Project_id">
+        <button class="btn btn-danger delete-project-button" style="position: absolute; top: 0; right: 60px;" data-project-id="@Model.Project_id">
             <i class="bi bi-trash"></i>
         </button>
-    </div>
-}
+    }
+    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#viewMembersModal"
+            style="position: absolute; top: 0; right: 0;">
+        <i class="bi bi-people"></i>
+    </button>
+</div>
+
 
 <h2>@Model.Name</h2>
 
@@ -40,15 +43,6 @@
 
 <p>Created At: <span>@Model.CreateAt.ToString("dd MMMM yyyy")</span></p>
 <p>Updated At: <span>@Model.UpdateAt.ToString("dd MMMM yyyy")</span></p>
-
-<!-- Danh sách thành viên dự án -->
-<h3>Project Members</h3>
-<ul id="projectMembersList">
-    @foreach (var member in Model.ProjectMembers)
-    {
-        <li>@member.User.UserName (@member.User.Email)</li>
-    }
-</ul>
 
 <h3>Tasks</h3>
 <div class="row">
@@ -183,10 +177,39 @@
     </div>
 </div>
 
+<!-- View Members Modal -->
+<div class="modal fade" id="viewMembersModal" tabindex="-1" aria-labelledby="viewMembersModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="viewMembersModalLabel">Project Members</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>Email</th>
+                            <th>Full Name</th>
+                        </tr>
+                    </thead>
+                    <tbody id="membersList">
+                        <!-- Members will be loaded here dynamically -->
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- Update Project Modal -->
 <div class="modal fade" id="updateProjectModal" tabindex="-1" aria-labelledby="updateProjectModalLabel"
      aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="updateProjectModalLabel">Update Project</h5>
@@ -202,6 +225,26 @@
                     <div class="mb-3">
                         <label asp-for="Description" class="form-label">Description</label>
                         <textarea asp-for="Description" class="form-control"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="userNameOrEmail" class="form-label">Add Member (User Name or Email)</label>
+                        <input type="text" class="form-control" id="userNameOrEmail" name="userNameOrEmail" />
+                        <button type="button" class="btn btn-primary mt-2" id="addUserButton">Add Member</button>
+                    </div>
+                    <div class="mb-3">
+                        <h5>Project Members</h5>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Username</th>
+                                    <th>Email</th>
+                                    <th>Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody id="currentMembersList">
+                                <!-- Members will be loaded here dynamically -->
+                            </tbody>
+                        </table>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -358,4 +401,5 @@
     <script src="~/js/delete-project.js"></script>
     <script src="~/js/task-comments.js"></script>
     <script src="~/js/add-user-to-project.js"></script>
+    <script src="~/js/view-members.js"></script>
 }

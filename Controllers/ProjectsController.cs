@@ -71,7 +71,7 @@ namespace TaskManagementSystem.Controllers
 
             if (project == null)
             {
-                return NotFound();
+                return View("NotFound"); // Trả về view NotFound nếu không tìm thấy project
             }
 
             // Xóa các task liên quan
@@ -87,24 +87,27 @@ namespace TaskManagementSystem.Controllers
         [HttpGet]
         public async Task<IActionResult> Details(int id)
         {
+            // Kiểm tra nếu ID project không tồn tại
+            var project = await dbContext.Projects
+                .Include(p => p.Task)
+                .ThenInclude(t => t.AssignedUser)
+                .Include(p => p.ProjectMembers) // Bao gồm ProjectMembers để kiểm tra quyền truy cập
+                .ThenInclude(pm => pm.User) // Bao gồm User trong ProjectMembers
+                .FirstOrDefaultAsync(p => p.Project_id == id);
+
+            if (project == null)
+            {
+                return View("NotFound"); // Trả về view NotFound nếu không tìm thấy project
+            }
+
             var currentUser = await _userManagementProxy.GetCurrentUserAsync();
+            var createdByUser = await _userManagementProxy.GetUserByIdAsync(project.User_id);
 
             // Kiểm tra nếu người dùng là admin
             if (await _userManagementProxy.IsUserInRoleAsync(currentUser, "admin"))
             {
+                ViewBag.CreatedByUsername = createdByUser?.UserName;
                 // Admin có thể xem toàn bộ dự án
-                var project = await dbContext.Projects
-                    .Include(p => p.Task)
-                    .ThenInclude(t => t.AssignedUser)
-                    .Include(p => p.ProjectMembers) // Include ProjectMembers
-                    .ThenInclude(pm => pm.User) // Include User in ProjectMembers
-                    .FirstOrDefaultAsync(p => p.Project_id == id);
-
-                if (project == null)
-                {
-                    return NotFound();
-                }
-
                 return View(project);
             }
 
@@ -112,35 +115,24 @@ namespace TaskManagementSystem.Controllers
             if (await _userManagementProxy.IsUserInRoleAsync(currentUser, "manager"))
             {
                 // Manager chỉ có thể xem những dự án mà họ tạo ra
-                var project = await dbContext.Projects
-                    .Include(p => p.Task)
-                    .ThenInclude(t => t.AssignedUser)
-                    .Include(p => p.ProjectMembers) // Include ProjectMembers
-                    .ThenInclude(pm => pm.User) // Include User in ProjectMembers
-                    .FirstOrDefaultAsync(p => p.Project_id == id && p.User_id == currentUser.Id);
-
-                if (project == null)
+                if (project.User_id != currentUser.Id)
                 {
-                    return Forbid(); // Chuyển hướng đến trang 403 Forbidden nếu không tìm thấy dự án hoặc không phải của manager đó
+                    return Forbid(); // Chuyển hướng đến trang 403 Forbidden nếu không phải của manager đó
                 }
 
+                ViewBag.CreatedByUsername = createdByUser?.UserName;
                 return View(project);
             }
 
-            // Nếu là thành viên của dự án thì có thể xem dự án
-            var projectAsMember = await dbContext.Projects
-                .Include(p => p.Task)
-                .ThenInclude(t => t.AssignedUser)
-                .Include(p => p.ProjectMembers) // Include ProjectMembers
-                .ThenInclude(pm => pm.User) // Include User in ProjectMembers
-                .FirstOrDefaultAsync(p => p.Project_id == id && p.ProjectMembers.Any(pm => pm.UserId == currentUser.Id));
-
-            if (projectAsMember == null)
+            // Nếu người dùng là thành viên của dự án, hiển thị các project mà họ là thành viên
+            if (project.ProjectMembers.Any(pm => pm.UserId == currentUser.Id))
             {
-                return Forbid(); // Chuyển hướng đến trang 403 Forbidden nếu không tìm thấy dự án hoặc không phải là thành viên của dự án
+                ViewBag.CreatedByUsername = createdByUser?.UserName;
+                return View(project);
             }
 
-            return View(projectAsMember);
+            // Nếu không phải là admin, manager hoặc thành viên của dự án, không được truy cập
+            return Forbid(); // Chuyển hướng đến trang 403 Forbidden nếu không có quyền truy cập
         }
 
         [HttpPost]
@@ -150,7 +142,7 @@ namespace TaskManagementSystem.Controllers
             var project = await dbContext.Projects.Include(p => p.ProjectMembers).FirstOrDefaultAsync(p => p.Project_id == projectId);
             if (project == null)
             {
-                return NotFound();
+                return View("NotFound"); // Trả về view NotFound nếu không tìm thấy project
             }
 
             var user = await _userManagementProxy.GetUserByNameAsync(userName) ?? await _userManagementProxy.GetUserByEmailAsync(userName);
@@ -170,6 +162,39 @@ namespace TaskManagementSystem.Controllers
             return Ok(new { userName = user.UserName, email = user.Email });
         }
 
+        [HttpPost]
+        [Authorize(Roles = "admin, manager")]
+        public async Task<IActionResult> RemoveUserFromProject(int projectId, string userId)
+        {
+            var project = await dbContext.Projects.Include(p => p.ProjectMembers).FirstOrDefaultAsync(p => p.Project_id == projectId);
+            if (project == null)
+            {
+                return View("NotFound"); // Trả về view NotFound nếu không tìm thấy project
+            }
+
+            var projectMember = project.ProjectMembers.FirstOrDefault(pm => pm.UserId == userId);
+            if (projectMember == null)
+            {
+                return View("NotFound"); // Trả về view NotFound nếu không tìm thấy project
+            }
+
+            var tasksAssignedToUser = await dbContext.Task
+                .Where(t => t.Project_Id == projectId && t.AssignedTo == userId)
+                .Select(t => new { t.Title })
+                .ToListAsync();
+
+            if (tasksAssignedToUser.Any())
+            {
+                var taskTitles = string.Join(", ", tasksAssignedToUser.Select(t => t.Title));
+                return BadRequest($"Cannot remove user. The user is assigned to tasks: {taskTitles}");
+            }
+
+            dbContext.ProjectMembers.Remove(projectMember);
+            await dbContext.SaveChangesAsync();
+
+            return Ok(new { success = true });
+        }
+
         [HttpGet]
         public async Task<IActionResult> GetProjectMembers(int projectId)
         {
@@ -178,11 +203,14 @@ namespace TaskManagementSystem.Controllers
                 .Select(pm => new
                 {
                     pm.User.Id,
-                    pm.User.UserName
+                    pm.User.UserName,
+                    pm.User.Email,
+                    pm.User.FullName
                 })
                 .ToListAsync();
 
             return Json(projectMembers);
         }
+
     }
 }

@@ -65,6 +65,10 @@
       "PackagePath": "staticwebassets/js/task-modal.js"
     },
     {
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/wwwroot/js/view-members.js",
+      "PackagePath": "staticwebassets/js/view-members.js"
+    },
+    {
       "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/wwwroot/lib/bootstrap/LICENSE",
       "PackagePath": "staticwebassets/lib/bootstrap"
     },
