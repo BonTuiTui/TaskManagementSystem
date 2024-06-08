@@ -37,14 +37,6 @@ namespace TaskManagementSystem.Controllers
         {
             if (ModelState.IsValid)
             {
-                var existingUsername = await _userManagementProxy.GetUserByNameAsync(model.Username);
-                if (existingUsername != null)
-                {
-                    ModelState.AddModelError("Username", "Username is already taken.");
-                    model.ExternalLogins = (await _userManagementProxy.GetExternalAuthenticationSchemesAsync()).ToList();
-                    return View(model);
-                }
-
                 var existingEmail = await _userManagementProxy.GetUserByEmailAsync(model.Email);
                 if (existingEmail != null)
                 {
@@ -53,11 +45,15 @@ namespace TaskManagementSystem.Controllers
                     return View(model);
                 }
 
+                // Tách tên người dùng từ địa chỉ email
+                var userName = model.Email.Split('@')[0];
+                var fullName = model.Email.Split('@')[0]; // Giả sử fullname là phần trước @ của email
+
                 var user = new ApplicationUser
                 {
-                    UserName = model.Username,
+                    UserName = userName,
                     Email = model.Email,
-                    FullName = model.Fullname
+                    FullName = fullName
                 };
 
                 var result = await _userManagementProxy.RegisterUserAsync(user, model.Password);
@@ -78,6 +74,7 @@ namespace TaskManagementSystem.Controllers
             model.ExternalLogins = (await _userManagementProxy.GetExternalAuthenticationSchemesAsync()).ToList();
             return View(model);
         }
+
 
         [HttpGet]
         [AllowAnonymous]
@@ -184,9 +181,14 @@ namespace TaskManagementSystem.Controllers
                     if (user == null)
                     {
                         Console.WriteLine("User not found, creating new user");
+
+                        // Tách tên người dùng từ địa chỉ email
+                        var userName = email.Split('@')[0];
+                        Console.WriteLine($"Username: {userName}");
+
                         user = new ApplicationUser
                         {
-                            UserName = email,
+                            UserName = userName,
                             Email = email,
                             FullName = info.Principal.FindFirstValue(ClaimTypes.GivenName),
                         };

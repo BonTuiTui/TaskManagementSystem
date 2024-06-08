@@ -33,8 +33,14 @@
 
             @if (!ViewData.ModelState.IsValid)
             {
-                <div class="alert alert-danger mt-2" role="alert">
-                    <strong>Error:</strong> Invalid login attempt.
+                <div class="alert alert-danger" role="alert">
+                    <strong>Error:</strong> There was a problem with your profile save.
+                    <ul>
+                        @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                        {
+                            <li>@error.ErrorMessage</li>
+                        }
+                    </ul>
                 </div>
             }
 
