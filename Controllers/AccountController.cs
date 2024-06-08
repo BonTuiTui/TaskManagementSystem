@@ -14,14 +14,10 @@ namespace TaskManagementSystem.Controllers
     public class AccountController : Controller
     {
         private readonly UserManagementProxy _userManagementProxy;
-        private readonly SignInManager<ApplicationUser> _signInManager;
-        private readonly UserManager<ApplicationUser> _userManager;
 
-        public AccountController(UserManagementProxy userManagementProxy, SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager)
+        public AccountController(UserManagementProxy userManagementProxy)
         {
             _userManagementProxy = userManagementProxy;
-            _signInManager = signInManager;
-            _userManager = userManager;
         }
 
         [HttpGet]
@@ -29,7 +25,7 @@ namespace TaskManagementSystem.Controllers
         {
             var model = new RegisterViewModel
             {
-                ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList(),
+                ExternalLogins = (await _userManagementProxy.GetExternalAuthenticationSchemesAsync()).ToList(),
                 ReturnUrl = Url.Action("Index", "Home")
             };
 
@@ -45,7 +41,7 @@ namespace TaskManagementSystem.Controllers
                 if (existingUsername != null)
                 {
                     ModelState.AddModelError("Username", "Username is already taken.");
-                    model.ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+                    model.ExternalLogins = (await _userManagementProxy.GetExternalAuthenticationSchemesAsync()).ToList();
                     return View(model);
                 }
 
@@ -53,7 +49,7 @@ namespace TaskManagementSystem.Controllers
                 if (existingEmail != null)
                 {
                     ModelState.AddModelError("Email", "Email is already taken.");
-                    model.ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+                    model.ExternalLogins = (await _userManagementProxy.GetExternalAuthenticationSchemesAsync()).ToList();
                     return View(model);
                 }
 
@@ -79,7 +75,7 @@ namespace TaskManagementSystem.Controllers
                 }
             }
 
-            model.ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+            model.ExternalLogins = (await _userManagementProxy.GetExternalAuthenticationSchemesAsync()).ToList();
             return View(model);
         }
 
@@ -95,7 +91,7 @@ namespace TaskManagementSystem.Controllers
             var model = new LoginViewModel
             {
                 ReturnUrl = ReturnUrl,
-                ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList()
+                ExternalLogins = (await _userManagementProxy.GetExternalAuthenticationSchemesAsync()).ToList()
             };
 
             return View(model);
@@ -120,17 +116,8 @@ namespace TaskManagementSystem.Controllers
 
                 ModelState.AddModelError("", "Invalid login attempt");
             }
-            model.ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+            model.ExternalLogins = (await _userManagementProxy.GetExternalAuthenticationSchemesAsync()).ToList();
             return View(model);
-        }
-
-        [HttpPost]
-        [AllowAnonymous]
-        public IActionResult ExternalLogin(string provider, string returnUrl)
-        {
-            var redirectUrl = Url.Action(action: "ExternalLoginCallback", controller: "Account", values: new { ReturnUrl = returnUrl });
-            var properties = _signInManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl);
-            return new ChallengeResult(provider, properties);
         }
 
         [HttpPost]
@@ -140,30 +127,48 @@ namespace TaskManagementSystem.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<IActionResult> ExternalLogin(string provider, string returnUrl)
+        {
+            var redirectUrl = Url.Action(action: "ExternalLoginCallback", controller: "Account", values: new { ReturnUrl = returnUrl });
+            var properties = _userManagementProxy.ConfigureExternalAuthenticationProperties(provider, redirectUrl);
+            return new ChallengeResult(provider, properties);
+        }
+
         [AllowAnonymous]
         public async Task<IActionResult> ExternalLoginCallback(string? returnUrl, string? remoteError)
         {
+            Console.WriteLine("ExternalLoginCallback called");
             returnUrl = returnUrl ?? Url.Content("~/");
+            Console.WriteLine($"ReturnUrl: {returnUrl}");
+
             LoginViewModel loginViewModel = new LoginViewModel
             {
                 ReturnUrl = returnUrl,
-                ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList()
+                ExternalLogins = (await _userManagementProxy.GetExternalAuthenticationSchemesAsync()).ToList()
             };
+            Console.WriteLine("LoginViewModel created");
 
             if (remoteError != null)
             {
+                Console.WriteLine($"Remote error: {remoteError}");
                 ModelState.AddModelError(string.Empty, $"Error from external provider: {remoteError}");
                 return View("Login", loginViewModel);
             }
 
-            var info = await _signInManager.GetExternalLoginInfoAsync();
+            var info = await _userManagementProxy.GetExternalLoginInfoAsync();
             if (info == null)
             {
+                Console.WriteLine("ExternalLoginInfo is null");
                 ModelState.AddModelError(string.Empty, "Error loading external login information.");
                 return View("Login", loginViewModel);
             }
+            Console.WriteLine("ExternalLoginInfo retrieved");
 
-            var signInResult = await _signInManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey, isPersistent: false, bypassTwoFactor: true);
+            var signInResult = await _userManagementProxy.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey, isPersistent: false, bypassTwoFactor: true);
+            Console.WriteLine($"SignInResult: {signInResult.Succeeded}");
+
             if (signInResult.Succeeded)
             {
                 return LocalRedirect(returnUrl);
@@ -171,37 +176,60 @@ namespace TaskManagementSystem.Controllers
             else
             {
                 var email = info.Principal.FindFirstValue(ClaimTypes.Email);
+                Console.WriteLine($"Email: {email}");
+
                 if (email != null)
                 {
                     var user = await _userManagementProxy.GetUserByEmailAsync(email);
                     if (user == null)
                     {
+                        Console.WriteLine("User not found, creating new user");
                         user = new ApplicationUser
                         {
                             UserName = email,
                             Email = email,
                             FullName = info.Principal.FindFirstValue(ClaimTypes.GivenName),
                         };
-                        var createResult = await _userManager.CreateAsync(user);
+                        var createResult = await _userManagementProxy.RegisterUserAsync(user, "P@ssword123"); // Thay thế "defaultPassword" bằng mật khẩu phù hợp
+                        Console.WriteLine($"Create user result: {createResult.Succeeded}");
+
                         if (!createResult.Succeeded)
                         {
                             foreach (var error in createResult.Errors)
                             {
+                                Console.WriteLine($"Create user error: {error.Description}");
+                                ModelState.AddModelError(string.Empty, error.Description);
+                            }
+                            return View("Login", loginViewModel);
+                        }
+
+                        // Thêm vai trò mặc định "employee" cho người dùng mới
+                        var addToRoleResult = await _userManagementProxy.AddToRolesAsync(user, new List<string> { "employee" });
+                        Console.WriteLine($"Add to role result: {addToRoleResult.Succeeded}");
+
+                        if (!addToRoleResult.Succeeded)
+                        {
+                            foreach (var error in addToRoleResult.Errors)
+                            {
+                                Console.WriteLine($"Add to role error: {error.Description}");
                                 ModelState.AddModelError(string.Empty, error.Description);
                             }
                             return View("Login", loginViewModel);
                         }
                     }
-                    await _userManager.AddLoginAsync(user, info);
-                    await _signInManager.SignInAsync(user, isPersistent: false);
+                    await _userManagementProxy.AddLoginAsync(user, info);
+                    await _userManagementProxy.SignInAsync(user, isPersistent: false);
+                    Console.WriteLine("User signed in");
                     return LocalRedirect(returnUrl);
                 }
 
                 ViewBag.ErrorTitle = $"Email claim not received from: {info.LoginProvider}";
                 ViewBag.ErrorMessage = "Please contact support.";
+                Console.WriteLine("Email claim not received");
                 return View("Error");
             }
         }
+
 
         [Authorize]
         [HttpGet]

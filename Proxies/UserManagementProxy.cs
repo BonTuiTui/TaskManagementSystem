@@ -1,6 +1,10 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Http;
 using TaskManagementSystem.Areas.Identity.Data;
 using TaskManagementSystem.Services;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace TaskManagementSystem.Proxies
 {
@@ -9,12 +13,14 @@ namespace TaskManagementSystem.Proxies
         private readonly IUserManagementService _realService;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
 
-        public UserManagementProxy(IUserManagementService realService, IHttpContextAccessor httpContextAccessor, UserManager<ApplicationUser> userManager)
+        public UserManagementProxy(IUserManagementService realService, IHttpContextAccessor httpContextAccessor, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
         {
             _realService = realService;
             _httpContextAccessor = httpContextAccessor;
             _userManager = userManager;
+            _signInManager = signInManager;
         }
 
         public async Task<ApplicationUser> GetUserByNameAsync(string username)
@@ -55,14 +61,12 @@ namespace TaskManagementSystem.Proxies
             }
         }
 
-        // Phương thức lấy thông tin người dùng hiện tại
         public async Task<ApplicationUser> GetCurrentUserAsync()
         {
             var user = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
             return user;
         }
 
-        // Phương thức kiểm tra người dùng có trong vai trò được chỉ định hay không
         public async Task<bool> IsUserInRoleAsync(ApplicationUser user, string roleName)
         {
             return await _userManager.IsInRoleAsync(user, roleName);
@@ -113,7 +117,6 @@ namespace TaskManagementSystem.Proxies
 
         public async Task<IdentityResult> AddToRolesAsync(ApplicationUser user, IEnumerable<string> roles)
         {
-            // No admin check here since it's for regular users
             return await _realService.AddToRolesAsync(user, roles);
         }
 
@@ -123,14 +126,40 @@ namespace TaskManagementSystem.Proxies
             return await _realService.RemoveFromRolesAsync(user, roles);
         }
 
-        internal Task<bool> IsUserInRoleAsync(string currentUser, string v)
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task<ApplicationUser> GetUserByIdAsync(string userId)
         {
             return await _userManager.FindByIdAsync(userId);
+        }
+
+        // New methods for external login support
+        public async Task<IEnumerable<AuthenticationScheme>> GetExternalAuthenticationSchemesAsync()
+        {
+            return await _signInManager.GetExternalAuthenticationSchemesAsync();
+        }
+
+        public AuthenticationProperties ConfigureExternalAuthenticationProperties(string provider, string redirectUrl)
+        {
+            return _signInManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl);
+        }
+
+        public async Task<ExternalLoginInfo> GetExternalLoginInfoAsync()
+        {
+            return await _signInManager.GetExternalLoginInfoAsync();
+        }
+
+        public async Task<SignInResult> ExternalLoginSignInAsync(string loginProvider, string providerKey, bool isPersistent, bool bypassTwoFactor)
+        {
+            return await _signInManager.ExternalLoginSignInAsync(loginProvider, providerKey, isPersistent, bypassTwoFactor);
+        }
+
+        public async Task<IdentityResult> AddLoginAsync(ApplicationUser user, UserLoginInfo info)
+        {
+            return await _userManager.AddLoginAsync(user, info);
+        }
+
+        public async Task SignInAsync(ApplicationUser user, bool isPersistent)
+        {
+            await _signInManager.SignInAsync(user, isPersistent);
         }
     }
 }
