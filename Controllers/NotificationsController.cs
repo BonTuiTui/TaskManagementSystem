@@ -14,6 +14,16 @@ namespace TaskManagementSystem.Controllers
             _context = context;
         }
 
+        [HttpGet]
+        public async Task<IActionResult> GetUnreadNotificationsCount(string userId)
+        {
+            var unreadCount = await _context.Notifications
+                .Where(n => n.User_id == userId && !n.IsRead)
+                .CountAsync();
+
+            return Json(unreadCount);
+        }
+
         // Phương thức GET để lấy thông báo của người dùng
         [HttpGet]
         public async Task<IActionResult> GetUserNotifications(string userId)
