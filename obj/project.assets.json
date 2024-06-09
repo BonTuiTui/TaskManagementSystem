@@ -4587,32 +4587,25 @@
     ]
   },
   "packageFolders": {
-    "/Users/sinhattoan/.nuget/packages/": {}
+    "/Users/macs/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-<<<<<<< HEAD
       "projectUniqueName": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem.csproj",
       "projectName": "TaskManagementSystem",
       "projectPath": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem.csproj",
       "packagesPath": "/Users/macs/.nuget/packages/",
       "outputPath": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/obj/",
-=======
-      "projectUniqueName": "/Users/sinhattoan/Documents/HSU/project/TaskManagementSystem/TaskManagementSystem.csproj",
-      "projectName": "TaskManagementSystem",
-      "projectPath": "/Users/sinhattoan/Documents/HSU/project/TaskManagementSystem/TaskManagementSystem.csproj",
-      "packagesPath": "/Users/sinhattoan/.nuget/packages/",
-      "outputPath": "/Users/sinhattoan/Documents/HSU/project/TaskManagementSystem/obj/",
->>>>>>> 251bdcb2f116599e529c5798bdbb4bfbba23e11e
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/sinhattoan/.nuget/NuGet/NuGet.Config"
+        "/Users/macs/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
       ],
       "sources": {
+        "/usr/local/share/dotnet/sdk/7.0.316/Sdks/Microsoft.NET.Sdk.Web/library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -4625,11 +4618,6 @@
         "warnAsError": [
           "NU1605"
         ]
-      },
-      "restoreAuditProperties": {
-        "enableAudit": "true",
-        "auditLevel": "low",
-        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -4684,20 +4672,6 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "downloadDependencies": [
-          {
-            "name": "Microsoft.AspNetCore.App.Ref",
-            "version": "[7.0.17, 7.0.17]"
-          },
-          {
-            "name": "Microsoft.NETCore.App.Host.osx-arm64",
-            "version": "[7.0.17, 7.0.17]"
-          },
-          {
-            "name": "Microsoft.NETCore.App.Ref",
-            "version": "[7.0.17, 7.0.17]"
-          }
-        ],
         "frameworkReferences": {
           "Microsoft.AspNetCore.App": {
             "privateAssets": "none"
@@ -4706,11 +4680,17 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.203/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.316/RuntimeIdentifierGraph.json"
       }
     }
   },
   "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Problem reading the cache file /Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/obj/project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
+    },
     {
       "code": "NU1701",
       "level": "Warning",
