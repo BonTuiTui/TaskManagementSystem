@@ -22,11 +22,9 @@ namespace TaskManagementSystem.Controllers
             _userManagementProxy = userManagementProxy ?? throw new ArgumentNullException(nameof(userManagementProxy));
         }
 
-        // Phương thức GET để lấy thông tin task theo ID
         [HttpGet]
         public async Task<IActionResult> GetTask(int id)
         {
-            // Truy vấn task theo ID và chọn các trường cần thiết
             var task = await dbContext.Task
                 .Where(t => t.Task_id == id)
                 .Select(t => new
@@ -35,7 +33,7 @@ namespace TaskManagementSystem.Controllers
                     t.Title,
                     t.Description,
                     t.Status,
-                    t.AssignedTo,
+                    AssignedToId = t.AssignedTo, // Return the user ID instead of username
                     t.DueDate,
                     t.UpdateAt
                 })
@@ -46,26 +44,9 @@ namespace TaskManagementSystem.Controllers
                 return NotFound();
             }
 
-            // Lấy thông tin người dùng được gán task
-            var user = await _userManagementProxy.GetUserByIdAsync(task.AssignedTo);
-            string assignedToUsername = user != null ? user.UserName : null;
-
-            // Tạo một object mới chứa thông tin task và Username
-            var result = new
-            {
-                task.Task_id,
-                task.Title,
-                task.Description,
-                task.Status,
-                AssignedToUsername = assignedToUsername,
-                task.DueDate,
-                task.UpdateAt
-            };
-
-            return Json(result);
+            return Json(task);
         }
 
-        // Phương thức POST để thêm một task mới
         [HttpPost]
         [Authorize(Roles = "admin, manager")]
         public async Task<IActionResult> Add(AddTaskViewModel viewModel)
@@ -73,14 +54,7 @@ namespace TaskManagementSystem.Controllers
             ApplicationUser assignedUser = null;
             if (!string.IsNullOrEmpty(viewModel.AssignedTo))
             {
-                if (viewModel.AssignedTo.Contains("@"))
-                {
-                    assignedUser = await _userManagementProxy.GetUserByEmailAsync(viewModel.AssignedTo);
-                }
-                else
-                {
-                    assignedUser = await _userManagementProxy.GetUserByNameAsync(viewModel.AssignedTo);
-                }
+                assignedUser = await _userManagementProxy.GetUserByIdAsync(viewModel.AssignedTo);
 
                 if (assignedUser == null)
                 {
@@ -106,7 +80,6 @@ namespace TaskManagementSystem.Controllers
             return Ok();
         }
 
-        // Phương thức POST để chỉnh sửa một task hiện có
         [HttpPost]
         [Authorize(Roles = "admin, manager")]
         public async Task<IActionResult> Edit(int id, AddTaskViewModel viewModel)
@@ -120,14 +93,7 @@ namespace TaskManagementSystem.Controllers
             ApplicationUser assignedUser = null;
             if (!string.IsNullOrEmpty(viewModel.AssignedTo))
             {
-                if (viewModel.AssignedTo.Contains("@"))
-                {
-                    assignedUser = await _userManagementProxy.GetUserByEmailAsync(viewModel.AssignedTo);
-                }
-                else
-                {
-                    assignedUser = await _userManagementProxy.GetUserByNameAsync(viewModel.AssignedTo);
-                }
+                assignedUser = await _userManagementProxy.GetUserByIdAsync(viewModel.AssignedTo);
 
                 if (assignedUser == null)
                 {

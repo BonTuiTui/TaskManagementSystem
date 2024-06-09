@@ -10,7 +10,7 @@ namespace TaskManagementSystem.Models
         [Key]
         public int Project_id { get; set; }
 
-        public string User_id { get; set; } // Change to string
+        public string User_id { get; set; } // ID của người tạo dự án
 
         public string Description { get; set; }
 
@@ -22,7 +22,7 @@ namespace TaskManagementSystem.Models
         [StringLength(255)]
         public string Name { get; set; }
 
-        public Project (string User_id, string Name, string Description, DateTime CreateAt, DateTime UpdateAt)
+        public Project(string User_id, string Name, string Description, DateTime CreateAt, DateTime UpdateAt)
         {
             this.User_id = User_id;
             this.Name = Name;
@@ -37,6 +37,9 @@ namespace TaskManagementSystem.Models
         public virtual ApplicationUser User { get; set; } // Navigation property
 
         public ICollection<Task> Task { get; set; }
+
+        // Thêm thuộc tính cho danh sách thành viên
+        public virtual ICollection<ProjectMember> ProjectMembers { get; set; } = new List<ProjectMember>();
 
         void IProjects.annouce()
         {

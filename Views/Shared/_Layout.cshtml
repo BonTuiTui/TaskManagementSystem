@@ -15,6 +15,14 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"></script>
+    <style>
+        .task-card {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            margin-bottom: 15px;
+            padding: 20px;
+        }
+    </style>
 </head>
 
 <body>
@@ -69,11 +77,9 @@ workspace</pre>
                                         Sign out
                                     </a>
                                 </form>
-                                <script>
-                                    document.getElementById('logoutLink').addEventListener('click', function () {
+                                <script>document.getElementById('logoutLink').addEventListener('click', function () {
                                         document.getElementById('logoutForm').submit();
-                                    });
-                                </script>
+                                    });</script>
                             </li>
                         </ul>
                     </div>
@@ -117,6 +123,7 @@ workspace</pre>
     </script>
     <script src="~/js/notifications.js" asp-append-version="true"></script>
 
+    <script src="~/js/sortable-tasks-new.js"></script>
     @RenderSection("Scripts", required: false)
 </body>
 

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "e5U+ToE8GVMW/0dES1YH7do5G7j5TImyLnUe4rxtm+C1BeLJkzOG7z0Uc7yosORjN4OwL4ZqjukeIU/Samn2LQ==",
+  "dgSpecHash": "B10U9/vAFHvYZENmwXVNQMWhr+jJG58WzOrYF7L4D6SIS5cshS2dqmy1BoUk1C/cspsTeXXD74CgfzZ/Otuh2w==",
   "success": true,
   "projectFilePath": "/Users/sinhattoan/Documents/HSU/project/TaskManagementSystem/TaskManagementSystem.csproj",
   "expectedPackageFiles": [
@@ -95,7 +95,10 @@
     "/Users/sinhattoan/.nuget/packages/system.text.encodings.web/7.0.0/system.text.encodings.web.7.0.0.nupkg.sha512",
     "/Users/sinhattoan/.nuget/packages/system.text.json/7.0.0/system.text.json.7.0.0.nupkg.sha512",
     "/Users/sinhattoan/.nuget/packages/system.threading.tasks.extensions/4.5.4/system.threading.tasks.extensions.4.5.4.nupkg.sha512",
-    "/Users/sinhattoan/.nuget/packages/system.windows.extensions/6.0.0/system.windows.extensions.6.0.0.nupkg.sha512"
+    "/Users/sinhattoan/.nuget/packages/system.windows.extensions/6.0.0/system.windows.extensions.6.0.0.nupkg.sha512",
+    "/Users/sinhattoan/.nuget/packages/microsoft.netcore.app.ref/7.0.17/microsoft.netcore.app.ref.7.0.17.nupkg.sha512",
+    "/Users/sinhattoan/.nuget/packages/microsoft.aspnetcore.app.ref/7.0.17/microsoft.aspnetcore.app.ref.7.0.17.nupkg.sha512",
+    "/Users/sinhattoan/.nuget/packages/microsoft.netcore.app.host.osx-arm64/7.0.17/microsoft.netcore.app.host.osx-arm64.7.0.17.nupkg.sha512"
   ],
   "logs": [
     {

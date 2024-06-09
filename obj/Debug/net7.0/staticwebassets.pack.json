@@ -29,7 +29,15 @@
       "PackagePath": "staticwebassets/js/.DS_Store"
     },
     {
+<<<<<<< HEAD
       "Id": "/Users/sinhattoan/Documents/HSU/project/TaskManagementSystem/wwwroot/js/delete-project.js",
+=======
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/wwwroot/js/add-user-to-project.js",
+      "PackagePath": "staticwebassets/js/add-user-to-project.js"
+    },
+    {
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/wwwroot/js/delete-project.js",
+>>>>>>> 4f0422ebf3f2f7d23c677a93c3aa3df747931637
       "PackagePath": "staticwebassets/js/delete-project.js"
     },
     {
@@ -53,12 +61,25 @@
       "PackagePath": "staticwebassets/js/sortable-tasks.js"
     },
     {
+<<<<<<< HEAD
       "Id": "/Users/sinhattoan/Documents/HSU/project/TaskManagementSystem/wwwroot/js/task-comments.js",
       "PackagePath": "staticwebassets/js/task-comments.js"
     },
     {
       "Id": "/Users/sinhattoan/Documents/HSU/project/TaskManagementSystem/wwwroot/js/task-modal.js",
       "PackagePath": "staticwebassets/js/task-modal.js"
+=======
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/wwwroot/js/task-add-edit-modal.js",
+      "PackagePath": "staticwebassets/js/task-add-edit-modal.js"
+    },
+    {
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/wwwroot/js/task-comments.js",
+      "PackagePath": "staticwebassets/js/task-comments.js"
+    },
+    {
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/wwwroot/js/view-members.js",
+      "PackagePath": "staticwebassets/js/view-members.js"
+>>>>>>> 4f0422ebf3f2f7d23c677a93c3aa3df747931637
     },
     {
       "Id": "/Users/sinhattoan/Documents/HSU/project/TaskManagementSystem/wwwroot/lib/bootstrap/LICENSE",

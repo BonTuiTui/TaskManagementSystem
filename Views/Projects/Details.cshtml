@@ -2,50 +2,49 @@
 
 @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
 @{
-    // Lấy token chống giả mạo để sử dụng trong các yêu cầu POST
     var antiforgeryTokenSet = Xsrf.GetAndStoreTokens(Context);
     ViewData["Title"] = "Project Details";
-
-    // Lấy ID của người dùng hiện tại từ các claim
     var userId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
-
-    // Đếm số lượng task theo trạng thái "To Do", "In Progress", và "Done"
     var todoCount = Model.Task.Count(t => t.Status == "To Do");
     var inProgressCount = Model.Task.Count(t => t.Status == "In Progress");
+    var needReviewCount = Model.Task.Count(t => t.Status == "Need Review");
     var doneCount = Model.Task.Count(t => t.Status == "Done");
 }
 
-@if (User.IsInRole("admin") || User.IsInRole("manager"))
-{
-    <div style="position: relative; margin-bottom: 20px;">
+<p>Created by <span>@ViewBag.CreatedByUsername</span> on <span>@Model.CreateAt.ToString("dd MMMM yyyy")</span></p>
+
+<div style="position: relative; margin-bottom: 20px;">
+    @if (User.IsInRole("admin") || User.IsInRole("manager"))
+    {
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#updateProjectModal"
-                style="position: absolute; top: 0; right: 60px;">
+                style="position: absolute; top: 0; right: 120px;">
             <i class="bi bi-pencil-square"></i>
         </button>
 
-        <button class="btn btn-danger delete-project-button" style="position: absolute; top: 0; right: 0;" data-project-id="@Model.Project_id">
+        <button class="btn btn-danger delete-project-button" style="position: absolute; top: 0; right: 60px;" data-project-id="@Model.Project_id">
             <i class="bi bi-trash"></i>
         </button>
-    </div>
-}
+    }
+    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#viewMembersModal"
+            style="position: absolute; top: 0; right: 0;">
+        <i class="bi bi-people"></i>
+    </button>
+</div>
 
 <h2>@Model.Name</h2>
 
 <p>@Model.Description</p>
 
-<p>Created At: <span>@Model.CreateAt.ToString("dd MMMM yyyy")</span></p>
-<p>Updated At: <span>@Model.UpdateAt.ToString("dd MMMM yyyy")</span></p>
-
+<p>Updated lastest on <span>@Model.UpdateAt.ToString("dd MMMM yyyy")</span></p>
 
 <h3>Tasks</h3>
 <div class="row">
-    <div class="col-md-4 border-end">
+    <div class="col-md-3 border-end">
         <h4 id="todoCountHeader">To Do (@todoCount)</h4>
-
         <div id="todoColumn" class="task-column">
             @foreach (var task in Model.Task.Where(t => t.Status == "To Do"))
             {
-                <div class="card-body" data-task-id="@task.Task_id">
+                <div class="card-body task-card" data-task-id="@task.Task_id">
                     <h5 class="card-title">@task.Title</h5>
                     <h6 class="card-subtitle mb-2 text-muted">@task.AssignedUser?.UserName</h6>
                     <p class="card-text">@task.Description</p>
@@ -83,12 +82,12 @@
         }
     </div>
 
-    <div class="col-md-4 border-end">
+    <div class="col-md-3 border-end">
         <h4 id="inProgressCountHeader">In Progress (@inProgressCount)</h4>
         <div id="inProgressColumn" class="task-column">
             @foreach (var task in Model.Task.Where(t => t.Status == "In Progress"))
             {
-                <div class="card-body" data-task-id="@task.Task_id">
+                <div class="card-body task-card" data-task-id="@task.Task_id">
                     <h5 class="card-title">@task.Title</h5>
                     <h6 class="card-subtitle mb-2 text-muted">@task.AssignedUser?.UserName</h6>
                     <p class="card-text">@task.Description</p>
@@ -126,12 +125,55 @@
         }
     </div>
 
-    <div class="col-md-4">
+    <div class="col-md-3">
+        <h4 id="needReviewCountHeader">Need Review (@needReviewCount)</h4>
+        <div id="needReviewColumn" class="task-column">
+            @foreach (var task in Model.Task.Where(t => t.Status == "Need Review"))
+            {
+                <div class="card-body task-card" data-task-id="@task.Task_id">
+                    <h5 class="card-title">@task.Title</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">@task.AssignedUser?.UserName</h6>
+                    <p class="card-text">@task.Description</p>
+                    <p class="card-text"><small class="text-muted">Created At: @task.CreateAt</small></p>
+                    <p class="card-text"><small class="text-muted">Due Date: @task.DueDate.ToShortDateString()</small></p>
+                    <p class="card-text">
+                        <small class="text-muted">
+                            Updated At: <span class="updated-at">@task.UpdateAt</span>
+                        </small>
+                    </p>
+                    <div class="mt-3">
+                        <button type="button" class="btn btn-secondary mr-2 btn-comment" data-bs-toggle="modal"
+                                data-bs-target="#taskCommentModal">
+                            Comment
+                        </button>
+
+                        @if (User.IsInRole("admin") || User.IsInRole("manager"))
+                        {
+                            <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#taskModal"
+                               data-task-id="@task.Task_id" data-status="@task.Status">Edit</a>
+                            <button class="btn btn-danger delete-task-button" data-task-id="@task.Task_id">Delete</button>
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+        @if (User.IsInRole("admin") || User.IsInRole("manager"))
+        {
+            <div class="row mx-2">
+                <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#taskModal"
+                        data-status="Need Review">
+                    Add Task
+                </button>
+            </div>
+        }
+    </div>
+
+    <div class="col-md-3 border-end">
         <h4 id="doneCountHeader">Done (@doneCount)</h4>
         <div id="doneColumn" class="task-column">
             @foreach (var task in Model.Task.Where(t => t.Status == "Done"))
             {
-                <div class="card-body" data-task-id="@task.Task_id">
+                <div class="card-body task-card" data-task-id="@task.Task_id">
                     <h5 class="card-title">@task.Title</h5>
                     <h6 class="card-subtitle mb-2 text-muted">@task.AssignedUser?.UserName</h6>
                     <p class="card-text">@task.Description</p>
@@ -170,10 +212,39 @@
     </div>
 </div>
 
+<!-- View Members Modal -->
+<div class="modal fade" id="viewMembersModal" tabindex="-1" aria-labelledby="viewMembersModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="viewMembersModalLabel">Project Members</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>Email</th>
+                            <th>Full Name</th>
+                        </tr>
+                    </thead>
+                    <tbody id="membersList">
+                        <!-- Members will be loaded here dynamically -->
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- Update Project Modal -->
 <div class="modal fade" id="updateProjectModal" tabindex="-1" aria-labelledby="updateProjectModalLabel"
      aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="updateProjectModalLabel">Update Project</h5>
@@ -189,6 +260,26 @@
                     <div class="mb-3">
                         <label asp-for="Description" class="form-label">Description</label>
                         <textarea asp-for="Description" class="form-control"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="userNameOrEmail" class="form-label">Add Member (User Name or Email)</label>
+                        <input type="text" class="form-control" id="userNameOrEmail" name="userNameOrEmail" />
+                        <button type="button" class="btn btn-primary mt-2" id="addUserButton">Add Member</button>
+                    </div>
+                    <div class="mb-3">
+                        <h5>Project Members</h5>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Username</th>
+                                    <th>Email</th>
+                                    <th>Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody id="currentMembersList">
+                                <!-- Members will be loaded here dynamically -->
+                            </tbody>
+                        </table>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -223,7 +314,9 @@
                     </div>
                     <div class="mb-3">
                         <label for="AssignedTo" class="form-label">Assigned To</label>
-                        <input type="text" class="form-control" id="AssignedTo" name="AssignedTo" />
+                        <select class="form-control" id="AssignedTo" name="AssignedTo">
+                            <!-- Options will be loaded here -->
+                        </select>
                     </div>
                     <div class="mb-3">
                         <label for="DueDate" class="form-label">Due Date</label>
@@ -234,6 +327,31 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-primary" id="saveTaskButton">Save Task</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add User to Project Modal -->
+<div class="modal fade" id="addUserToProjectModal" tabindex="-1" aria-labelledby="addUserToProjectModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addUserToProjectModalLabel">Add User to Project</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="addUserToProjectForm">
+                    <input type="hidden" id="ProjectId" name="ProjectId" value="@Model.Project_id" />
+                    <div class="mb-3">
+                        <label for="userNameOrEmail" class="form-label">User Name or Email</label>
+                        <input type="text" class="form-control" id="userNameOrEmail" name="userNameOrEmail" required />
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="addUserButton">Add User</button>
             </div>
         </div>
     </div>
@@ -312,9 +430,12 @@
 </div>
 
 @section Scripts {
+    @*<script src="~/js/sortable-tasks.js"></script>*@
     <script src="~/js/sortable-tasks.js"></script>
-    <script src="~/js/task-modal.js"></script>
+    <script src="~/js/task-add-edit-modal.js"></script>
     <script src="~/js/delete-task.js"></script>
     <script src="~/js/delete-project.js"></script>
     <script src="~/js/task-comments.js"></script>
+    <script src="~/js/add-user-to-project.js"></script>
+    <script src="~/js/view-members.js"></script>
 }

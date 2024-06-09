@@ -1,6 +1,10 @@
 {
   "Version": 1,
+<<<<<<< HEAD
   "Hash": "lDbsjzdQ+eYNyT2pCd9Wu0/gK2y1B+x7x1T0kpOg/Rg=",
+=======
+  "Hash": "ED4sJRRnh5aA6Ig/yztBd+wh9aYSrGFcGzOQcrP90VY=",
+>>>>>>> 4f0422ebf3f2f7d23c677a93c3aa3df747931637
   "Source": "TaskManagementSystem",
   "BasePath": "_content/TaskManagementSystem",
   "Mode": "Default",
@@ -153,7 +157,28 @@
       "OriginalItemSpec": "wwwroot/js/.DS_Store"
     },
     {
+<<<<<<< HEAD
       "Identity": "/Users/sinhattoan/Documents/HSU/project/TaskManagementSystem/wwwroot/js/delete-project.js",
+=======
+      "Identity": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/wwwroot/js/add-user-to-project.js",
+      "SourceId": "TaskManagementSystem",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/wwwroot/",
+      "BasePath": "_content/TaskManagementSystem",
+      "RelativePath": "js/add-user-to-project.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/js/add-user-to-project.js"
+    },
+    {
+      "Identity": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/wwwroot/js/delete-project.js",
+>>>>>>> 4f0422ebf3f2f7d23c677a93c3aa3df747931637
       "SourceId": "TaskManagementSystem",
       "SourceType": "Discovered",
       "ContentRoot": "/Users/sinhattoan/Documents/HSU/project/TaskManagementSystem/wwwroot/",
@@ -255,7 +280,28 @@
       "OriginalItemSpec": "wwwroot/js/sortable-tasks.js"
     },
     {
+<<<<<<< HEAD
       "Identity": "/Users/sinhattoan/Documents/HSU/project/TaskManagementSystem/wwwroot/js/task-comments.js",
+=======
+      "Identity": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/wwwroot/js/task-add-edit-modal.js",
+      "SourceId": "TaskManagementSystem",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/wwwroot/",
+      "BasePath": "_content/TaskManagementSystem",
+      "RelativePath": "js/task-add-edit-modal.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/js/task-add-edit-modal.js"
+    },
+    {
+      "Identity": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/wwwroot/js/task-comments.js",
+>>>>>>> 4f0422ebf3f2f7d23c677a93c3aa3df747931637
       "SourceId": "TaskManagementSystem",
       "SourceType": "Discovered",
       "ContentRoot": "/Users/sinhattoan/Documents/HSU/project/TaskManagementSystem/wwwroot/",
@@ -272,12 +318,16 @@
       "OriginalItemSpec": "wwwroot/js/task-comments.js"
     },
     {
+<<<<<<< HEAD
       "Identity": "/Users/sinhattoan/Documents/HSU/project/TaskManagementSystem/wwwroot/js/task-modal.js",
+=======
+      "Identity": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/wwwroot/js/view-members.js",
+>>>>>>> 4f0422ebf3f2f7d23c677a93c3aa3df747931637
       "SourceId": "TaskManagementSystem",
       "SourceType": "Discovered",
       "ContentRoot": "/Users/sinhattoan/Documents/HSU/project/TaskManagementSystem/wwwroot/",
       "BasePath": "_content/TaskManagementSystem",
-      "RelativePath": "js/task-modal.js",
+      "RelativePath": "js/view-members.js",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -286,7 +336,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/js/task-modal.js"
+      "OriginalItemSpec": "wwwroot/js/view-members.js"
     },
     {
       "Identity": "/Users/sinhattoan/Documents/HSU/project/TaskManagementSystem/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css",
