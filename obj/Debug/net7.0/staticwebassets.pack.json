@@ -57,12 +57,12 @@
       "PackagePath": "staticwebassets/js/sortable-tasks.js"
     },
     {
-      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/wwwroot/js/task-comments.js",
-      "PackagePath": "staticwebassets/js/task-comments.js"
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/wwwroot/js/task-add-edit-modal.js",
+      "PackagePath": "staticwebassets/js/task-add-edit-modal.js"
     },
     {
-      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/wwwroot/js/task-modal.js",
-      "PackagePath": "staticwebassets/js/task-modal.js"
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/wwwroot/js/task-comments.js",
+      "PackagePath": "staticwebassets/js/task-comments.js"
     },
     {
       "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/wwwroot/js/view-members.js",

@@ -13,6 +13,9 @@
         // Clear the existing options
         assignedToSelect.empty();
 
+        // Add the "Not Assigned" option
+        assignedToSelect.append(new Option("No one", ""));
+
         // Load project members
         $.ajax({
             url: '/Projects/GetProjectMembers',
@@ -30,7 +33,7 @@
                             document.getElementById('TaskId').value = task.task_id;
                             document.getElementById('Title').value = task.title;
                             document.getElementById('TaskDescription').value = task.description;
-                            document.getElementById('AssignedTo').value = task.assignedToId; // Use the user ID instead of username
+                            document.getElementById('AssignedTo').value = task.assignedToId || ""; // Use the user ID or empty if not assigned
                             document.getElementById('DueDate').value = task.dueDate ? new Date(task.dueDate).toISOString().split('T')[0] : '';
                             document.getElementById('Status').value = task.status;
                             document.getElementById('taskModalLabel').innerText = 'Edit Task';

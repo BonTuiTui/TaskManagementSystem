@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "u2vOzbl3FWxL9NNeNENHJ+Km0elQP7I/NLeYj4iINvc=",
+  "Hash": "ED4sJRRnh5aA6Ig/yztBd+wh9aYSrGFcGzOQcrP90VY=",
   "Source": "TaskManagementSystem",
   "BasePath": "_content/TaskManagementSystem",
   "Mode": "Default",
@@ -272,6 +272,23 @@
       "OriginalItemSpec": "wwwroot/js/sortable-tasks.js"
     },
     {
+      "Identity": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/wwwroot/js/task-add-edit-modal.js",
+      "SourceId": "TaskManagementSystem",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/wwwroot/",
+      "BasePath": "_content/TaskManagementSystem",
+      "RelativePath": "js/task-add-edit-modal.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/js/task-add-edit-modal.js"
+    },
+    {
       "Identity": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/wwwroot/js/task-comments.js",
       "SourceId": "TaskManagementSystem",
       "SourceType": "Discovered",
@@ -287,23 +304,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/js/task-comments.js"
-    },
-    {
-      "Identity": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/wwwroot/js/task-modal.js",
-      "SourceId": "TaskManagementSystem",
-      "SourceType": "Discovered",
-      "ContentRoot": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/wwwroot/",
-      "BasePath": "_content/TaskManagementSystem",
-      "RelativePath": "js/task-modal.js",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/js/task-modal.js"
     },
     {
       "Identity": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem/wwwroot/js/view-members.js",

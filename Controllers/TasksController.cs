@@ -51,26 +51,15 @@ namespace TaskManagementSystem.Controllers
         [Authorize(Roles = "admin, manager")]
         public async Task<IActionResult> Add(AddTaskViewModel viewModel)
         {
-            Console.WriteLine("Add method called");
-            Console.WriteLine("ViewModel: ");
-            Console.WriteLine($"Title: {viewModel.Title}");
-            Console.WriteLine($"Description: {viewModel.Description}");
-            Console.WriteLine($"Status: {viewModel.Status}");
-            Console.WriteLine($"AssignedTo: {viewModel.AssignedTo}");
-            Console.WriteLine($"ProjectId: {viewModel.ProjectId}");
-            Console.WriteLine($"DueDate: {viewModel.DueDate}");
-            Console.WriteLine($"CreatedAt: {viewModel.CreatedAt}");
+            ApplicationUser assignedUser = null;
+            if (!string.IsNullOrEmpty(viewModel.AssignedTo))
+            {
+                assignedUser = await _userManagementProxy.GetUserByIdAsync(viewModel.AssignedTo);
 
-            // Assume AssignedTo is already the userId
-            ApplicationUser assignedUser = await _userManagementProxy.GetUserByIdAsync(viewModel.AssignedTo);
-            if (assignedUser == null)
-            {
-                Console.WriteLine("Assigned user not found");
-                return BadRequest("The specified user does not exist.");
-            }
-            else
-            {
-                Console.WriteLine($"Assigned user found: {assignedUser.UserName}");
+                if (assignedUser == null)
+                {
+                    return BadRequest("The specified user does not exist.");
+                }
             }
 
             var task = new Task
@@ -85,17 +74,12 @@ namespace TaskManagementSystem.Controllers
                 DueDate = viewModel.DueDate
             };
 
-            Console.WriteLine("Task object created");
-
             await dbContext.Task.AddAsync(task);
             await dbContext.SaveChangesAsync();
-
-            Console.WriteLine("Task saved to database");
 
             return Ok();
         }
 
-        // Phương thức POST để chỉnh sửa một task hiện có
         [HttpPost]
         [Authorize(Roles = "admin, manager")]
         public async Task<IActionResult> Edit(int id, AddTaskViewModel viewModel)
@@ -106,26 +90,15 @@ namespace TaskManagementSystem.Controllers
                 return NotFound();
             }
 
-            Console.WriteLine("Edit method called");
-            Console.WriteLine("ViewModel: ");
-            Console.WriteLine($"Title: {viewModel.Title}");
-            Console.WriteLine($"Description: {viewModel.Description}");
-            Console.WriteLine($"Status: {viewModel.Status}");
-            Console.WriteLine($"AssignedTo: {viewModel.AssignedTo}");
-            Console.WriteLine($"ProjectId: {viewModel.ProjectId}");
-            Console.WriteLine($"DueDate: {viewModel.DueDate}");
-            Console.WriteLine($"CreatedAt: {viewModel.CreatedAt}");
+            ApplicationUser assignedUser = null;
+            if (!string.IsNullOrEmpty(viewModel.AssignedTo))
+            {
+                assignedUser = await _userManagementProxy.GetUserByIdAsync(viewModel.AssignedTo);
 
-            // Assume AssignedTo is already the userId
-            ApplicationUser assignedUser = await _userManagementProxy.GetUserByIdAsync(viewModel.AssignedTo);
-            if (assignedUser == null)
-            {
-                Console.WriteLine("Assigned user not found");
-                return BadRequest("The specified user does not exist.");
-            }
-            else
-            {
-                Console.WriteLine($"Assigned user found: {assignedUser.UserName}");
+                if (assignedUser == null)
+                {
+                    return BadRequest("The specified user does not exist.");
+                }
             }
 
             task.Title = viewModel.Title;
@@ -135,11 +108,7 @@ namespace TaskManagementSystem.Controllers
             task.UpdateAt = DateTime.Now;  // Cập nhật thời gian
             task.DueDate = viewModel.DueDate;
 
-            Console.WriteLine("Task object updated");
-
             await dbContext.SaveChangesAsync();
-
-            Console.WriteLine("Task changes saved to database");
 
             return Ok();
         }
