@@ -72,11 +72,9 @@
                                         Sign out
                                     </a>
                                 </form>
-                                <script>
-                                    document.getElementById('logoutLink').addEventListener('click', function () {
+                                <script>document.getElementById('logoutLink').addEventListener('click', function () {
                                         document.getElementById('logoutForm').submit();
-                                    });
-                                </script>
+                                    });</script>
                             </li>
                         </ul>
                     </div>
@@ -120,6 +118,7 @@
     </script>
     <script src="~/js/notifications.js" asp-append-version="true"></script>
 
+    <script src="~/js/sortable-tasks-new.js"></script>
     @RenderSection("Scripts", required: false)
 </body>
 

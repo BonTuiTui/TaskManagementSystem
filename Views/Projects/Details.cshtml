@@ -2,21 +2,16 @@
 
 @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
 @{
-    // Lấy token chống giả mạo để sử dụng trong các yêu cầu POST
     var antiforgeryTokenSet = Xsrf.GetAndStoreTokens(Context);
     ViewData["Title"] = "Project Details";
-
-    // Lấy ID của người dùng hiện tại từ các claim
     var userId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
-
-    // Đếm số lượng task theo trạng thái "To Do", "In Progress", và "Done"
     var todoCount = Model.Task.Count(t => t.Status == "To Do");
     var inProgressCount = Model.Task.Count(t => t.Status == "In Progress");
+    var needReviewCount = Model.Task.Count(t => t.Status == "Need Review");
     var doneCount = Model.Task.Count(t => t.Status == "Done");
 }
 
 <p>Created by <span>@ViewBag.CreatedByUsername</span> on <span>@Model.CreateAt.ToString("dd MMMM yyyy")</span></p>
-
 
 <div style="position: relative; margin-bottom: 20px;">
     @if (User.IsInRole("admin") || User.IsInRole("manager"))
@@ -36,7 +31,6 @@
     </button>
 </div>
 
-
 <h2>@Model.Name</h2>
 
 <p>@Model.Description</p>
@@ -45,9 +39,8 @@
 
 <h3>Tasks</h3>
 <div class="row">
-    <div class="col-md-4 border-end">
+    <div class="col-md-3 border-end">
         <h4 id="todoCountHeader">To Do (@todoCount)</h4>
-
         <div id="todoColumn" class="task-column">
             @foreach (var task in Model.Task.Where(t => t.Status == "To Do"))
             {
@@ -89,7 +82,7 @@
         }
     </div>
 
-    <div class="col-md-4 border-end">
+    <div class="col-md-3 border-end">
         <h4 id="inProgressCountHeader">In Progress (@inProgressCount)</h4>
         <div id="inProgressColumn" class="task-column">
             @foreach (var task in Model.Task.Where(t => t.Status == "In Progress"))
@@ -132,7 +125,50 @@
         }
     </div>
 
-    <div class="col-md-4">
+    <div class="col-md-3">
+        <h4 id="needReviewCountHeader">Need Review (@needReviewCount)</h4>
+        <div id="needReviewColumn" class="task-column">
+            @foreach (var task in Model.Task.Where(t => t.Status == "Need Review"))
+            {
+                <div class="card-body task-card" data-task-id="@task.Task_id">
+                    <h5 class="card-title">@task.Title</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">@task.AssignedUser?.UserName</h6>
+                    <p class="card-text">@task.Description</p>
+                    <p class="card-text"><small class="text-muted">Created At: @task.CreateAt</small></p>
+                    <p class="card-text"><small class="text-muted">Due Date: @task.DueDate.ToShortDateString()</small></p>
+                    <p class="card-text">
+                        <small class="text-muted">
+                            Updated At: <span class="updated-at">@task.UpdateAt</span>
+                        </small>
+                    </p>
+                    <div class="mt-3">
+                        <button type="button" class="btn btn-secondary mr-2 btn-comment" data-bs-toggle="modal"
+                                data-bs-target="#taskCommentModal">
+                            Comment
+                        </button>
+
+                        @if (User.IsInRole("admin") || User.IsInRole("manager"))
+                        {
+                            <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#taskModal"
+                               data-task-id="@task.Task_id" data-status="@task.Status">Edit</a>
+                            <button class="btn btn-danger delete-task-button" data-task-id="@task.Task_id">Delete</button>
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+        @if (User.IsInRole("admin") || User.IsInRole("manager"))
+        {
+            <div class="row mx-2">
+                <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#taskModal"
+                        data-status="Need Review">
+                    Add Task
+                </button>
+            </div>
+        }
+    </div>
+
+    <div class="col-md-3 border-end">
         <h4 id="doneCountHeader">Done (@doneCount)</h4>
         <div id="doneColumn" class="task-column">
             @foreach (var task in Model.Task.Where(t => t.Status == "Done"))
@@ -279,7 +315,7 @@
                     <div class="mb-3">
                         <label for="AssignedTo" class="form-label">Assigned To</label>
                         <select class="form-control" id="AssignedTo" name="AssignedTo">
-                            Options will be loaded here
+                            <!-- Options will be loaded here -->
                         </select>
                     </div>
                     <div class="mb-3">
@@ -394,6 +430,7 @@
 </div>
 
 @section Scripts {
+    @*<script src="~/js/sortable-tasks.js"></script>*@
     <script src="~/js/sortable-tasks.js"></script>
     <script src="~/js/task-add-edit-modal.js"></script>
     <script src="~/js/delete-task.js"></script>

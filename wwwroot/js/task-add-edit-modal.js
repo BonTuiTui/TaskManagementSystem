@@ -1,4 +1,6 @@
-﻿document.addEventListener('DOMContentLoaded', function () {
+﻿console.log("File task-add-edit-modal đã được tải.");
+
+document.addEventListener('DOMContentLoaded', function () {
     var taskModal = document.getElementById('taskModal');
 
     taskModal.addEventListener('show.bs.modal', function (event) {
