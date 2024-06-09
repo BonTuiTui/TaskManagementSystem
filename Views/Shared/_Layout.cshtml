@@ -26,49 +26,60 @@
 </head>
 
 <body>
-    <div class="d-flex">
-        <div class="flex-shrink-0 p-3" style="width: 240px;">
+    <div class="d-flex  ">
+        <div class="border-end border-light  " >
             <!-- Sidebar content here -->
-            <a href="/" class="d-flex align-items-center pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom">
-                <span class="fs-5 fw-semibold">TMSystem</span>
-            </a>
-            <p>Hello, @User.Identity.Name !</p>
-            <ul class="list-unstyled ps-0">
-                <li class="mb-1">
-                    <div class="d-flex align-items-center justify-content-between">
-                        <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#projects-collapse" aria-expanded="false">
+            <div class=" pt-3 align-items-center mb-3 border-bottom">
+                <a href="/" class="text-center  link-body-emphasis text-decoration-none ">
+                    <span class="fs-5  ms-3 mb-3 fw-semibold ">TMSystem</span>
+                </a>
+                <div class="row m-3 ">
+                    <i class="bi bi-person-vcard col-md-auto "></i>
+                    <pre class="col-md-auto ">@User.Identity.Name
+workspace</pre>
+                </div>
+            </div>
+            <div class="align-items-center ">
+                <div class=" align-items-center border-bottom">
+                    <div class=" justify-content-between mb-3">
+                        <button class="h4 btn btn-toggle d-inline-flex align-items-center  collapsed" data-bs-toggle="collapse" data-bs-target="#projects-collapse" aria-expanded="false">
                             Projects
                         </button>
-                        <a class="btn btn-outline-primary ml-2 text-end" asp-area="" asp-controller="Projects" asp-action="Add"><i class="bi bi-plus"></i></a>
+                        <a class=" ms-3 border border-2 border-primary-subtle rounded-pill fs-6"   asp-area="" asp-controller="Projects" asp-action="Add"><i class="bi bi-plus "></i>  </a>
                     </div>
-                    <div class="collapse" id="projects-collapse">
+                    <div class="collapse  " id="projects-collapse">
                         @await Component.InvokeAsync("Projects")
                     </div>
-                </li>
-                <li class="border-top my-3"></li>
-                <li class="mb-1">
-                    <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="true">
+                </div>
+                <div class="align-items-center mt-3  ">
+                    <button class="h4 btn btn-toggle d-inline-flex align-items-center  collapsed" data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="true">
                         Account
                     </button>
                     <div class="collapse show" id="account-collapse">
                         <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                             <li>
-                                <a asp-controller="Account" asp-action="Profile" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Profile</a>
+                                <a asp-controller="Account" asp-action="Profile" class="link-body-emphasis d-inline-flex text-decoration-none text-black rounded">Profile</a>
                             </li>
                             @if (User.IsInRole("admin"))
                             {
                                 <li>
-                                    <a asp-controller="Admin" asp-action="ManageUsers" class="link-body-emphasis d-inline-flex text-decoration-none rounded">
+                                    <a asp-controller="Admin" asp-action="ManageUsers" class="link-body-emphasis d-inline-flex text-decoration-none text-black rounded">
                                         Manage Users
                                     </a>
                                 </li>
                             }
+<<<<<<< HEAD
                         <li>
                             @await Component.InvokeAsync("Notification", userId)
                         </li>
+=======
+                            <li>
+                                <a href="#" class="link-body-emphasis d-inline-flex text-decoration-none text-black rounded" data-bs-toggle="modal" data-bs-target="#notificationModal" id="notificationLink" >Notification</a>
+                            </li>
+>>>>>>> 251bdcb2f116599e529c5798bdbb4bfbba23e11e
                             <li>
                                 <form id="logoutForm" asp-area="" asp-controller="Account" asp-action="Logout" method="post" class="form-inline">
-                                    <a href="javascript:void(0);" id="logoutLink" class="nav-link text-dark">
+                                    <a href="javascript:void(0);" id="logoutLink" class="nav-link text-black">
                                         Sign out
                                     </a>
                                 </form>
@@ -78,8 +89,8 @@
                             </li>
                         </ul>
                     </div>
-                </li>
-            </ul>
+                </div>
+            </div>
         </div>
         <div class="flex-grow-1">
             <!-- Main content here -->

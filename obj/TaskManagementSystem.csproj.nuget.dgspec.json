@@ -1,6 +1,7 @@
 {
   "format": 1,
   "restore": {
+<<<<<<< HEAD
     "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem.csproj": {}
   },
   "projects": {
@@ -12,9 +13,22 @@
         "projectPath": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem.csproj",
         "packagesPath": "/Users/macs/.nuget/packages/",
         "outputPath": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/obj/",
+=======
+    "/Users/sinhattoan/Documents/HSU/project/TaskManagementSystem/TaskManagementSystem.csproj": {}
+  },
+  "projects": {
+    "/Users/sinhattoan/Documents/HSU/project/TaskManagementSystem/TaskManagementSystem.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/sinhattoan/Documents/HSU/project/TaskManagementSystem/TaskManagementSystem.csproj",
+        "projectName": "TaskManagementSystem",
+        "projectPath": "/Users/sinhattoan/Documents/HSU/project/TaskManagementSystem/TaskManagementSystem.csproj",
+        "packagesPath": "/Users/sinhattoan/.nuget/packages/",
+        "outputPath": "/Users/sinhattoan/Documents/HSU/project/TaskManagementSystem/obj/",
+>>>>>>> 251bdcb2f116599e529c5798bdbb4bfbba23e11e
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/macs/.nuget/NuGet/NuGet.Config"
+          "/Users/sinhattoan/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
