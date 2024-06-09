@@ -6,27 +6,32 @@
 @model TaskManagementSystem.ViewModels.LoginViewModel
 
 <div class="row justify-content-center">
-    <h1 class="h3 mb-3 fw-normal text-center">Welcome back</h1>
+    <h1 class="h3 mb-5 fw-normal text-center">Welcome back</h1>
     <form asp-action="Login">
         <div class="form-floating mb-3">
             <input asp-for="Username" type="text" class="form-control" id="floatingInput"
-                    placeholder="Username">
+                   placeholder="Username">
             <label asp-for="Username" for="floatingInput">Username</label>
             <span asp-validation-for="Username" class="text-danger"></span>
         </div>
         <div class="form-floating mb-3">
             <input asp-for="Password" type="password" class="form-control" id="floatingPassword"
-                    placeholder="Password">
+                   placeholder="Password">
             <label asp-for="Password" for="floatingPassword">Password</label>
             <span asp-validation-for="Password" class="text-danger"></span>
         </div>
-        <div  class="container text-center">
+
+        <button class="btn btn-primary btn-lg bg-success mb-3 w-100 py-2" type="submit">Continue</button>
+
+        <div class="container text-center w-100">
             <div class="row">
-                <h6 class="h6 mb-3 fw-normal text-center col"> Don't have an account? </h6>
-                <button class="h6 btn text-secondary col py-2" type="submit">Sign Up</button>
+                <h6 class="h6 mb-3 fw-normal text-center col-md-auto"> Don't have an account? </h6>
+                <a asp-controller="Account" asp-action="Register" class="h6  text-secondary col-md-auto " type="submit">Sign Up</a>
             </div>
         </div>
-        <button class="btn btn-primary  btn-lg bg-success w-100 py-2" type="submit">Continue</button>
+
+
+        <div class="h7 text-center mb-4 mt-4 "> OR </div>
     </form>
 
     @if (!ViewData.ModelState.IsValid)
@@ -54,13 +59,13 @@
                     <div>
                         @foreach (var provider in Model.ExternalLogins)
                         {
-                            <button class="btn btn-secondary mx-1" type="submit" name="provider" value="@provider.Name"
+                            <button class="btn btn-light border border-light w-100 m-auto text-dark mx-1 text-center" type="submit" name="provider" value="@provider.Name"
                                     title="Log in using your @provider.DisplayName account">
 
                                 <i class="bi bi-google"></i>
+                                Continue with Google
                             </button>
 
-                            <a asp-controller="Account" asp-action="Register" class="btn btn-secondary mx-1">Register</a>
                         }
                     </div>
                 </form>
