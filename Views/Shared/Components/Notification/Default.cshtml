@@ -1,0 +1,14 @@
+﻿@model int
+
+<a href="#" class="link-body-emphasis d-inline-flex text-decoration-none text-black rounded position-relative"
+   data-bs-toggle="modal" data-bs-target="#notificationModal"
+   id="notificationLink">
+    Notification
+    @if (Model > 0)
+    {
+        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+            @Model
+            <span class="visually-hidden">unread messages</span>
+        </span>
+    }
+</a>
