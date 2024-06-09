@@ -47,6 +47,7 @@ namespace TaskManagementSystem.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Edit(Project viewModel)
         {
             var project = await dbContext.Projects.FindAsync(viewModel.Project_id);
@@ -92,6 +93,7 @@ namespace TaskManagementSystem.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> Details(int id)
         {
             // Kiểm tra nếu ID project không tồn tại
@@ -203,6 +205,7 @@ namespace TaskManagementSystem.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> GetProjectMembers(int projectId)
         {
             var projectMembers = await dbContext.ProjectMembers

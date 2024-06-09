@@ -6,32 +6,17 @@ using TaskManagementSystem.Services;
 namespace TaskManagementSystem.Proxies
 {
     // Proxy để quản lý người dùng, đảm bảo quyền truy cập và ủy quyền các hành động cho dịch vụ thực sự
+    // Lớp proxy để quản lý người dùng, đảm bảo quyền truy cập và ủy quyền các hành động cho dịch vụ thực sự
     public class UserManagementProxy : IUserManagementService
     {
         private readonly IUserManagementService _realService;
         private readonly IHttpContextAccessor _httpContextAccessor;
-        private readonly UserManager<ApplicationUser> _userManager;
-        private readonly SignInManager<ApplicationUser> _signInManager;
 
-        // Khởi tạo proxy với các dịch vụ thực sự và HttpContextAccessor
-        public UserManagementProxy(IUserManagementService realService, IHttpContextAccessor httpContextAccessor, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
+        // Khởi tạo proxy với dịch vụ thực sự và HttpContextAccessor
+        public UserManagementProxy(IUserManagementService realService, IHttpContextAccessor httpContextAccessor)
         {
             _realService = realService;
             _httpContextAccessor = httpContextAccessor;
-            _userManager = userManager;
-            _signInManager = signInManager;
-        }
-
-        // Lấy người dùng bằng tên đăng nhập
-        public async Task<ApplicationUser> GetUserByNameAsync(string username)
-        {
-            return await _userManager.FindByNameAsync(username);
-        }
-
-        // Lấy người dùng bằng email
-        public async Task<ApplicationUser> GetUserByEmailAsync(string email)
-        {
-            return await _userManager.FindByEmailAsync(email);
         }
 
         // Kiểm tra nếu người dùng hiện tại là admin
@@ -64,18 +49,6 @@ namespace TaskManagementSystem.Proxies
             {
                 throw new UnauthorizedAccessException("Only manager can perform this action.");
             }
-        }
-
-        // Lấy người dùng hiện tại
-        public async Task<ApplicationUser> GetCurrentUserAsync()
-        {
-            return await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
-        }
-
-        // Kiểm tra nếu người dùng thuộc vai trò nhất định
-        public async Task<bool> IsUserInRoleAsync(ApplicationUser user, string roleName)
-        {
-            return await _userManager.IsInRoleAsync(user, roleName);
         }
 
         // Đăng ký người dùng mới
@@ -142,48 +115,72 @@ namespace TaskManagementSystem.Proxies
             return await _realService.RemoveFromRolesAsync(user, roles);
         }
 
+        // Lấy người dùng hiện tại
+        public async Task<ApplicationUser> GetCurrentUserAsync()
+        {
+            return await _realService.GetCurrentUserAsync();
+        }
+
+        // Kiểm tra nếu người dùng thuộc vai trò nhất định
+        public async Task<bool> IsUserInRoleAsync(ApplicationUser user, string roleName)
+        {
+            return await _realService.IsUserInRoleAsync(user, roleName);
+        }
+
+        // Lấy người dùng bằng email
+        public async Task<ApplicationUser> GetUserByEmailAsync(string email)
+        {
+            return await _realService.GetUserByEmailAsync(email);
+        }
+
+        // Lấy người dùng bằng tên đăng nhập
+        public async Task<ApplicationUser> GetUserByNameAsync(string username)
+        {
+            return await _realService.GetUserByNameAsync(username);
+        }
+
         // Lấy người dùng bằng ID
         public async Task<ApplicationUser> GetUserByIdAsync(string userId)
         {
-            return await _userManager.FindByIdAsync(userId);
+            return await _realService.GetUserByIdAsync(userId);
         }
 
         // Các phương thức hỗ trợ đăng nhập từ bên ngoài (External login)
-
+        
         // Lấy các schema xác thực từ bên ngoài
         public async Task<IEnumerable<AuthenticationScheme>> GetExternalAuthenticationSchemesAsync()
         {
-            return await _signInManager.GetExternalAuthenticationSchemesAsync();
+            return await _realService.GetExternalAuthenticationSchemesAsync();
         }
 
         // Cấu hình thuộc tính xác thực từ bên ngoài
         public AuthenticationProperties ConfigureExternalAuthenticationProperties(string provider, string redirectUrl)
         {
-            return _signInManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl);
+            return _realService.ConfigureExternalAuthenticationProperties(provider, redirectUrl);
         }
 
         // Lấy thông tin đăng nhập từ bên ngoài
         public async Task<ExternalLoginInfo> GetExternalLoginInfoAsync()
         {
-            return await _signInManager.GetExternalLoginInfoAsync();
+            return await _realService.GetExternalLoginInfoAsync();
         }
 
         // Đăng nhập bằng thông tin từ bên ngoài
         public async Task<SignInResult> ExternalLoginSignInAsync(string loginProvider, string providerKey, bool isPersistent, bool bypassTwoFactor)
         {
-            return await _signInManager.ExternalLoginSignInAsync(loginProvider, providerKey, isPersistent, bypassTwoFactor);
+            return await _realService.ExternalLoginSignInAsync(loginProvider, providerKey, isPersistent, bypassTwoFactor);
         }
 
         // Thêm thông tin đăng nhập từ bên ngoài cho người dùng
         public async Task<IdentityResult> AddLoginAsync(ApplicationUser user, UserLoginInfo info)
         {
-            return await _userManager.AddLoginAsync(user, info);
+            return await _realService.AddLoginAsync(user, info);
         }
 
         // Đăng nhập người dùng với tùy chọn isPersistent
         public async Task SignInAsync(ApplicationUser user, bool isPersistent)
         {
-            await _signInManager.SignInAsync(user, isPersistent);
+            await _realService.SignInAsync(user, isPersistent);
         }
     }
 }

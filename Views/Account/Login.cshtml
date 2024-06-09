@@ -25,13 +25,12 @@
 
         <div class="container text-center w-100">
             <div class="row">
-                <h6 class="h6 mb-3 fw-normal text-center col-md-auto"> Don't have an account? </h6>
-                <a asp-controller="Account" asp-action="Register" class="h6  text-secondary col-md-auto " type="submit">Sign Up</a>
+                <h6 class="h6 mb-3 fw-normal text-center"> Don't have an account? <a asp-controller="Account" asp-action="Register" class="h6 text-secondary">Sign Up</a> </h6>
             </div>
         </div>
 
 
-        <div class="h7 text-center mb-4 mt-4 "> OR </div>
+        <div class="h7 text-center mb-2 mt-2 "> OR </div>
     </form>
 
     @if (!ViewData.ModelState.IsValid)
