@@ -6,26 +6,31 @@ using TaskManagementSystem.ViewModels;
 using Task = TaskManagementSystem.Models.Task;
 using TaskManagementSystem.Areas.Identity.Data;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.SignalR;
+using TaskManagementSystem.Hubs;
+using TaskManagementSystem.Observer;
 
 namespace TaskManagementSystem.Controllers
 {
     public class TasksController : Controller
     {
-        private readonly ApplicationDbContext dbContext;
+        private readonly ApplicationDbContext _dbContext;
+        private readonly TaskNotifier _taskNotifier;
         private readonly UserManagementProxy _userManagementProxy;
+        private readonly IHubContext<NotificationHub> _hubContext;
 
-        // Khởi tạo TasksController với ApplicationDbContext và UserManagementProxy
-        public TasksController(ApplicationDbContext dbContext, UserManagementProxy userManagementProxy)
+        public TasksController(ApplicationDbContext dbContext, TaskNotifier taskNotifier, UserManagementProxy userManagementProxy, IHubContext<NotificationHub> hubContext)
         {
-            // Khởi tạo các thành viên và kiểm tra null
-            this.dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
-            _userManagementProxy = userManagementProxy ?? throw new ArgumentNullException(nameof(userManagementProxy));
+            _dbContext = dbContext;
+            _taskNotifier = taskNotifier;
+            _userManagementProxy = userManagementProxy;
+            _hubContext = hubContext;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetTask(int id)
         {
-            var task = await dbContext.Task
+            var task = await _dbContext.Task
                 .Where(t => t.Task_id == id)
                 .Select(t => new
                 {
@@ -33,7 +38,7 @@ namespace TaskManagementSystem.Controllers
                     t.Title,
                     t.Description,
                     t.Status,
-                    AssignedToId = t.AssignedTo, // Return the user ID instead of username
+                    AssignedToId = t.AssignedTo, 
                     t.DueDate,
                     t.UpdateAt
                 })
@@ -74,8 +79,17 @@ namespace TaskManagementSystem.Controllers
                 DueDate = viewModel.DueDate
             };
 
-            await dbContext.Task.AddAsync(task);
-            await dbContext.SaveChangesAsync();
+            await _dbContext.Task.AddAsync(task);
+            await _dbContext.SaveChangesAsync();
+
+            // Gửi thông báo tới user
+            if (assignedUser != null)
+            {
+                string message = $"You have been assigned a new task: {task.Title}";
+                _taskNotifier.Attach(new TaskObserver(assignedUser.Id, _dbContext));
+                _taskNotifier.Notify(message);
+                await _hubContext.Clients.User(assignedUser.Id).SendAsync("ReceiveNotification", $"Bạn đã được giao một task mới: {task.Title}");
+            }
 
             return Ok();
         }
@@ -84,7 +98,7 @@ namespace TaskManagementSystem.Controllers
         [Authorize(Roles = "admin, manager")]
         public async Task<IActionResult> Edit(int id, AddTaskViewModel viewModel)
         {
-            var task = await dbContext.Task.FindAsync(id);
+            var task = await _dbContext.Task.FindAsync(id);
             if (task == null)
             {
                 return NotFound();
@@ -108,7 +122,7 @@ namespace TaskManagementSystem.Controllers
             task.UpdateAt = DateTime.Now;  // Cập nhật thời gian
             task.DueDate = viewModel.DueDate;
 
-            await dbContext.SaveChangesAsync();
+            await _dbContext.SaveChangesAsync();
 
             return Ok();
         }
@@ -117,15 +131,15 @@ namespace TaskManagementSystem.Controllers
         [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {
-            var task = await dbContext.Task.FindAsync(id);
+            var task = await _dbContext.Task.FindAsync(id);
 
             if (task == null)
             {
                 return NotFound();
             }
 
-            dbContext.Task.Remove(task);
-            await dbContext.SaveChangesAsync();
+            _dbContext.Task.Remove(task);
+            await _dbContext.SaveChangesAsync();
 
             return RedirectToAction("Index", "Home");
         }
@@ -134,7 +148,7 @@ namespace TaskManagementSystem.Controllers
         [HttpPost]
         public IActionResult UpdateStatus([FromBody] UpdateStatusModel model)
         {
-            var task = dbContext.Task.Find(model.TaskId);
+            var task = _dbContext.Task.Find(model.TaskId);
             if (task == null)
             {
                 return NotFound();
@@ -142,7 +156,7 @@ namespace TaskManagementSystem.Controllers
 
             task.Status = model.Status;
             task.UpdateAt = DateTime.Now;
-            dbContext.SaveChanges();
+            _dbContext.SaveChanges();
 
             return Ok();
         }

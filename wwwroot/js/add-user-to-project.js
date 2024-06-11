@@ -9,7 +9,7 @@
 
         // Load project members
         $.ajax({
-            url: '/Projects/GetProjectMembers',
+            url: '/Members/GetProjectMembers',
             method: 'GET',
             data: { projectId: projectId },
             success: function (data) {
@@ -34,7 +34,7 @@
         var userNameOrEmail = $('#userNameOrEmail').val();
 
         $.ajax({
-            url: '/Projects/AddUserToProject',
+            url: '/Members/AddUserToProject',
             method: 'POST',
             data: {
                 projectId: projectId,
@@ -63,8 +63,8 @@
         var listItem = $(this).closest('tr');
 
         $.ajax({
-            url: '/Projects/RemoveUserFromProject',
-            method: 'POST',
+            url: '/Members/RemoveUserFromProject',
+            method: 'DELETE',
             data: {
                 projectId: projectId,
                 userId: userId,

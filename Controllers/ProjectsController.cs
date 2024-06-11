@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System.Net.Http;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TaskManagementSystem.Data;
@@ -11,15 +12,14 @@ namespace TaskManagementSystem.Controllers
 {
     public class ProjectsController : Controller
     {
-        private readonly ApplicationDbContext dbContext;
-        private readonly UserManagementProxy _userManagementProxy; // Thêm UserManagementProxy
-        private readonly IProjectFactory projectFactory;
+        private readonly HttpClient _httpClient;
+        private readonly UserManagementProxy _userManagementProxy;
+        private readonly string api_gateway = "http://localhost:5250/api/projects";
 
-        public ProjectsController(ApplicationDbContext dbContext, UserManagementProxy userManagementProxy, IProjectFactory factory) // Thêm UserManagementProxy vào constructor
+        public ProjectsController(HttpClient httpClient, UserManagementProxy userManagementProxy) 
         {
-            this.dbContext = dbContext;
-            _userManagementProxy = userManagementProxy; // Khởi tạo UserManagementProxy
-            projectFactory = factory;
+            _httpClient = httpClient;
+            _userManagementProxy = userManagementProxy;
         }
 
         [HttpGet]
@@ -33,61 +33,44 @@ namespace TaskManagementSystem.Controllers
         [Authorize(Roles = "admin, manager")]
         public async Task<IActionResult> Add(AddProjectViewModel viewModel)
         {
-            if (projectFactory == null)
+            var response = await _httpClient.PostAsJsonAsync(api_gateway, viewModel);
+
+            if (!response.IsSuccessStatusCode)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, "Project factory is not initialized");
+                return StatusCode((int)response.StatusCode, await response.Content.ReadAsStringAsync());
             }
 
-            IProjects project = projectFactory.createuser(viewModel.UserId, viewModel.Name, viewModel.Description);
-            var _project = (Project)project;
-            await dbContext.Projects.AddAsync(_project);
-            await dbContext.SaveChangesAsync();
+            var projectId = await response.Content.ReadFromJsonAsync<int>();
 
-            return RedirectToAction("Details", "Projects", new { id = _project.Project_id });
+            return RedirectToAction("Details", "Projects", new { id = projectId });
         }
 
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> Edit(Project viewModel)
+        public async Task<IActionResult> Edit(Project receive_project)
         {
-            var project = await dbContext.Projects.FindAsync(viewModel.Project_id);
+            var response = await _httpClient.PutAsJsonAsync(api_gateway, receive_project);
 
-            if (project is not null)
+            if (!response.IsSuccessStatusCode)
             {
-                project.Name = viewModel.Name;
-                project.Description = viewModel.Description;
-                project.UpdateAt = DateTime.Now;
-
-                await dbContext.SaveChangesAsync();
+                return StatusCode((int)response.StatusCode, await response.Content.ReadAsStringAsync());
             }
 
-            return RedirectToAction("Details", "Projects", new { id = project.Project_id });
+            var projectId = await response.Content.ReadFromJsonAsync<int>();
+
+            return RedirectToAction("Details", "Projects", new { id = projectId });
         }
 
         [HttpPost]
         [Authorize(Roles = "admin, manager")]
         public async Task<IActionResult> Delete(int id)
         {
-            var project = await dbContext.Projects
-                .Include(p => p.Task)
-                .Include(p => p.ProjectMembers) // Bao gồm ProjectMembers để xóa
-                .FirstOrDefaultAsync(p => p.Project_id == id);
+            var response = await _httpClient.DeleteAsync($"{api_gateway}/{id}");
 
-            if (project == null)
+            if (!response.IsSuccessStatusCode)
             {
-                return View("NotFound"); // Trả về view NotFound nếu không tìm thấy project
+                return StatusCode((int)response.StatusCode, await response.Content.ReadAsStringAsync());
             }
-
-            // Xóa các task liên quan
-            var relatedTasks = dbContext.Task.Where(t => t.Project_Id == id);
-            dbContext.Task.RemoveRange(relatedTasks);
-
-            // Xóa các ProjectMember liên quan
-            var relatedProjectMembers = dbContext.ProjectMembers.Where(pm => pm.ProjectId == id);
-            dbContext.ProjectMembers.RemoveRange(relatedProjectMembers);
-
-            dbContext.Projects.Remove(project);
-            await dbContext.SaveChangesAsync();
 
             return Ok();
         }
@@ -95,132 +78,48 @@ namespace TaskManagementSystem.Controllers
         [HttpGet]
         [Authorize]
         public async Task<IActionResult> Details(int id)
-        {
-            // Kiểm tra nếu ID project không tồn tại
-            var project = await dbContext.Projects
-                .Include(p => p.Task)
-                .ThenInclude(t => t.AssignedUser)
-                .Include(p => p.ProjectMembers) // Bao gồm ProjectMembers để kiểm tra quyền truy cập
-                .ThenInclude(pm => pm.User) // Bao gồm User trong ProjectMembers
-                .FirstOrDefaultAsync(p => p.Project_id == id);
+        { 
+            var response = await _httpClient.GetAsync($"{api_gateway}/{id}");
+
+            if (!response.IsSuccessStatusCode)
+            {
+                return StatusCode((int)response.StatusCode, await response.Content.ReadAsStringAsync());
+            }
+
+            var project = await response.Content.ReadFromJsonAsync<Project>();
 
             if (project == null)
             {
-                return View("NotFound"); // Trả về view NotFound nếu không tìm thấy project
+                return NotFound("Project not found");
             }
 
             var currentUser = await _userManagementProxy.GetCurrentUserAsync();
             var createdByUser = await _userManagementProxy.GetUserByIdAsync(project.User_id);
 
-            // Kiểm tra nếu người dùng là admin
             if (await _userManagementProxy.IsUserInRoleAsync(currentUser, "admin"))
             {
                 ViewBag.CreatedByUsername = createdByUser?.UserName;
-                // Admin có thể xem toàn bộ dự án
                 return View(project);
             }
 
-            // Nếu không phải admin, kiểm tra tiếp nếu là manager
             if (await _userManagementProxy.IsUserInRoleAsync(currentUser, "manager"))
             {
-                // Manager chỉ có thể xem những dự án mà họ tạo ra
                 if (project.User_id != currentUser.Id)
                 {
-                    return Forbid(); // Chuyển hướng đến trang 403 Forbidden nếu không phải của manager đó
+                    return Forbid();
                 }
 
                 ViewBag.CreatedByUsername = createdByUser?.UserName;
                 return View(project);
             }
 
-            // Nếu người dùng là thành viên của dự án, hiển thị các project mà họ là thành viên
             if (project.ProjectMembers.Any(pm => pm.UserId == currentUser.Id))
             {
                 ViewBag.CreatedByUsername = createdByUser?.UserName;
                 return View(project);
             }
 
-            // Nếu không phải là admin, manager hoặc thành viên của dự án, không được truy cập
-            return Forbid(); // Chuyển hướng đến trang 403 Forbidden nếu không có quyền truy cập
+            return Forbid();
         }
-
-        [HttpPost]
-        [Authorize(Roles = "admin, manager")]
-        public async Task<IActionResult> AddUserToProject(int projectId, string userName)
-        {
-            var project = await dbContext.Projects.Include(p => p.ProjectMembers).FirstOrDefaultAsync(p => p.Project_id == projectId);
-            if (project == null)
-            {
-                return View("NotFound"); // Trả về view NotFound nếu không tìm thấy project
-            }
-
-            var user = await _userManagementProxy.GetUserByNameAsync(userName) ?? await _userManagementProxy.GetUserByEmailAsync(userName);
-            if (user == null)
-            {
-                return BadRequest("User not found.");
-            }
-
-            if (project.ProjectMembers.Any(pm => pm.UserId == user.Id))
-            {
-                return BadRequest("User is already a member of this project.");
-            }
-
-            project.ProjectMembers.Add(new ProjectMember { ProjectId = projectId, UserId = user.Id });
-            await dbContext.SaveChangesAsync();
-
-            return Ok(new { userName = user.UserName, email = user.Email });
-        }
-
-        [HttpPost]
-        [Authorize(Roles = "admin, manager")]
-        public async Task<IActionResult> RemoveUserFromProject(int projectId, string userId)
-        {
-            var project = await dbContext.Projects.Include(p => p.ProjectMembers).FirstOrDefaultAsync(p => p.Project_id == projectId);
-            if (project == null)
-            {
-                return View("NotFound"); // Trả về view NotFound nếu không tìm thấy project
-            }
-
-            var projectMember = project.ProjectMembers.FirstOrDefault(pm => pm.UserId == userId);
-            if (projectMember == null)
-            {
-                return View("NotFound"); // Trả về view NotFound nếu không tìm thấy project
-            }
-
-            var tasksAssignedToUser = await dbContext.Task
-                .Where(t => t.Project_Id == projectId && t.AssignedTo == userId)
-                .Select(t => new { t.Title })
-                .ToListAsync();
-
-            if (tasksAssignedToUser.Any())
-            {
-                var taskTitles = string.Join(", ", tasksAssignedToUser.Select(t => t.Title));
-                return BadRequest($"Cannot remove user. The user is assigned to tasks: {taskTitles}");
-            }
-
-            dbContext.ProjectMembers.Remove(projectMember);
-            await dbContext.SaveChangesAsync();
-
-            return Ok(new { success = true });
-        }
-
-        [HttpGet]
-        [Authorize]
-        public async Task<IActionResult> GetProjectMembers(int projectId)
-        {
-            var projectMembers = await dbContext.ProjectMembers
-                .Where(pm => pm.ProjectId == projectId)
-                .Select(pm => new
-                {
-                    pm.User.Id,
-                    pm.User.UserName,
-                    pm.User.Email,
-                    pm.User.FullName
-                })
-                .ToListAsync();
-
-            return Json(projectMembers);
-        }
-
     }
 }

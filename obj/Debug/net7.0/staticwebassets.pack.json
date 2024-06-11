@@ -5,6 +5,10 @@
       "PackagePath": "staticwebassets/TaskManagementSystem.bundle.scp.css"
     },
     {
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/.DS_Store",
+      "PackagePath": "staticwebassets/.DS_Store"
+    },
+    {
       "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/css/login.css",
       "PackagePath": "staticwebassets/css/login.css"
     },
@@ -47,6 +51,10 @@
     {
       "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/js/sidebar.js",
       "PackagePath": "staticwebassets/js/sidebar.js"
+    },
+    {
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/js/signalR.js",
+      "PackagePath": "staticwebassets/js/signalR.js"
     },
     {
       "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/js/site.js",

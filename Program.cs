@@ -6,13 +6,19 @@ using TaskManagementSystem.Services;
 using TaskManagementSystem.Proxies;
 using TaskManagementSystem.Middleware;
 using TaskManagementSystem.ProjectFactory;
+using TaskManagementSystem.Hubs;
+using TaskManagementSystem.Observer;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddSignalR(); // Thêm SignalR
 
 builder.Services.AddScoped<IProjectFactory, ProjectFactory>();
+builder.Services.AddHttpClient(); // Thêm HttpClient
+
+builder.Services.AddSingleton<TaskNotifier>();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
@@ -75,6 +81,9 @@ app.UseMiddleware<CustomExceptionMiddleware>();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.MapHub<NotificationHub>("/notificationHub");
+
 
 using (var scope = app.Services.CreateScope())
 {

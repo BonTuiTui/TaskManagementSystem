@@ -119,6 +119,19 @@ workspace</pre>
             </div>
         </div>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/5.0.11/signalr.min.js"></script>
+    <script>const connection = new signalR.HubConnectionBuilder()
+            .withUrl("/notificationHub")
+            .build();
+
+        connection.on("ReceiveNotification", function (message) {
+            alert(message); // Popup thông báo
+        });
+
+        connection.start().catch(function (err) {
+            return console.error(err.toString());
+        });
+    </script>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
@@ -128,7 +141,6 @@ workspace</pre>
         var userId = '@userId';
     </script>
     <script src="~/js/notifications.js" asp-append-version="true"></script>
-    <script src="~/js/sortable-tasks-new.js"></script>
     @RenderSection("Scripts", required: false)
 </body>
 

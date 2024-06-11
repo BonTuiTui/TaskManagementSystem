@@ -1,10 +1,16 @@
 ﻿<Properties StartupConfiguration="{57D7654E-C7C7-4A61-B0BB-D1C9EA7A07E3}|https">
-  <MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench ActiveDocument="ViewComponents/ListProjectsComponent.cs">
+    <Files>
+      <File FileName="ViewComponents/ListProjectsComponent.cs" Line="43" Column="44" />
+      <File FileName="Program.cs" />
+    </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="TaskManagementSystem">
-            <Node name="TaskManagementSystem" expanded="True" />
+          <Node name="TaskManagementSystem" selected="True">
+            <Node name="TaskManagementSystem" expanded="True">
+              <Node name="ViewComponents" expanded="True" />
+            </Node>
           </Node>
         </State>
       </Pad>

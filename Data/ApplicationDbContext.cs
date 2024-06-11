@@ -18,7 +18,6 @@ namespace TaskManagementSystem.Data
         {
             base.OnModelCreating(builder);
 
-            // Define roles
             var adminRole = new IdentityRole
             {
                 Id = "1",
@@ -40,16 +39,13 @@ namespace TaskManagementSystem.Data
                 NormalizedName = "EMPLOYEE"
             };
 
-            // Seed roles
             builder.Entity<IdentityRole>().HasData(adminRole, managerRole, employeeRole);
 
-            // Configure your existing tables
             builder.Entity<Project>().ToTable("Project");
             builder.Entity<Task>().ToTable("Task");
             builder.Entity<Notification>().ToTable("Notification");
             builder.Entity<TaskComment>().ToTable("TaskComment");
 
-            // Configure the ProjectMember table
             builder.Entity<ProjectMember>().ToTable("ProjectMember");
             builder.Entity<ProjectMember>()
                 .HasOne(pm => pm.Project)
@@ -63,7 +59,6 @@ namespace TaskManagementSystem.Data
                 .HasForeignKey(pm => pm.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            // Define foreign key relationships
             builder.Entity<Task>()
                 .HasOne(t => t.Project)
                 .WithMany(p => p.Task)

@@ -5,14 +5,14 @@
 
     deleteButtons.forEach(function (button) {
         button.addEventListener('click', function () {
-            var projectId = button.getAttribute('data-project-id'); // Lấy Project ID từ thuộc tính data
+            var project_id = button.getAttribute('data-project-id'); // Lấy Project ID từ thuộc tính data
 
-            console.log("Project ID to delete: " + projectId);
+            console.log("Project ID to delete: " + project_id);
 
             confirmDeleteProjectModal.show();
 
             confirmDeleteProjectButton.addEventListener('click', function () {
-                fetch('/Projects/Delete/' + projectId, {
+                fetch('/Projects/Delete/' + project_id, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

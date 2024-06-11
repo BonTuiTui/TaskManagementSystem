@@ -253,6 +253,7 @@
             <div class="modal-body">
                 <form asp-action="Edit" method="post">
                     <input type="hidden" asp-for="Project_id" />
+                    <input type="hidden" asp-for="User_id" />
                     <div class="mb-3">
                         <label asp-for="Name" class="form-label">Project Name</label>
                         <input asp-for="Name" class="form-control" />

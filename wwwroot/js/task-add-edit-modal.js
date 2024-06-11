@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Load project members
         $.ajax({
-            url: '/Projects/GetProjectMembers',
+            url: '/Members/GetProjectMembers',
             method: 'GET',
             data: { projectId: projectId },
             success: function (data) {

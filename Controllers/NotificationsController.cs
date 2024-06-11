@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Text.Json;
+using Azure;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TaskManagementSystem.Data;
 using TaskManagementSystem.Models;
@@ -7,70 +9,54 @@ namespace TaskManagementSystem.Controllers
 {
     public class NotificationsController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly HttpClient _httpClient;
+        private readonly string api_gateway = "http://localhost:5250/api/notifications";
 
-        public NotificationsController(ApplicationDbContext context)
+        public NotificationsController(HttpClient httpClient)
         {
-            _context = context;
+            _httpClient = httpClient;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetUnreadNotificationsCount(string userId)
         {
-            var unreadCount = await _context.Notifications
-                .Where(n => n.User_id == userId && !n.IsRead)
-                .CountAsync();
+            var response = await _httpClient.GetAsync($"{api_gateway}/unreadcount/{userId}");
 
-            return Json(unreadCount);
+            if (!response.IsSuccessStatusCode)
+            {
+                return StatusCode((int)response.StatusCode, await response.Content.ReadAsStringAsync());
+            }
+
+            var count = await response.Content.ReadFromJsonAsync<int>();
+
+            return Json(count);
         }
-
-        // Phương thức GET để lấy thông báo của người dùng
+        
         [HttpGet]
         public async Task<IActionResult> GetUserNotifications(string userId)
         {
-            // Lấy thông báo của người dùng theo userId và sắp xếp theo thời gian tạo giảm dần
-            var notifications = await _context.Notifications
-                .Where(n => n.User_id == userId)
-                .OrderByDescending(n => n.CreateAt)
-                .ToListAsync();
+            var response = await _httpClient.GetAsync($"{api_gateway}/{userId}");
 
-            return Json(notifications);
+            if (!response.IsSuccessStatusCode)
+            {
+                return StatusCode((int)response.StatusCode, await response.Content.ReadAsStringAsync());
+            }
+
+            var notifications = await response.Content.ReadFromJsonAsync<dynamic>();
+
+            return Ok(notifications);
         }
 
-        // Phương thức POST để đánh dấu thông báo là đã đọc
         [HttpPost]
         public async Task<IActionResult> MarkAsRead(int notificationId)
         {
-            Console.WriteLine("MarkAsRead method called with notificationId: " + notificationId);
+            
+            var response = await _httpClient.PostAsync($"{api_gateway}/{notificationId}", null);
 
-            // Tìm thông báo theo notificationId
-            var notification = await _context.Notifications.FindAsync(notificationId);
-            if (notification != null)
+            if (!response.IsSuccessStatusCode)
             {
-                notification.IsRead = true; // Đánh dấu thông báo là đã đọc
-                await _context.SaveChangesAsync();
-                Console.WriteLine("Notification marked as read.");
-                return Ok();
+                return StatusCode((int)response.StatusCode, await response.Content.ReadAsStringAsync());
             }
-            Console.WriteLine("Notification not found with ID: " + notificationId);
-            return NotFound();
-        }
-
-        // Phương thức tạo thông báo khi có bình luận mới được thêm vào
-        [HttpPost]
-        public async Task<IActionResult> CreateNotificationForComment(TaskComment taskComment, string receiverUser)
-        {
-            var notification = new Notification
-            {
-                User_id = receiverUser, // Đặt người nhận thông báo là receiverUser
-                Notification_text = $"New comment on task {taskComment.Task_id}: {taskComment.Comment_text}",
-                CreateAt = DateTime.UtcNow,
-                IsRead = false
-            };
-
-            // Thêm thông báo mới vào cơ sở dữ liệu
-            _context.Notifications.Add(notification);
-            await _context.SaveChangesAsync();
 
             return Ok();
         }
