@@ -49,7 +49,6 @@
     <Folder Include="Views\Shared\Components\" />
     <Folder Include="Views\Shared\Components\Projects\" />
     <Folder Include="ViewComponents\" />
-    <Folder Include="Interfaces\" />
     <Folder Include="Hubs\" />
   </ItemGroup>
 </Project>

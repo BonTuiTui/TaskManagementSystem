@@ -182,5 +182,56 @@ namespace TaskManagementSystem.Proxies
         {
             await _realService.SignInAsync(user, isPersistent);
         }
+
+        public async Task<string> GeneratePasswordResetTokenAsync(ApplicationUser? user)
+        {
+            return await _realService.GeneratePasswordResetTokenAsync(user);
+        }
+
+        public async Task<bool> IsEmailConfirmedAsync(ApplicationUser user)
+        {
+            return await _realService.IsEmailConfirmedAsync(user);
+        }
+
+        public async Task<IdentityResult> ResetPasswordAsync(ApplicationUser user, string token, string password)
+        {
+            try
+            {
+                var result = await _realService.ResetPasswordAsync(user, token, password);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                // Handle exception if necessary
+                Console.WriteLine($"Error occurred while resetting password: {ex.Message}");
+                throw; // Rethrow the exception to propagate it up the call stack
+            }
+        }
+
+        public async Task<string> GenerateEmailConfirmationTokenAsync(ApplicationUser? user)
+        {
+            if (user == null)
+            {
+                throw new ArgumentNullException(nameof(user));
+            }
+
+            var token = await _realService.GenerateEmailConfirmationTokenAsync(user);
+            return token;
+        }
+
+        public async Task<IdentityResult> ConfirmEmailAsync(ApplicationUser user, string? token)
+        {
+            return await _realService.ConfirmEmailAsync(user, token);
+        }
+
+        public async Task<IdentityResult> ChangePasswordAsync(ApplicationUser user, string oldPassword, string newPassword)
+        {
+            return await _realService.ChangePasswordAsync(user, oldPassword, newPassword);
+        }
+
+        public async Task RefreshSignInAsync(ApplicationUser user)
+        {
+            await _realService.RefreshSignInAsync(user);
+        }
     }
 }
