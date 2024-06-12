@@ -1,14 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TaskManagementSystem.Data;
-using TaskManagementSystem.Proxies;
 using TaskManagementSystem.ViewModels;
 using Task = TaskManagementSystem.Models.Task;
 using TaskManagementSystem.Areas.Identity.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
 using TaskManagementSystem.Hubs;
-using TaskManagementSystem.Observer;
+using TaskManagementSystem.Services.Observer;
+using TaskManagementSystem.Models;
+using TaskManagementSystem.Services.Proxies;
 
 namespace TaskManagementSystem.Controllers
 {
@@ -40,7 +41,9 @@ namespace TaskManagementSystem.Controllers
                     t.Status,
                     AssignedToId = t.AssignedTo, 
                     t.DueDate,
-                    t.UpdateAt
+                    t.UpdateAt,
+                    AssignedUser = t.AssignedUser.UserName,
+                    currentUsername = _userManagementProxy.GetCurrentUserAsync().Result.UserName
                 })
                 .FirstOrDefaultAsync();
 
@@ -159,13 +162,6 @@ namespace TaskManagementSystem.Controllers
             _dbContext.SaveChanges();
 
             return Ok();
-        }
-
-        // Lớp model để cập nhật trạng thái của một task
-        public class UpdateStatusModel
-        {
-            public int TaskId { get; set; }
-            public string Status { get; set; }
         }
     }
 }

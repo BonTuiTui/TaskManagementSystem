@@ -26,3 +26,28 @@ body {
     margin-bottom: 15px;
     padding: 20px;
 }
+.modal-custom {
+  max-width: 600px !important; 
+}
+.modal-custom .modal-header {
+  background-color: #ffffff;
+  border-bottom: none !important;
+}
+.modal-custom .modal-body {
+  background-color: #ffffff;
+  padding: 1rem 1rem 0 1rem !important;
+}
+.activity-comment {
+  margin-top: 1em;
+  padding: 1em;
+  background-color: #f8f9fa;
+  border-radius: 18px;
+}
+.reply-box {
+  display: flex;
+  align-items: center;
+}
+.modal-custom .modal-footer {
+  border-top: none !important; 
+  padding: 0.5rem 1rem;
+}

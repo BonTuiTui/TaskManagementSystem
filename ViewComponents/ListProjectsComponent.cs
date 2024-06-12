@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TaskManagementSystem.Models;
-using TaskManagementSystem.Proxies;
+using TaskManagementSystem.Services.Proxies;
 using TaskManagementSystem.Areas.Identity.Data;
 
 namespace TaskManagementSystem.ViewComponents

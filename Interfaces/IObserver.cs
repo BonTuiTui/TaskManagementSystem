@@ -1,5 +1,5 @@
 ﻿using System;
-namespace TaskManagementSystem.Observer
+namespace TaskManagementSystem.Interfaces
 {
     public interface IObserver
     {

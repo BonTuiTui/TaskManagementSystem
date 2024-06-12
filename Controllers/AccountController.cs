@@ -1,14 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using TaskManagementSystem.Areas.Identity.Data;
-using TaskManagementSystem.Proxies;
 using TaskManagementSystem.ViewModels;
 using System.Security.Claims;
 using System.Text.Encodings.Web;
-using TaskManagementSystem.Services;
 using TaskManagementSystem.Interfaces;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNet.Identity;
+using TaskManagementSystem.Services.Proxies;
 
 namespace TaskManagementSystem.Controllers
 {

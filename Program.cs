@@ -3,11 +3,11 @@ using Microsoft.EntityFrameworkCore;
 using TaskManagementSystem.Areas.Identity.Data;
 using TaskManagementSystem.Data;
 using TaskManagementSystem.Services;
-using TaskManagementSystem.Proxies;
+using TaskManagementSystem.Services.Proxies;
 using TaskManagementSystem.Middleware;
-using TaskManagementSystem.ProjectFactory;
+using TaskManagementSystem.Services.ProjectFactory;
 using TaskManagementSystem.Hubs;
-using TaskManagementSystem.Observer;
+using TaskManagementSystem.Services.Observer;
 using TaskManagementSystem.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);

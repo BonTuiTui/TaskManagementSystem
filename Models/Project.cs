@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using TaskManagementSystem.Areas.Identity.Data;
-using TaskManagementSystem.ProjectFactory;
+using TaskManagementSystem.Interfaces;
 
 namespace TaskManagementSystem.Models
 {

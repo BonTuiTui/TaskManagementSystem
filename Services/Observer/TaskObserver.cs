@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using Microsoft.EntityFrameworkCore;
-using TaskManagementSystem.Data;
+﻿using TaskManagementSystem.Data;
+using TaskManagementSystem.Interfaces;
 using TaskManagementSystem.Models;
 
-namespace TaskManagementSystem.Observer
+namespace TaskManagementSystem.Services.Observer
 {
     public class TaskObserver : IObserver
     {

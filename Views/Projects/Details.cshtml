@@ -17,16 +17,17 @@
     @if (User.IsInRole("admin") || User.IsInRole("manager"))
     {
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#updateProjectModal"
-                style="position: absolute; top: 0; right: 120px;">
+            style="position: absolute; top: 0; right: 120px;">
             <i class="bi bi-pencil-square"></i>
         </button>
 
-        <button class="btn btn-danger delete-project-button" style="position: absolute; top: 0; right: 60px;" data-project-id="@Model.Project_id">
+        <button class="btn btn-danger delete-project-button" style="position: absolute; top: 0; right: 60px;"
+            data-project-id="@Model.Project_id">
             <i class="bi bi-trash"></i>
         </button>
     }
     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#viewMembersModal"
-            style="position: absolute; top: 0; right: 0;">
+        style="position: absolute; top: 0; right: 0;">
         <i class="bi bi-people"></i>
     </button>
 </div>
@@ -56,15 +57,16 @@
                         </small>
                     </p>
                     <div class="mt-3">
-                        <button type="button" class="btn btn-secondary mr-2 btn-comment" data-bs-toggle="modal"
-                                data-bs-target="#taskCommentModal">
-                            Comment
+
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#detailtaskmodal" onclick="openTaskModal(@task.Task_id)">
+                            Detail Task
                         </button>
 
                         @if (User.IsInRole("admin") || User.IsInRole("manager"))
                         {
                             <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#taskModal"
-                               data-task-id="@task.Task_id" data-status="@task.Status">Edit</a>
+                                data-task-id="@task.Task_id" data-status="@task.Status">Edit</a>
                             <button class="btn btn-danger delete-task-button" data-task-id="@task.Task_id">Delete</button>
                         }
                     </div>
@@ -75,7 +77,7 @@
         {
             <div class="row mx-2">
                 <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#taskModal"
-                        data-status="To Do">
+                    data-status="To Do">
                     Add Task
                 </button>
             </div>
@@ -99,15 +101,15 @@
                         </small>
                     </p>
                     <div class="mt-3">
-                        <button type="button" class="btn btn-secondary mr-2 btn-comment" data-bs-toggle="modal"
-                                data-bs-target="#taskCommentModal">
-                            Comment
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#detailtaskmodal" onclick="openTaskModal(@task.Task_id)">
+                            Detail Task
                         </button>
 
                         @if (User.IsInRole("admin") || User.IsInRole("manager"))
                         {
                             <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#taskModal"
-                               data-task-id="@task.Task_id" data-status="@task.Status">Edit</a>
+                                data-task-id="@task.Task_id" data-status="@task.Status">Edit</a>
                             <button class="btn btn-danger delete-task-button" data-task-id="@task.Task_id">Delete</button>
                         }
                     </div>
@@ -118,7 +120,7 @@
         {
             <div class="row mx-2">
                 <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#taskModal"
-                        data-status="In Progress">
+                    data-status="In Progress">
                     Add Task
                 </button>
             </div>
@@ -142,15 +144,16 @@
                         </small>
                     </p>
                     <div class="mt-3">
-                        <button type="button" class="btn btn-secondary mr-2 btn-comment" data-bs-toggle="modal"
-                                data-bs-target="#taskCommentModal">
-                            Comment
+
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#detailtaskmodal" onclick="openTaskModal(@task.Task_id)">
+                            Detail Task
                         </button>
 
                         @if (User.IsInRole("admin") || User.IsInRole("manager"))
                         {
                             <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#taskModal"
-                               data-task-id="@task.Task_id" data-status="@task.Status">Edit</a>
+                                data-task-id="@task.Task_id" data-status="@task.Status">Edit</a>
                             <button class="btn btn-danger delete-task-button" data-task-id="@task.Task_id">Delete</button>
                         }
                     </div>
@@ -161,7 +164,7 @@
         {
             <div class="row mx-2">
                 <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#taskModal"
-                        data-status="Need Review">
+                    data-status="Need Review">
                     Add Task
                 </button>
             </div>
@@ -185,15 +188,16 @@
                         </small>
                     </p>
                     <div class="mt-3">
-                        <button type="button" class="btn btn-secondary mr-2 btn-comment" data-bs-toggle="modal"
-                                data-bs-target="#taskCommentModal">
-                            Comment
+
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#detailtaskmodal" onclick="openTaskModal(@task.Task_id)">
+                            Detail Task
                         </button>
 
                         @if (User.IsInRole("admin") || User.IsInRole("manager"))
                         {
                             <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#taskModal"
-                               data-task-id="@task.Task_id" data-status="@task.Status">Edit</a>
+                                data-task-id="@task.Task_id" data-status="@task.Status">Edit</a>
                             <button class="btn btn-danger delete-task-button" data-task-id="@task.Task_id">Delete</button>
                         }
                     </div>
@@ -204,7 +208,7 @@
         {
             <div class="row mx-2">
                 <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#taskModal"
-                        data-status="Done">
+                    data-status="Done">
                     Add Task
                 </button>
             </div>
@@ -243,7 +247,7 @@
 
 <!-- Update Project Modal -->
 <div class="modal fade" id="updateProjectModal" tabindex="-1" aria-labelledby="updateProjectModalLabel"
-     aria-hidden="true">
+    aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -334,7 +338,8 @@
 </div>
 
 <!-- Add User to Project Modal -->
-<div class="modal fade" id="addUserToProjectModal" tabindex="-1" aria-labelledby="addUserToProjectModalLabel" aria-hidden="true">
+<div class="modal fade" id="addUserToProjectModal" tabindex="-1" aria-labelledby="addUserToProjectModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -358,33 +363,34 @@
     </div>
 </div>
 
-<!-- Task Comment Modal -->
-<div class="modal fade" id="taskCommentModal" tabindex="-1" aria-labelledby="taskCommentModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable">
-        <div class="modal-content">
+<!-- Details Task Modal -->
+<div class="modal fade" id="detailtaskmodal" tabindex="-1" aria-labelledby="detailtaskmodalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-custom">
+        <div class="modal-content p-4">
             <div class="modal-header">
-                <h5 class="modal-title" id="taskCommentModalLabel">Task Comment</h5>
+                <h5 class="modal-title" id="detailtaskmodalLabel"></h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <!-- Form for adding/editing task comment -->
-                <form id="taskCommentForm">
-                    <input type="hidden" id="TaskId" name="TaskId" />
-                    <input type="hidden" id="UserId" name="UserId" value="@userId" />
-                    <div class="mb-3">
-                        <label for="comment" class="form-label">Comment</label>
-                        <textarea class="form-control" id="comment" name="Comment" required></textarea>
-                    </div>
-                </form>
-
-                <!-- Display task comments -->
+                <p><strong>Status:</strong> <span class="badge bg-warning text-dark" id="task-status"></span></p>
+                <p><strong>Assignee:</strong> <span id="task-assignee"></span></p>
+                <p><strong>Due Date:</strong> <span id="task-due-date"></span></p>
+                <hr>
+                <p><strong>Description:</strong></p>
+                <p id="task-description"></p>
+                <hr>
                 <div id="taskCommentList">
-                    <!-- Task comments will be displayed here -->
+                    <!-- Comments will be dynamically loaded here -->
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="saveCommentButton">Save Comment</button>
+                <div class="reply-box w-100 mb-2">
+                    <textarea class="form-control" id="comment" placeholder="Your comment..." rows="3"></textarea>
+                    <input type="hidden" id="TaskId" value="" />
+                    <input type="hidden" id="UserId" name="UserId" value="@userId" />
+                    <input type="hidden" id="UserName" value="" /> <!-- Assuming you have UserName stored in a hidden field -->
+                </div>
+                <button class="btn btn-primary ms-2 send-button" id="saveCommentButton">Send</button>
             </div>
         </div>
     </div>
@@ -392,7 +398,7 @@
 
 <!-- Confirmation delete task modal -->
 <div class="modal fade" id="confirmDeleteTaskModal" tabindex="-1" aria-labelledby="confirmationModalLabel"
-     aria-hidden="true">
+    aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -412,7 +418,7 @@
 
 <!-- Confirmation delete project modal -->
 <div class="modal fade" id="confirmDeleteProjectModal" tabindex="-1" aria-labelledby="confirmationModalLabel"
-     aria-hidden="true">
+    aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -431,12 +437,11 @@
 </div>
 
 @section Scripts {
-    @*<script src="~/js/sortable-tasks.js"></script>*@
     <script src="~/js/sortable-tasks.js"></script>
     <script src="~/js/task-add-edit-modal.js"></script>
     <script src="~/js/delete-task.js"></script>
     <script src="~/js/delete-project.js"></script>
-    <script src="~/js/task-comments.js"></script>
+    <script src="~/js/task-details.js"></script>
     <script src="~/js/add-user-to-project.js"></script>
     <script src="~/js/view-members.js"></script>
 }

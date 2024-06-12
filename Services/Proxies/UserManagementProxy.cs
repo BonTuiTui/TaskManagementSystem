@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using TaskManagementSystem.Areas.Identity.Data;
-using TaskManagementSystem.Services;
+using TaskManagementSystem.Interfaces;
 
-namespace TaskManagementSystem.Proxies
+namespace TaskManagementSystem.Services.Proxies
 {
     // Proxy để quản lý người dùng, đảm bảo quyền truy cập và ủy quyền các hành động cho dịch vụ thực sự
     // Lớp proxy để quản lý người dùng, đảm bảo quyền truy cập và ủy quyền các hành động cho dịch vụ thực sự
