@@ -8,12 +8,14 @@ using TaskManagementSystem.Middleware;
 using TaskManagementSystem.ProjectFactory;
 using TaskManagementSystem.Hubs;
 using TaskManagementSystem.Observer;
+using TaskManagementSystem.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddSignalR(); // Thêm SignalR
+builder.Services.AddTransient<ISenderEmail, EmailSender>();// Forgot Password
 
 builder.Services.AddScoped<IProjectFactory, ProjectFactory>();
 builder.Services.AddHttpClient(); // Thêm HttpClient

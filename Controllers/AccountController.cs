@@ -4,16 +4,22 @@ using TaskManagementSystem.Areas.Identity.Data;
 using TaskManagementSystem.Proxies;
 using TaskManagementSystem.ViewModels;
 using System.Security.Claims;
+using System.Text.Encodings.Web;
+using TaskManagementSystem.Services;
+using TaskManagementSystem.Interfaces;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNet.Identity;
 
 namespace TaskManagementSystem.Controllers
 {
     public class AccountController : Controller
     {
         private readonly UserManagementProxy _userManagementProxy;
-
-        public AccountController(UserManagementProxy userManagementProxy)
+        private readonly ISenderEmail _emailSender;
+        public AccountController(UserManagementProxy userManagementProxy, ISenderEmail emailSender)
         {
             _userManagementProxy = userManagementProxy;
+            _emailSender = emailSender;
         }
 
         [HttpGet]
@@ -56,9 +62,10 @@ namespace TaskManagementSystem.Controllers
 
                 if (result.Succeeded)
                 {
+                    await SendConfirmationEmail(model.Email, user);
                     await _userManagementProxy.AddToRolesAsync(user, new List<string> { "employee" });
                     await _userManagementProxy.SignInUserAsync(user.UserName, model.Password, rememberMe: false);
-                    return RedirectToAction("Index", "Home");
+                    return View("RegistrationSuccessful");
                 }
 
                 foreach (var error in result.Errors)
@@ -70,7 +77,6 @@ namespace TaskManagementSystem.Controllers
             model.ExternalLogins = (await _userManagementProxy.GetExternalAuthenticationSchemesAsync()).ToList();
             return View(model);
         }
-
 
         [HttpGet]
         [AllowAnonymous]
@@ -112,6 +118,219 @@ namespace TaskManagementSystem.Controllers
             model.ExternalLogins = (await _userManagementProxy.GetExternalAuthenticationSchemesAsync()).ToList();
             return View(model);
         }
+        private async Task SendConfirmationEmail(string? email, ApplicationUser? user)
+        {
+            //Generate the Token
+            var token = await _userManagementProxy.GenerateEmailConfirmationTokenAsync(user);
+
+            //Build the Email Confirmation Link which must include the Callback URL
+            var ConfirmationLink = Url.Action("ConfirmEmail", "Account",
+            new { UserId = user.Id, Token = token }, protocol: HttpContext.Request.Scheme);
+
+            //Send the Confirmation Email to the User Email Id
+            await _emailSender.SendEmailAsync(email, "Confirm Your Email", $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(ConfirmationLink)}'>clicking here</a>.", true);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> ConfirmEmail(string UserId, string Token)
+        {
+            if (UserId == null || Token == null)
+            {
+                ViewBag.Message = "The link is Invalid or Expired";
+            }
+            //Find the User By Id
+            var user = await _userManagementProxy.GetUserByIdAsync(UserId);
+            if (user == null)
+            {
+                ViewBag.ErrorMessage = $"The User ID {UserId} is Invalid";
+                return View("NotFound");
+            }
+            //Call the ConfirmEmailAsync Method which will mark the Email as Confirmed
+            var result = await _userManagementProxy.ConfirmEmailAsync(user, Token);
+            if (result.Succeeded)
+            {
+                ViewBag.Message = "Thank you for confirming your email";
+                return View();
+            }
+            ViewBag.Message = "Email cannot be confirmed";
+            return View();
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult ResendConfirmationEmail(bool IsResend = true)
+        {
+            if (IsResend)
+            {
+                ViewBag.Message = "Resend Confirmation Email";
+            }
+            else
+            {
+                ViewBag.Message = "Send Confirmation Email";
+            }
+            return View();
+        }
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ResendConfirmationEmail(string Email)
+        {
+            var user = await _userManagementProxy.GetUserByEmailAsync(Email);
+            if (user == null || await _userManagementProxy.IsEmailConfirmedAsync(user))
+            {
+                // Handle the situation when the user does not exist or Email already confirmed.
+                // For security, don't reveal that the user does not exist or Email is already confirmed
+                return View("ConfirmationEmailSent");
+            }
+
+            //Then send the Confirmation Email to the User
+            await SendConfirmationEmail(Email, user);
+
+            return View("ConfirmationEmailSent");
+        }
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult ForgotPassword()
+        {
+            return View();
+        }
+        private async Task SendForgotPasswordEmail(string? email, ApplicationUser? user)
+        {
+            var token = await _userManagementProxy.GeneratePasswordResetTokenAsync(user);
+            var passwordResetLink = Url.Action("ResetPassword", "Account",
+                    new { Email = email, Token = token }, protocol: HttpContext.Request.Scheme);
+            await _emailSender.SendEmailAsync(email, "Reset Your Password", $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(passwordResetLink)}'>clicking here</a>.", true);
+        }
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<IActionResult> ForgotPassword(ForgotPasswordViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                // Find the user by email
+                var user = await _userManagementProxy.GetUserByEmailAsync(model.Email);
+
+                // If the user is found
+                if (user != null && await _userManagementProxy.IsEmailConfirmedAsync(user))
+                {
+                    // You can optionally check if the email is confirmed here, or proceed without checking
+
+                    await SendForgotPasswordEmail(user.Email, user);
+
+                    // Send the user to Forgot Password Confirmation view
+                    return RedirectToAction("ForgotPasswordConfirmation", "Account");
+                }
+
+                // If the user is not found, return to the view with an error message
+                ModelState.AddModelError(string.Empty, "Email not found.");
+                return View(model);
+            }
+
+            return View(model);
+        }
+        [AllowAnonymous]
+        public ActionResult ForgotPasswordConfirmation()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult ResetPassword(string Token, string Email)
+        {
+            if (Token == null || Email == null)
+            {
+                ViewBag.ErrorTitle = "Invalid Password Reset Token";
+                ViewBag.ErrorMessage = "The Link is Expired or Invalid";
+                return View("Error");
+            }
+            else
+            {
+                ResetPasswordViewModel model = new ResetPasswordViewModel();
+                model.Token = Token;
+                model.Email = Email;
+                return View(model);
+            }
+        }
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<IActionResult> ResetPassword(ResetPasswordViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _userManagementProxy.GetUserByEmailAsync(model.Email);
+
+                if (user != null)
+                {
+                    var result = await _userManagementProxy.ResetPasswordAsync(user, model.Token, model.Password);
+                    if (result.Succeeded)
+                    {
+                        return RedirectToAction("ResetPasswordConfirmation", "Account");
+                    }
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError("", error.Description);
+                    }
+                    return View(model);
+                }
+                return RedirectToAction("ResetPasswordConfirmation", "Account");
+            }
+
+            return View(model);
+        }
+
+        [AllowAnonymous]
+        public ActionResult ResetPasswordConfirmation()
+        {
+            return View();
+        }
+
+        [Authorize]
+        [HttpGet]
+        public IActionResult ChangePassword()
+        {
+            return View();
+        }
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> ChangePassword(ChangePasswordViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _userManagementProxy.GetUserAsync(User.Identity.GetUserId());
+                if (user == null)
+                {
+                    return RedirectToAction("Login", "Account");
+                }
+
+                var result = await _userManagementProxy.ChangePasswordAsync(user, model.OldPassword, model.NewPassword);
+
+                if (!result.Succeeded)
+                {
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError(string.Empty, error.Description);
+                    }
+                    return View();
+                }
+
+                // Upon successfully changing the password refresh sign-in cookie
+                await _userManagementProxy.RefreshSignInAsync(user);
+
+                //Then redirect the user to the ChangePasswordConfirmation view
+                return RedirectToAction("ChangePasswordConfirmation", "Account");
+            }
+
+            return View(model);
+        }
+
+        [Authorize]
+        [HttpGet]
+        public IActionResult ChangePasswordConfirmation()
+        {
+            return View();
+        }
 
         [HttpPost]
         public async Task<IActionResult> Logout()
@@ -119,6 +338,8 @@ namespace TaskManagementSystem.Controllers
             await _userManagementProxy.SignOutUserAsync();
             return RedirectToAction("Index", "Home");
         }
+
+
 
         [HttpPost]
         [AllowAnonymous]

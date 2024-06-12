@@ -4,7 +4,6 @@
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -16,7 +15,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"></script>
 </head>
-
 <body>
     <div class="d-flex">
         <div class="border-end border-light">
@@ -71,6 +69,10 @@ workspace</pre>
                                 </li>
                             }
                             <li>
+                                <a asp-controller="Account" asp-action="ChangePassword"
+                                   class="link-body-emphasis d-inline-flex text-decoration-none text-black rounded">Change Password</a>
+                            </li>
+                            <li>
                                 <a href="#" class="link-body-emphasis d-inline-flex text-decoration-none text-black rounded position-relative"
                                    data-bs-toggle="modal" data-bs-target="#notificationModal"
                                    id="notificationLink">
@@ -87,7 +89,8 @@ workspace</pre>
                                         Sign out
                                     </a>
                                 </form>
-                                <script>document.getElementById('logoutLink').addEventListener('click', function () {
+                                <script>
+                                    document.getElementById('logoutLink').addEventListener('click', function () {
                                         document.getElementById('logoutForm').submit();
                                     });</script>
                             </li>
@@ -141,5 +144,4 @@ workspace</pre>
     <script src="~/js/notifications.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
 </body>
-
 </html>

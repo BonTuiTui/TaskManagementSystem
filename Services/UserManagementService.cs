@@ -126,5 +126,68 @@ namespace TaskManagementSystem.Services
         {
             await _signInManager.SignInAsync(user, isPersistent);
         }
+
+        public async Task<bool> IsEmailConfirmedAsync(ApplicationUser user)
+        {
+            return await _userManager.IsEmailConfirmedAsync(user);
+        }
+
+        public async Task<IdentityResult> ResetPasswordAsync(ApplicationUser user, string token, string password)
+        {
+            try
+            {
+                var result = await _userManager.ResetPasswordAsync(user, token, password);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error occurred while resetting password: {ex.Message}");
+                throw;
+            }
+        }
+
+        public async Task<string> GenerateEmailConfirmationTokenAsync(ApplicationUser user)
+        {
+            if (user == null)
+            {
+                throw new ArgumentNullException(nameof(user));
+            }
+
+            var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+            return token;
+        }
+
+        public async Task<IdentityResult> ConfirmEmailAsync(ApplicationUser user, string? token)
+        {
+            if (user == null || string.IsNullOrEmpty(token))
+            {
+                throw new ArgumentException("User or token cannot be null or empty.");
+            }
+
+            var result = await _userManager.ConfirmEmailAsync(user, token);
+            return result;
+        }
+
+        public async Task<string> GeneratePasswordResetTokenAsync(ApplicationUser? user)
+        {
+            if (user == null)
+            {
+                throw new ArgumentNullException(nameof(user), "User cannot be null.");
+            }
+
+            var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+            return token;
+        }
+
+        public async Task<IdentityResult> ChangePasswordAsync(ApplicationUser user, string oldPassword, string newPassword)
+        {
+            return await _userManager.ChangePasswordAsync(user, oldPassword, newPassword);
+        }
+
+        public async Task RefreshSignInAsync(ApplicationUser user)
+        {
+            await _signInManager.RefreshSignInAsync(user);
+        }
     }
+
 }
