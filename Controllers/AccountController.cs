@@ -212,8 +212,9 @@ namespace TaskManagementSystem.Controllers
                 var user = await _userManagementProxy.GetUserByEmailAsync(model.Email);
 
                 // If the user is found
-                if (user != null && await _userManagementProxy.IsEmailConfirmedAsync(user))
-                {
+                //if (user != null && await _userManagementProxy.IsEmailConfirmedAsync(user))
+                if (user != null)
+                    {
                     // You can optionally check if the email is confirmed here, or proceed without checking
 
                     await SendForgotPasswordEmail(user.Email, user);

@@ -20,12 +20,15 @@
             <label asp-for="Password" for="floatingPassword">Password</label>
             <span asp-validation-for="Password" class="text-danger"></span>
         </div>
+        <div class="mb-3">
+            <a class="text-decoration-none text-secondary" asp-controller="Account" asp-action="ForgotPassword">Forgot Password?</a>
+        </div>
 
         <button class="btn btn-primary btn-lg bg-success mb-3 w-100 py-2" type="submit">Continue</button>
 
         <div class="container text-center w-100">
             <div class="row">
-                <h6 class="h6 mb-3 fw-normal text-center"> Don't have an account? <a asp-controller="Account" asp-action="Register" class="h6 text-secondary">Sign Up</a> </h6>
+                <h6 class="h6 mb-3 fw-normal text-center"> Don't have an account? <a asp-controller="Account" asp-action="Register" class="h6 text-decoration-none text-secondary">Sign Up</a> </h6>
             </div>
         </div>
 
@@ -45,9 +48,6 @@
             </ul>
         </div>
     }
-    <div>
-        <a asp-controller="Account" asp-action="ForgotPassword">Forgot Password?</a>
-    </div>
     <div class="mt-3 text-center">
         @{
             if (Model.ExternalLogins?.Count == 0)

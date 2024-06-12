@@ -1,315 +1,323 @@
 {
   "Files": [
     {
-      "Id": "D:\\Sa2\\Hihi\\obj\\Debug\\net7.0\\scopedcss\\projectbundle\\TaskManagementSystem.bundle.scp.css",
-      "PackagePath": "staticwebassets\\TaskManagementSystem.bundle.scp.css"
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/obj/Debug/net7.0/scopedcss/projectbundle/TaskManagementSystem.bundle.scp.css",
+      "PackagePath": "staticwebassets/TaskManagementSystem.bundle.scp.css"
     },
     {
-      "Id": "D:\\Sa2\\Hihi\\wwwroot\\css\\login.css",
-      "PackagePath": "staticwebassets\\css\\login.css"
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/.DS_Store",
+      "PackagePath": "staticwebassets/.DS_Store"
     },
     {
-      "Id": "D:\\Sa2\\Hihi\\wwwroot\\css\\notifications.css",
-      "PackagePath": "staticwebassets\\css\\notifications.css"
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/css/login.css",
+      "PackagePath": "staticwebassets/css/login.css"
     },
     {
-      "Id": "D:\\Sa2\\Hihi\\wwwroot\\css\\sidebarStyle.css",
-      "PackagePath": "staticwebassets\\css\\sidebarStyle.css"
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/css/notifications.css",
+      "PackagePath": "staticwebassets/css/notifications.css"
     },
     {
-      "Id": "D:\\Sa2\\Hihi\\wwwroot\\css\\site.css",
-      "PackagePath": "staticwebassets\\css\\site.css"
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/css/sidebarStyle.css",
+      "PackagePath": "staticwebassets/css/sidebarStyle.css"
     },
     {
-      "Id": "D:\\Sa2\\Hihi\\wwwroot\\favicon.ico",
-      "PackagePath": "staticwebassets\\favicon.ico"
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/css/site.css",
+      "PackagePath": "staticwebassets/css/site.css"
     },
     {
-      "Id": "D:\\Sa2\\Hihi\\wwwroot\\js\\add-user-to-project.js",
-      "PackagePath": "staticwebassets\\js\\add-user-to-project.js"
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/favicon.ico",
+      "PackagePath": "staticwebassets/favicon.ico"
     },
     {
-      "Id": "D:\\Sa2\\Hihi\\wwwroot\\js\\delete-project.js",
-      "PackagePath": "staticwebassets\\js\\delete-project.js"
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/js/.DS_Store",
+      "PackagePath": "staticwebassets/js/.DS_Store"
     },
     {
-      "Id": "D:\\Sa2\\Hihi\\wwwroot\\js\\delete-task.js",
-      "PackagePath": "staticwebassets\\js\\delete-task.js"
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/js/add-user-to-project.js",
+      "PackagePath": "staticwebassets/js/add-user-to-project.js"
     },
     {
-      "Id": "D:\\Sa2\\Hihi\\wwwroot\\js\\notifications.js",
-      "PackagePath": "staticwebassets\\js\\notifications.js"
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/js/delete-project.js",
+      "PackagePath": "staticwebassets/js/delete-project.js"
     },
     {
-      "Id": "D:\\Sa2\\Hihi\\wwwroot\\js\\sidebar.js",
-      "PackagePath": "staticwebassets\\js\\sidebar.js"
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/js/delete-task.js",
+      "PackagePath": "staticwebassets/js/delete-task.js"
     },
     {
-      "Id": "D:\\Sa2\\Hihi\\wwwroot\\js\\signalR.js",
-      "PackagePath": "staticwebassets\\js\\signalR.js"
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/js/notifications.js",
+      "PackagePath": "staticwebassets/js/notifications.js"
     },
     {
-      "Id": "D:\\Sa2\\Hihi\\wwwroot\\js\\site.js",
-      "PackagePath": "staticwebassets\\js\\site.js"
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/js/sidebar.js",
+      "PackagePath": "staticwebassets/js/sidebar.js"
     },
     {
-      "Id": "D:\\Sa2\\Hihi\\wwwroot\\js\\sortable-tasks.js",
-      "PackagePath": "staticwebassets\\js\\sortable-tasks.js"
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/js/signalR.js",
+      "PackagePath": "staticwebassets/js/signalR.js"
     },
     {
-      "Id": "D:\\Sa2\\Hihi\\wwwroot\\js\\task-add-edit-modal.js",
-      "PackagePath": "staticwebassets\\js\\task-add-edit-modal.js"
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/js/site.js",
+      "PackagePath": "staticwebassets/js/site.js"
     },
     {
-      "Id": "D:\\Sa2\\Hihi\\wwwroot\\js\\task-comments.js",
-      "PackagePath": "staticwebassets\\js\\task-comments.js"
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/js/sortable-tasks.js",
+      "PackagePath": "staticwebassets/js/sortable-tasks.js"
     },
     {
-      "Id": "D:\\Sa2\\Hihi\\wwwroot\\js\\view-members.js",
-      "PackagePath": "staticwebassets\\js\\view-members.js"
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/js/task-add-edit-modal.js",
+      "PackagePath": "staticwebassets/js/task-add-edit-modal.js"
     },
     {
-      "Id": "D:\\Sa2\\Hihi\\wwwroot\\lib\\bootstrap\\LICENSE",
-      "PackagePath": "staticwebassets\\lib\\bootstrap"
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/js/task-comments.js",
+      "PackagePath": "staticwebassets/js/task-comments.js"
     },
     {
-      "Id": "D:\\Sa2\\Hihi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css"
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/js/view-members.js",
+      "PackagePath": "staticwebassets/js/view-members.js"
     },
     {
-      "Id": "D:\\Sa2\\Hihi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map"
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/lib/bootstrap/LICENSE",
+      "PackagePath": "staticwebassets/lib/bootstrap"
     },
     {
-      "Id": "D:\\Sa2\\Hihi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css"
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.css"
     },
     {
-      "Id": "D:\\Sa2\\Hihi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map"
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.css.map"
     },
     {
-      "Id": "D:\\Sa2\\Hihi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css"
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.min.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.min.css"
     },
     {
-      "Id": "D:\\Sa2\\Hihi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map"
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.min.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.min.css.map"
     },
     {
-      "Id": "D:\\Sa2\\Hihi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css"
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.rtl.css"
     },
     {
-      "Id": "D:\\Sa2\\Hihi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map"
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.rtl.css.map"
     },
     {
-      "Id": "D:\\Sa2\\Hihi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css"
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css"
     },
     {
-      "Id": "D:\\Sa2\\Hihi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map"
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css.map"
     },
     {
-      "Id": "D:\\Sa2\\Hihi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css"
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.css"
     },
     {
-      "Id": "D:\\Sa2\\Hihi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map"
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.css.map"
     },
     {
-      "Id": "D:\\Sa2\\Hihi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css"
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.min.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.min.css"
     },
     {
-      "Id": "D:\\Sa2\\Hihi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map"
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.min.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.min.css.map"
     },
     {
-      "Id": "D:\\Sa2\\Hihi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css"
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css"
     },
     {
-      "Id": "D:\\Sa2\\Hihi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map"
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css.map"
     },
     {
-      "Id": "D:\\Sa2\\Hihi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css"
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css"
     },
     {
-      "Id": "D:\\Sa2\\Hihi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map"
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css.map"
     },
     {
-      "Id": "D:\\Sa2\\Hihi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css"
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.css"
     },
     {
-      "Id": "D:\\Sa2\\Hihi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map"
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.css.map"
     },
     {
-      "Id": "D:\\Sa2\\Hihi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css"
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.min.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.min.css"
     },
     {
-      "Id": "D:\\Sa2\\Hihi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map"
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.min.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.min.css.map"
     },
     {
-      "Id": "D:\\Sa2\\Hihi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css"
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css"
     },
     {
-      "Id": "D:\\Sa2\\Hihi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map"
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css.map"
     },
     {
-      "Id": "D:\\Sa2\\Hihi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css"
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css"
     },
     {
-      "Id": "D:\\Sa2\\Hihi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css.map"
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css.map"
     },
     {
-      "Id": "D:\\Sa2\\Hihi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css"
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/lib/bootstrap/dist/css/bootstrap.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap.css"
     },
     {
-      "Id": "D:\\Sa2\\Hihi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map"
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/lib/bootstrap/dist/css/bootstrap.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap.css.map"
     },
     {
-      "Id": "D:\\Sa2\\Hihi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css"
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap.min.css"
     },
     {
-      "Id": "D:\\Sa2\\Hihi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map"
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap.min.css.map"
     },
     {
-      "Id": "D:\\Sa2\\Hihi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css"
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap.rtl.css"
     },
     {
-      "Id": "D:\\Sa2\\Hihi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map"
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap.rtl.css.map"
     },
     {
-      "Id": "D:\\Sa2\\Hihi\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js"
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.min.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap.rtl.min.css"
     },
     {
-      "Id": "D:\\Sa2\\Hihi\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map"
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.min.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap.rtl.min.css.map"
     },
     {
-      "Id": "D:\\Sa2\\Hihi\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js"
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.bundle.js"
     },
     {
-      "Id": "D:\\Sa2\\Hihi\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map"
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.bundle.js.map"
     },
     {
-      "Id": "D:\\Sa2\\Hihi\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js"
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.bundle.min.js"
     },
     {
-      "Id": "D:\\Sa2\\Hihi\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map"
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.bundle.min.js.map"
     },
     {
-      "Id": "D:\\Sa2\\Hihi\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js"
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.js",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.esm.js"
     },
     {
-      "Id": "D:\\Sa2\\Hihi\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map"
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.js.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.esm.js.map"
     },
     {
-      "Id": "D:\\Sa2\\Hihi\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js"
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.min.js",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.esm.min.js"
     },
     {
-      "Id": "D:\\Sa2\\Hihi\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js.map"
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.min.js.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.esm.min.js.map"
     },
     {
-      "Id": "D:\\Sa2\\Hihi\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js"
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/lib/bootstrap/dist/js/bootstrap.js",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.js"
     },
     {
-      "Id": "D:\\Sa2\\Hihi\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map"
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/lib/bootstrap/dist/js/bootstrap.js.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.js.map"
     },
     {
-      "Id": "D:\\Sa2\\Hihi\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
-      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.min.js"
     },
     {
-      "Id": "D:\\Sa2\\Hihi\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
-      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js"
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.min.js.map"
     },
     {
-      "Id": "D:\\Sa2\\Hihi\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js",
-      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js"
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/lib/jquery-validation-unobtrusive/LICENSE.txt",
+      "PackagePath": "staticwebassets/lib/jquery-validation-unobtrusive/LICENSE.txt"
     },
     {
-      "Id": "D:\\Sa2\\Hihi\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
-      "PackagePath": "staticwebassets\\lib\\jquery-validation\\LICENSE.md"
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js",
+      "PackagePath": "staticwebassets/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"
     },
     {
-      "Id": "D:\\Sa2\\Hihi\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
-      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.js"
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js",
+      "PackagePath": "staticwebassets/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"
     },
     {
-      "Id": "D:\\Sa2\\Hihi\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
-      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.min.js"
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/lib/jquery-validation/LICENSE.md",
+      "PackagePath": "staticwebassets/lib/jquery-validation/LICENSE.md"
     },
     {
-      "Id": "D:\\Sa2\\Hihi\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
-      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.js"
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/lib/jquery-validation/dist/additional-methods.js",
+      "PackagePath": "staticwebassets/lib/jquery-validation/dist/additional-methods.js"
     },
     {
-      "Id": "D:\\Sa2\\Hihi\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
-      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.min.js"
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/lib/jquery-validation/dist/additional-methods.min.js",
+      "PackagePath": "staticwebassets/lib/jquery-validation/dist/additional-methods.min.js"
     },
     {
-      "Id": "D:\\Sa2\\Hihi\\wwwroot\\lib\\jquery\\LICENSE.txt",
-      "PackagePath": "staticwebassets\\lib\\jquery\\LICENSE.txt"
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/lib/jquery-validation/dist/jquery.validate.js",
+      "PackagePath": "staticwebassets/lib/jquery-validation/dist/jquery.validate.js"
     },
     {
-      "Id": "D:\\Sa2\\Hihi\\wwwroot\\lib\\jquery\\dist\\jquery.js",
-      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.js"
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/lib/jquery-validation/dist/jquery.validate.min.js",
+      "PackagePath": "staticwebassets/lib/jquery-validation/dist/jquery.validate.min.js"
     },
     {
-      "Id": "D:\\Sa2\\Hihi\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
-      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.js"
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/lib/jquery/LICENSE.txt",
+      "PackagePath": "staticwebassets/lib/jquery/LICENSE.txt"
     },
     {
-      "Id": "D:\\Sa2\\Hihi\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
-      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/lib/jquery/dist/jquery.js",
+      "PackagePath": "staticwebassets/lib/jquery/dist/jquery.js"
     },
     {
-      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.TaskManagementSystem.Microsoft.AspNetCore.StaticWebAssets.props",
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/lib/jquery/dist/jquery.min.js",
+      "PackagePath": "staticwebassets/lib/jquery/dist/jquery.min.js"
+    },
+    {
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/lib/jquery/dist/jquery.min.map",
+      "PackagePath": "staticwebassets/lib/jquery/dist/jquery.min.map"
+    },
+    {
+      "Id": "obj/Debug/net7.0/staticwebassets/msbuild.TaskManagementSystem.Microsoft.AspNetCore.StaticWebAssets.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
     },
     {
-      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.build.TaskManagementSystem.props",
+      "Id": "obj/Debug/net7.0/staticwebassets/msbuild.build.TaskManagementSystem.props",
       "PackagePath": "build\\TaskManagementSystem.props"
     },
     {
-      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.buildMultiTargeting.TaskManagementSystem.props",
+      "Id": "obj/Debug/net7.0/staticwebassets/msbuild.buildMultiTargeting.TaskManagementSystem.props",
       "PackagePath": "buildMultiTargeting\\TaskManagementSystem.props"
     },
     {
-      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.buildTransitive.TaskManagementSystem.props",
+      "Id": "obj/Debug/net7.0/staticwebassets/msbuild.buildTransitive.TaskManagementSystem.props",
       "PackagePath": "buildTransitive\\TaskManagementSystem.props"
     }
   ],
