@@ -6,6 +6,13 @@
 
 <h1>Manage Users</h1>
 
+<form method="get" asp-controller="Admin" asp-action="ManageUsers">
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="Search by username or email" aria-label="Search by username or email" aria-describedby="button-search" name="searchTerm" value="@ViewBag.SearchTerm">
+        <button class="btn btn-outline-secondary" type="submit" id="button-search">Search</button>
+    </div>
+</form>
+
 <table class="table">
     <thead>
         <tr>
