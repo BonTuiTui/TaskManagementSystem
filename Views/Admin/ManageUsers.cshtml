@@ -18,6 +18,7 @@
         <tr>
             <th>Username</th>
             <th>Email</th>
+            <th>Confirmed</th>
             <th>Roles</th>
             <th>Action</th>
         </tr>
@@ -28,6 +29,7 @@
             <tr>
                 <td>@user.UserName</td>
                 <td>@user.Email</td>
+                <td>@user.Comfirmed</td>
                 <td>@string.Join(", ", user.Roles)</td>
                 <td>
                     <a asp-controller="Admin" asp-action="EditRoles" asp-route-userId="@user.UserId">Edit Roles</a>

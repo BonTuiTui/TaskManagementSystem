@@ -27,6 +27,7 @@ namespace TaskManagementSystem.Controllers
                     UserId = user.Id,
                     UserName = user.UserName,
                     Email = user.Email,
+                    Comfirmed = user.EmailConfirmed,
                     Roles = userRoles.ToList()
                 };
                 userViewModels.Add(userViewModel);
