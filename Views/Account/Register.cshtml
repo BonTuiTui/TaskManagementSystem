@@ -47,9 +47,9 @@
             <h6 class="h6 mb-3 fw-normal text-center"> Already have an account? <a asp-controller="Account" asp-action="Login" class="h6 text-secondary text-decoration-none">Login</a></h6>
         </div>
     </div>
-    <div class="h7 text-center mb-2 mt-2 "> OR </div>
+    <hr>
 </form>
-<div class="mt-3 text-center">
+<div class="mt-4 text-center">
     @{
         if (Model.ExternalLogins?.Count == 0)
         {

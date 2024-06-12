@@ -99,3 +99,19 @@ body {
 .bd-mode-toggle .dropdown-menu .active .bi {
     display: block !important;
 }
+
+hr {
+    border: none;
+    color: #000000;
+    overflow: visible;
+    text-align: center;
+    height: 5px;
+}
+
+hr::after {
+    background: #fff;
+    content: 'OR';
+    padding: 0 10px;
+    position: relative;
+    top: -13px;
+}
