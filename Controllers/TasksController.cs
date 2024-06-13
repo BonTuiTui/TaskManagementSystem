@@ -55,6 +55,39 @@ namespace TaskManagementSystem.Controllers
             return Json(task);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> AdvancedSearchTasks(string title, string status, string assignee, DateTime? dueDate)
+        {
+            var query = _dbContext.Task.AsQueryable();
+
+            if (!string.IsNullOrEmpty(title))
+            {
+                query = query.Where(t => t.Title.Contains(title));
+            }
+            if (!string.IsNullOrEmpty(status))
+            {
+                query = query.Where(t => t.Status == status);
+            }
+            if (!string.IsNullOrEmpty(assignee))
+            {
+                query = query.Where(t => t.AssignedUser.UserName.Contains(assignee));
+            }
+            if (dueDate.HasValue)
+            {
+                query = query.Where(t => t.DueDate.Date == dueDate.Value.Date);
+            }
+
+            var tasks = await query.Select(t => new
+            {
+                t.Task_id,
+                t.Title,
+                t.Description,
+                t.Project_Id // Assuming ProjectId is part of the Task entity
+            }).ToListAsync();
+
+            return Json(tasks);
+        }
+
         [HttpPost]
         [Authorize(Roles = "admin, manager")]
         public async Task<IActionResult> Add(AddTaskViewModel viewModel)

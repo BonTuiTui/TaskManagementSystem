@@ -49,6 +49,10 @@
       "PackagePath": "staticwebassets/js/notifications.js"
     },
     {
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/js/search-tasks.js",
+      "PackagePath": "staticwebassets/js/search-tasks.js"
+    },
+    {
       "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/js/sidebar.js",
       "PackagePath": "staticwebassets/js/sidebar.js"
     },
