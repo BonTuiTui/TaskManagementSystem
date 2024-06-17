@@ -1,26 +1,26 @@
 {
   "format": 1,
   "restore": {
-    "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem.csproj": {}
+    "/Users/vinhpham/Downloads/TaskManagementSystem/TaskManagementSystem.csproj": {}
   },
   "projects": {
-    "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem.csproj": {
+    "/Users/vinhpham/Downloads/TaskManagementSystem/TaskManagementSystem.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem.csproj",
+        "projectUniqueName": "/Users/vinhpham/Downloads/TaskManagementSystem/TaskManagementSystem.csproj",
         "projectName": "TaskManagementSystem",
-        "projectPath": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem.csproj",
-        "packagesPath": "/Users/macs/.nuget/packages/",
-        "outputPath": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/obj/",
+        "projectPath": "/Users/vinhpham/Downloads/TaskManagementSystem/TaskManagementSystem.csproj",
+        "packagesPath": "/Users/vinhpham/.nuget/packages/",
+        "outputPath": "/Users/vinhpham/Downloads/TaskManagementSystem/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/macs/.nuget/NuGet/NuGet.Config"
+          "/Users/vinhpham/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
         ],
         "sources": {
-          "/usr/local/share/dotnet/sdk/7.0.316/Sdks/Microsoft.NET.Sdk.Web/library-packs": {},
+          "/usr/local/share/dotnet/library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -33,6 +33,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -71,7 +76,7 @@
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[7.0.18, )"
+              "version": "[7.0.19, )"
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
@@ -103,7 +108,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.316/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.203/RuntimeIdentifierGraph.json"
         }
       }
     }
