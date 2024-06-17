@@ -52,9 +52,9 @@ namespace TaskManagementSystem.Services.Proxies
         }
 
         // Đăng ký người dùng mới
-        public async Task<IdentityResult> RegisterUserAsync(ApplicationUser user, string password)
+        public async Task<IdentityResult> RegisterUserAsync(ApplicationUser user)
         {
-            return await _realService.RegisterUserAsync(user, password);
+            return await _realService.RegisterUserAsync(user);
         }
 
         // Đăng nhập người dùng
@@ -232,6 +232,32 @@ namespace TaskManagementSystem.Services.Proxies
         public async Task RefreshSignInAsync(ApplicationUser user)
         {
             await _realService.RefreshSignInAsync(user);
+        }
+
+        public async Task<bool> HasPasswordAsync(ApplicationUser user)
+        {
+            return await _realService.HasPasswordAsync(user);
+        }
+
+        public async Task<IdentityResult> AddPasswordAsync(ApplicationUser user, string newPassword)
+        {
+            return await _realService.AddPasswordAsync(user, newPassword);
+        }
+        public async Task<bool> IsUsingDefaultPasswordAsync(ApplicationUser user, string defaultPassword)
+        {
+            var passwordHasher = new PasswordHasher<ApplicationUser>();
+            var verificationResult = passwordHasher.VerifyHashedPassword(user, user.PasswordHash, defaultPassword);
+            return verificationResult == PasswordVerificationResult.Success;
+        }
+
+        public async Task<IdentityResult> LockUserAsync(string userId)
+        {
+            return await _realService.LockUserAsync(userId);
+        }
+
+        public async Task<IdentityResult> UnlockUserAsync(string userId)
+        {
+            return await _realService.UnlockUserAsync(userId);
         }
     }
 }

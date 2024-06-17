@@ -28,9 +28,9 @@ namespace TaskManagementSystem.Services.Proxies
             return await _userManager.FindByIdAsync(userId);
         }
 
-        public async Task<IdentityResult> RegisterUserAsync(ApplicationUser user, string password)
+        public async Task<IdentityResult> RegisterUserAsync(ApplicationUser user)
         {
-            return await _userManager.CreateAsync(user, password);
+            return await _userManager.CreateAsync(user);
         }
 
         public async Task<SignInResult> SignInUserAsync(string username, string password, bool rememberMe)
@@ -142,9 +142,48 @@ namespace TaskManagementSystem.Services.Proxies
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error occurred while resetting password: {ex.Message}");
+                // Log the exception
                 throw;
             }
+        }
+
+        public async Task<string> GeneratePasswordResetTokenAsync(ApplicationUser user)
+        {
+            return await _userManager.GeneratePasswordResetTokenAsync(user);
+        }
+
+        public async Task<bool> ValidatePasswordAsync(ApplicationUser user, string password)
+        {
+            return await _userManager.CheckPasswordAsync(user, password);
+        }
+
+        public async Task<IdentityResult> ChangePasswordAsync(ApplicationUser user, string currentPassword, string newPassword)
+        {
+            return await _userManager.ChangePasswordAsync(user, currentPassword, newPassword);
+        }
+
+        public async Task<IdentityResult> LockUserAsync(string userId)
+        {
+            var user = await GetUserAsync(userId);
+            if (user == null)
+            {
+                return IdentityResult.Failed(new IdentityError { Description = "User not found." });
+            }
+
+            user.LockoutEnd = DateTimeOffset.UtcNow.AddYears(100);
+            return await _userManager.UpdateAsync(user);
+        }
+
+        public async Task<IdentityResult> UnlockUserAsync(string userId)
+        {
+            var user = await GetUserAsync(userId);
+            if (user == null)
+            {
+                return IdentityResult.Failed(new IdentityError { Description = "User not found." });
+            }
+
+            user.LockoutEnd = null;
+            return await _userManager.UpdateAsync(user);
         }
 
         public async Task<string> GenerateEmailConfirmationTokenAsync(ApplicationUser user)
@@ -169,26 +208,19 @@ namespace TaskManagementSystem.Services.Proxies
             return result;
         }
 
-        public async Task<string> GeneratePasswordResetTokenAsync(ApplicationUser? user)
-        {
-            if (user == null)
-            {
-                throw new ArgumentNullException(nameof(user), "User cannot be null.");
-            }
-
-            var token = await _userManager.GeneratePasswordResetTokenAsync(user);
-            return token;
-        }
-
-        public async Task<IdentityResult> ChangePasswordAsync(ApplicationUser user, string oldPassword, string newPassword)
-        {
-            return await _userManager.ChangePasswordAsync(user, oldPassword, newPassword);
-        }
-
         public async Task RefreshSignInAsync(ApplicationUser user)
         {
             await _signInManager.RefreshSignInAsync(user);
         }
-    }
+        public async Task<bool> HasPasswordAsync(ApplicationUser user)
+        {
+            return await _userManager.HasPasswordAsync(user);
+        }
 
+        public async Task<IdentityResult> AddPasswordAsync(ApplicationUser user, string newPassword)
+        {
+            var result = await _userManager.AddPasswordAsync(user, newPassword);
+            return result;
+        }
+    }
 }

@@ -1,8 +1,16 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Controllers"
+    "\\Controllers",
+    "\\Data",
+    "\\Hubs",
+    "\\Interfaces",
+    "\\Migrations",
+    "\\Models",
+    "\\Views",
+    "\\Views\\Account",
+    "\\Views\\Admin"
   ],
-  "SelectedNode": "\\Controllers\\AccountController.cs",
+  "SelectedNode": "\\Views\\Admin\\ManageUsers.cshtml",
   "PreviewInSolutionExplorer": false
 }

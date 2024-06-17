@@ -6,7 +6,7 @@ namespace TaskManagementSystem.Interfaces
 {
     public interface IUserManagementService
     {
-        Task<IdentityResult> RegisterUserAsync(ApplicationUser user, string password);
+        Task<IdentityResult> RegisterUserAsync(ApplicationUser user);
         Task<SignInResult> SignInUserAsync(string username, string password, bool rememberMe);
         Task SignOutUserAsync();
         Task<ApplicationUser> GetUserAsync(string userId);
@@ -34,5 +34,9 @@ namespace TaskManagementSystem.Interfaces
         Task<string> GeneratePasswordResetTokenAsync(ApplicationUser? user);
         Task<IdentityResult> ChangePasswordAsync(ApplicationUser user, string oldPassword, string newPassword);
         Task RefreshSignInAsync(ApplicationUser user);
+        Task<bool> HasPasswordAsync(ApplicationUser user);
+        Task<IdentityResult> AddPasswordAsync(ApplicationUser user, string newPassword);
+        Task<IdentityResult> LockUserAsync(string userId);
+        Task<IdentityResult> UnlockUserAsync(string userId);
     }
 }

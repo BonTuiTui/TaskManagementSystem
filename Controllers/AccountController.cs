@@ -56,7 +56,7 @@ namespace TaskManagementSystem.Controllers
                     FullName = fullName
                 };
 
-                var result = await _userManagementProxy.RegisterUserAsync(user, model.Password);
+                var result = await _userManagementProxy.RegisterUserAsync(user);
 
                 if (result.Succeeded)
                 {
@@ -100,6 +100,14 @@ namespace TaskManagementSystem.Controllers
         {
             if (ModelState.IsValid)
             {
+                var user = await _userManagementProxy.GetUserByNameAsync(model.Username);
+
+                if (user != null && await _userManagementProxy.IsUserInRoleAsync(user, "employee") && user.LockoutEnd > DateTime.Now)
+                {
+                    ModelState.AddModelError(string.Empty, "Your account has been blocked by the admin.");
+                    return View(model);
+                }
+
                 var result = await _userManagementProxy.SignInUserAsync(model.Username, model.Password, model.RememberMe);
 
                 if (result.Succeeded)
@@ -110,22 +118,26 @@ namespace TaskManagementSystem.Controllers
                     }
                     return RedirectToAction("Index", "Home");
                 }
+                else if (result.IsLockedOut)
+                {
+                    return RedirectToAction("Lockout");
 
-                ModelState.AddModelError("", "Invalid login attempt");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Invalid login attempt");
+                }
             }
             model.ExternalLogins = (await _userManagementProxy.GetExternalAuthenticationSchemesAsync()).ToList();
             return View(model);
         }
+
+
         private async Task SendConfirmationEmail(string? email, ApplicationUser? user)
         {
-            //Generate the Token
             var token = await _userManagementProxy.GenerateEmailConfirmationTokenAsync(user);
-
-            //Build the Email Confirmation Link which must include the Callback URL
             var ConfirmationLink = Url.Action("ConfirmEmail", "Account",
             new { UserId = user.Id, Token = token }, protocol: HttpContext.Request.Scheme);
-
-            //Send the Confirmation Email to the User Email Id
             await _emailSender.SendEmailAsync(email, "Confirm Your Email", $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(ConfirmationLink)}'>clicking here</a>.", true);
         }
 
@@ -206,22 +218,13 @@ namespace TaskManagementSystem.Controllers
         {
             if (ModelState.IsValid)
             {
-                // Find the user by email
                 var user = await _userManagementProxy.GetUserByEmailAsync(model.Email);
 
-                // If the user is found
-                //if (user != null && await _userManagementProxy.IsEmailConfirmedAsync(user))
                 if (user != null)
                     {
-                    // You can optionally check if the email is confirmed here, or proceed without checking
-
                     await SendForgotPasswordEmail(user.Email, user);
-
-                    // Send the user to Forgot Password Confirmation view
                     return RedirectToAction("ForgotPasswordConfirmation", "Account");
                 }
-
-                // If the user is not found, return to the view with an error message
                 ModelState.AddModelError(string.Empty, "Email not found.");
                 return View(model);
             }
@@ -314,10 +317,8 @@ namespace TaskManagementSystem.Controllers
                     return View();
                 }
 
-                // Upon successfully changing the password refresh sign-in cookie
                 await _userManagementProxy.RefreshSignInAsync(user);
 
-                //Then redirect the user to the ChangePasswordConfirmation view
                 return RedirectToAction("ChangePasswordConfirmation", "Account");
             }
 
@@ -337,8 +338,68 @@ namespace TaskManagementSystem.Controllers
             await _userManagementProxy.SignOutUserAsync();
             return RedirectToAction("Index", "Home");
         }
+        // Change Password for Google , Facebook ......
+        [Authorize]
+        [HttpGet]
+        public async Task<IActionResult> AddPassword()
+        {
+            var user = await _userManagementProxy.GetUserAsync(userId: User.Identity.GetUserId());
+            var userHasPassword = await _userManagementProxy.HasPasswordAsync(user);
+            if (userHasPassword)
+            {
+                return RedirectToAction("ChangePasswordForGoogle", "Account");
+            }
+            return View();
+        }
+        [Authorize]
+        [HttpGet]
+        public async Task<IActionResult> ChangePasswordForGoogle()
+        {
+            var user = await _userManagementProxy.GetUserAsync(userId: User.Identity.GetUserId());
+            var userHasPassword = await _userManagementProxy.HasPasswordAsync(user);
+            if (!userHasPassword)
+            {
+                return RedirectToAction("AddPassword", "Account");
+            }
+            return View();
+        }
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> AddPassword(AddPasswordViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _userManagementProxy.GetUserAsync(userId: User.Identity.GetUserId());
+                if (user == null)
+                {
+                    ModelState.AddModelError(string.Empty, "Unable to Load User.");
+                    return View();
+                }
 
+                var result = await _userManagementProxy.AddPasswordAsync(user, model.NewPassword);
 
+                if (!result.Succeeded)
+                {
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError(string.Empty, error.Description);
+                    }
+                    return View();
+                }
+
+                await _userManagementProxy.RefreshSignInAsync(user);
+
+                return RedirectToAction("AddPasswordConfirmation", "Account");
+            }
+
+            return View();
+        }
+        [Authorize]
+        [HttpGet]
+        public IActionResult AddPasswordConfirmation()
+        {
+            return View();
+        }
 
         [HttpPost]
         [AllowAnonymous]
@@ -398,7 +459,6 @@ namespace TaskManagementSystem.Controllers
                     {
                         Console.WriteLine("User not found, creating new user");
 
-                        // Tách tên người dùng từ địa chỉ email
                         var userName = email.Split('@')[0];
                         Console.WriteLine($"Username: {userName}");
 
@@ -408,21 +468,19 @@ namespace TaskManagementSystem.Controllers
                             Email = email,
                             FullName = info.Principal.FindFirstValue(ClaimTypes.GivenName),
                         };
-                        var createResult = await _userManagementProxy.RegisterUserAsync(user, "P@ssword123"); // Thay thế "defaultPassword" bằng mật khẩu phù hợp
-                        Console.WriteLine($"Create user result: {createResult.Succeeded}");
-
+                        var createResult = await _userManagementProxy.RegisterUserAsync(user);
                         if (!createResult.Succeeded)
                         {
                             foreach (var error in createResult.Errors)
                             {
-                                Console.WriteLine($"Create user error: {error.Description}");
                                 ModelState.AddModelError(string.Empty, error.Description);
                             }
                             return View("Login", loginViewModel);
                         }
+                    
 
-                        // Thêm vai trò mặc định "employee" cho người dùng mới
-                        var addToRoleResult = await _userManagementProxy.AddToRolesAsync(user, new List<string> { "employee" });
+
+                    var addToRoleResult = await _userManagementProxy.AddToRolesAsync(user, new List<string> { "employee" });
                         Console.WriteLine($"Add to role result: {addToRoleResult.Succeeded}");
 
                         if (!addToRoleResult.Succeeded)
@@ -447,6 +505,7 @@ namespace TaskManagementSystem.Controllers
                 return View("Error");
             }
         }
+
 
 
         [Authorize]
@@ -505,6 +564,11 @@ namespace TaskManagementSystem.Controllers
 
         [HttpGet]
         public IActionResult AccessDenied()
+        {
+            return View();
+        }
+        //Lockout User for Admin
+        public IActionResult Lockout()
         {
             return View();
         }

@@ -20,7 +20,9 @@
             <th>Email</th>
             <th>Confirmed</th>
             <th>Roles</th>
-            <th>Action</th>
+            <th>Lock Status</th>
+            <th>Actions</th>
+            <th>Block User</th>
         </tr>
     </thead>
     <tbody>
@@ -32,9 +34,38 @@
                 <td>@user.Comfirmed</td>
                 <td>@string.Join(", ", user.Roles)</td>
                 <td>
+                    @if (user.LockoutEnd > DateTimeOffset.UtcNow)
+                    {
+                        <i class="fas fa-lock" style="color:red;"></i> <span style="color: red;">Locked</span>
+                    }
+                    else
+                    {
+                        <i class="fas fa-unlock" style="color:green;"></i> <span style="color: green;">Unlocked</span>
+                    }
+                </td>
+                <td>
                     <a asp-controller="Admin" asp-action="EditRoles" asp-route-userId="@user.UserId">Edit Roles</a>
                 </td>
+                @if (User.IsInRole("admin"))
+                {
+                    <td class="d-flex justify-content-center">
+                        <form method="post" asp-action="@(user.LockoutEnd > DateTimeOffset.UtcNow ? "UnlockUser" : "LockUser")" asp-route-userId="@user.UserId">
+                            <button type="submit" class="btn btn-sm btn-@(user.LockoutEnd > DateTimeOffset.UtcNow ? "success" : "danger")">
+                                @if (user.LockoutEnd > DateTimeOffset.UtcNow)
+                                {
+                                    <i class="fas fa-unlock"></i>
+                                }
+                                else
+                                {
+                                    <i class="fas fa-lock"></i>
+                                }
+                            </button>
+                        </form>
+                    </td>
+                }
+
             </tr>
         }
     </tbody>
 </table>
+

@@ -1,6 +1,7 @@
 {
   "format": 1,
   "restore": {
+<<<<<<< HEAD
     "/Users/vinhpham/Downloads/TaskManagementSystem/TaskManagementSystem.csproj": {}
   },
   "projects": {
@@ -15,12 +16,33 @@
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/vinhpham/.nuget/NuGet/NuGet.Config"
+=======
+    "D:\\Sa2\\Hihi\\TaskManagementSystem.csproj": {}
+  },
+  "projects": {
+    "D:\\Sa2\\Hihi\\TaskManagementSystem.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Sa2\\Hihi\\TaskManagementSystem.csproj",
+        "projectName": "TaskManagementSystem",
+        "projectPath": "D:\\Sa2\\Hihi\\TaskManagementSystem.csproj",
+        "packagesPath": "C:\\Users\\vuobg\\.nuget\\packages\\",
+        "outputPath": "D:\\Sa2\\Hihi\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\vuobg\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+>>>>>>> 8755f2352e14f2dc1668c2abbc4778aaabe771f5
         ],
         "originalTargetFrameworks": [
           "net7.0"
         ],
         "sources": {
+<<<<<<< HEAD
           "/usr/local/share/dotnet/library-packs": {},
+=======
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+>>>>>>> 8755f2352e14f2dc1668c2abbc4778aaabe771f5
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -33,11 +55,6 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -108,7 +125,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.203/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }

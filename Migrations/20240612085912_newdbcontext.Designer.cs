@@ -12,7 +12,7 @@ using TaskManagementSystem.Data;
 namespace TaskManagementSystem.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240611134516_newdbcontext")]
+    [Migration("20240612085912_newdbcontext")]
     partial class newdbcontext
     {
         /// <inheritdoc />

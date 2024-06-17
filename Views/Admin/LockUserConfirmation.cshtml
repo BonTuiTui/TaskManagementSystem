@@ -1,0 +1,10 @@
+﻿@* Views/Account/LockUserConfirmation.cshtml *@
+@model TaskManagementSystem.ViewModels.UsersViewModel
+
+<h2>Lock User</h2>
+<p>Are you sure you want to lock the user <strong>@Model.UserName (@Model.Email)</strong>?</p>
+
+<form method="post" asp-action="LockUserConfirmed" asp-route-userId="@Model.UserId">
+    <button type="submit" class="btn btn-danger">Lock</button>
+    <a asp-action="ManageUsers" class="btn btn-secondary">Cancel</a>
+</form>
