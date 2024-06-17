@@ -51,3 +51,16 @@ body {
   border-top: none !important; 
   padding: 0.5rem 1rem;
 }
+.task-details {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+.task-details label {
+    width: 120px; 
+    font-weight: bold;
+}
+.task-details span {
+    display: inline-block; 
+}
