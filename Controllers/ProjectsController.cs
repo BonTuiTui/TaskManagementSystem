@@ -4,8 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TaskManagementSystem.Data;
 using TaskManagementSystem.Models;
-using TaskManagementSystem.ProjectFactory;
-using TaskManagementSystem.Proxies;
+using TaskManagementSystem.Services.ProjectFactory;
+using TaskManagementSystem.Services.Proxies;
 using TaskManagementSystem.ViewModels;
 
 namespace TaskManagementSystem.Controllers

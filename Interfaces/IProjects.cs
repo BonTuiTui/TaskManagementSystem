@@ -1,4 +1,4 @@
-﻿namespace TaskManagementSystem.ProjectFactory
+﻿namespace TaskManagementSystem.Interfaces
 {
 	public interface IProjects
 	{

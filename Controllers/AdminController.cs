@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TaskManagementSystem.ViewModels;
-using TaskManagementSystem.Proxies;
+using TaskManagementSystem.Services.Proxies;
 using System.Linq;
 using Microsoft.AspNetCore.Identity;
 

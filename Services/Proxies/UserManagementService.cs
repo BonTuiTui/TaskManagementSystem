@@ -3,8 +3,9 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using TaskManagementSystem.Areas.Identity.Data;
+using TaskManagementSystem.Interfaces;
 
-namespace TaskManagementSystem.Services
+namespace TaskManagementSystem.Services.Proxies
 {
     public class UserManagementService : IUserManagementService
     {

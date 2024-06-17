@@ -37,7 +37,7 @@ namespace TaskManagementSystem.Controllers
 
             if (ModelState.IsValid)
             {
-                taskComment.CreateAt = DateTime.UtcNow;
+                taskComment.CreateAt = DateTime.Now;
                 _context.TaskComments.Add(taskComment);
                 await _context.SaveChangesAsync();
                 Console.WriteLine("Task comment saved");

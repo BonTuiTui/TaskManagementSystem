@@ -1,5 +1,7 @@
 ﻿using System;
-namespace TaskManagementSystem.Observer
+using TaskManagementSystem.Interfaces;
+
+namespace TaskManagementSystem.Services.Observer
 {
 	public class TaskNotifier: ISubject
 	{

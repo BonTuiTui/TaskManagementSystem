@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using TaskManagementSystem.Areas.Identity.Data;
 
-namespace TaskManagementSystem.Services
+namespace TaskManagementSystem.Interfaces
 {
     public interface IUserManagementService
     {

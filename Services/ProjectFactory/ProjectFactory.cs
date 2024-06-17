@@ -1,6 +1,7 @@
-﻿using TaskManagementSystem.Models;
+﻿using TaskManagementSystem.Interfaces;
+using TaskManagementSystem.Models;
 
-namespace TaskManagementSystem.ProjectFactory
+namespace TaskManagementSystem.Services.ProjectFactory
 {
 	public class ProjectFactory : IProjectFactory
     {
@@ -8,7 +9,6 @@ namespace TaskManagementSystem.ProjectFactory
 		{
 
 		}
-
 
         IProjects IProjectFactory.createuser(string User_id, string Name, string Description)
         {

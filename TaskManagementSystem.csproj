@@ -13,7 +13,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="7.0.19" />
     <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.18" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.18" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.19" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.18" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.18">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -39,6 +39,9 @@
     <None Remove="Migrations\" />
     <None Remove="Interfaces\" />
     <None Remove="Hubs\" />
+    <None Remove="Services\Proxies\" />
+    <None Remove="Services\Observer\" />
+    <None Remove="Services\ProjectFactory\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\" />
@@ -50,5 +53,8 @@
     <Folder Include="Views\Shared\Components\Projects\" />
     <Folder Include="ViewComponents\" />
     <Folder Include="Hubs\" />
+    <Folder Include="Services\Proxies\" />
+    <Folder Include="Services\Observer\" />
+    <Folder Include="Services\ProjectFactory\" />
   </ItemGroup>
 </Project>

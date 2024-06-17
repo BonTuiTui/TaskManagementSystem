@@ -1,5 +1,6 @@
-﻿using TaskManagementSystem.Models;
-namespace TaskManagementSystem.ProjectFactory
+﻿using TaskManagementSystem.Services.ProjectFactory;
+
+namespace TaskManagementSystem.Interfaces
 {
 	public interface IProjectFactory
 	{

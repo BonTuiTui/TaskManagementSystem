@@ -1,14 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TaskManagementSystem.Data;
-using TaskManagementSystem.Proxies;
 using TaskManagementSystem.ViewModels;
 using Task = TaskManagementSystem.Models.Task;
 using TaskManagementSystem.Areas.Identity.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
 using TaskManagementSystem.Hubs;
-using TaskManagementSystem.Observer;
+using TaskManagementSystem.Services.Observer;
+using TaskManagementSystem.Models;
+using TaskManagementSystem.Services.Proxies;
 
 namespace TaskManagementSystem.Controllers
 {
@@ -40,7 +41,9 @@ namespace TaskManagementSystem.Controllers
                     t.Status,
                     AssignedToId = t.AssignedTo, 
                     t.DueDate,
-                    t.UpdateAt
+                    t.UpdateAt,
+                    AssignedUser = t.AssignedUser.UserName,
+                    currentUsername = _userManagementProxy.GetCurrentUserAsync().Result.UserName
                 })
                 .FirstOrDefaultAsync();
 
@@ -50,6 +53,39 @@ namespace TaskManagementSystem.Controllers
             }
 
             return Json(task);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> AdvancedSearchTasks(string title, string status, string assignee, DateTime? dueDate)
+        {
+            var query = _dbContext.Task.AsQueryable();
+
+            if (!string.IsNullOrEmpty(title))
+            {
+                query = query.Where(t => t.Title.Contains(title));
+            }
+            if (!string.IsNullOrEmpty(status))
+            {
+                query = query.Where(t => t.Status == status);
+            }
+            if (!string.IsNullOrEmpty(assignee))
+            {
+                query = query.Where(t => t.AssignedUser.UserName.Contains(assignee));
+            }
+            if (dueDate.HasValue)
+            {
+                query = query.Where(t => t.DueDate.Date == dueDate.Value.Date);
+            }
+
+            var tasks = await query.Select(t => new
+            {
+                t.Task_id,
+                t.Title,
+                t.Description,
+                t.Project_Id // Assuming ProjectId is part of the Task entity
+            }).ToListAsync();
+
+            return Json(tasks);
         }
 
         [HttpPost]
@@ -149,9 +185,26 @@ namespace TaskManagementSystem.Controllers
         public IActionResult UpdateStatus([FromBody] UpdateStatusModel model)
         {
             var task = _dbContext.Task.Find(model.TaskId);
+            var project = _dbContext.Projects.SingleOrDefault(p => p.Project_id == task.Project_Id);
+            var message = $"The task {task.Title} has been changed status into {task.Status}";
+            var notification = new Notification
+            {
+                User_id = task.AssignedTo,
+                Notification_text = message,
+                CreateAt = DateTime.Now,
+                IsRead = false
+            };
+
             if (task == null)
             {
                 return NotFound();
+            }
+            else
+
+            {
+                _hubContext.Clients.User(project.User_id).SendAsync("ReceiveNotification", message);
+                _dbContext.Notifications.Add(notification);
+                //_dbContext.SaveChanges();
             }
 
             task.Status = model.Status;
@@ -159,13 +212,6 @@ namespace TaskManagementSystem.Controllers
             _dbContext.SaveChanges();
 
             return Ok();
-        }
-
-        // Lớp model để cập nhật trạng thái của một task
-        public class UpdateStatusModel
-        {
-            public int TaskId { get; set; }
-            public string Status { get; set; }
         }
     }
 }

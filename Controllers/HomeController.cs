@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using TaskManagementSystem.Proxies;
+using TaskManagementSystem.Services.Proxies;
 
 namespace TaskManagementSystem.Controllers;
 
