@@ -49,6 +49,10 @@
       "PackagePath": "staticwebassets/js/notifications.js"
     },
     {
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/js/search-tasks.js",
+      "PackagePath": "staticwebassets/js/search-tasks.js"
+    },
+    {
       "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/js/sidebar.js",
       "PackagePath": "staticwebassets/js/sidebar.js"
     },
@@ -69,8 +73,8 @@
       "PackagePath": "staticwebassets/js/task-add-edit-modal.js"
     },
     {
-      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/js/task-comments.js",
-      "PackagePath": "staticwebassets/js/task-comments.js"
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/js/task-details.js",
+      "PackagePath": "staticwebassets/js/task-details.js"
     },
     {
       "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/js/view-members.js",

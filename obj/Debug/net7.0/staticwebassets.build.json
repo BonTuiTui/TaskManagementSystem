@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "PUZxP9/GSeOr4942aO50slSL1XDdX5R3a0zibaY4QgE=",
+  "Hash": "j26N0rXgnr04qT7VmCiEQd2mFNHakIGwzATgNsUATeQ=",
   "Source": "TaskManagementSystem",
   "BasePath": "_content/TaskManagementSystem",
   "Mode": "Default",
@@ -238,6 +238,23 @@
       "OriginalItemSpec": "wwwroot/js/notifications.js"
     },
     {
+      "Identity": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/js/search-tasks.js",
+      "SourceId": "TaskManagementSystem",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/",
+      "BasePath": "_content/TaskManagementSystem",
+      "RelativePath": "js/search-tasks.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/js/search-tasks.js"
+    },
+    {
       "Identity": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/js/sidebar.js",
       "SourceId": "TaskManagementSystem",
       "SourceType": "Discovered",
@@ -323,12 +340,12 @@
       "OriginalItemSpec": "wwwroot/js/task-add-edit-modal.js"
     },
     {
-      "Identity": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/js/task-comments.js",
+      "Identity": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/js/task-details.js",
       "SourceId": "TaskManagementSystem",
       "SourceType": "Discovered",
       "ContentRoot": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/",
       "BasePath": "_content/TaskManagementSystem",
-      "RelativePath": "js/task-comments.js",
+      "RelativePath": "js/task-details.js",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -337,7 +354,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/js/task-comments.js"
+      "OriginalItemSpec": "wwwroot/js/task-details.js"
     },
     {
       "Identity": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/js/view-members.js",

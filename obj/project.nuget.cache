@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "vRcJpiu1CcosT2fYuvfirWVXPszHmUZyU31+ttAhxezB9Sp8ar2QPQbD6i9CthhMO029DraXlGrRfAi0JKAiww==",
+  "dgSpecHash": "7OxZ2r/QhGFZ8Jmp7tNGctt3ADupoyNPN9PUdlgWmgny9IbfVOs24Nk0qHK3drHgXTeixkIpuemIiUUYprnDUQ==",
   "success": true,
   "projectFilePath": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem.csproj",
   "expectedPackageFiles": [
@@ -47,9 +47,9 @@
     "/Users/macs/.nuget/packages/microsoft.csharp/4.5.0/microsoft.csharp.4.5.0.nupkg.sha512",
     "/Users/macs/.nuget/packages/microsoft.data.sqlclient/5.1.5/microsoft.data.sqlclient.5.1.5.nupkg.sha512",
     "/Users/macs/.nuget/packages/microsoft.data.sqlclient.sni.runtime/5.1.1/microsoft.data.sqlclient.sni.runtime.5.1.1.nupkg.sha512",
-    "/Users/macs/.nuget/packages/microsoft.entityframeworkcore/7.0.18/microsoft.entityframeworkcore.7.0.18.nupkg.sha512",
-    "/Users/macs/.nuget/packages/microsoft.entityframeworkcore.abstractions/7.0.18/microsoft.entityframeworkcore.abstractions.7.0.18.nupkg.sha512",
-    "/Users/macs/.nuget/packages/microsoft.entityframeworkcore.analyzers/7.0.18/microsoft.entityframeworkcore.analyzers.7.0.18.nupkg.sha512",
+    "/Users/macs/.nuget/packages/microsoft.entityframeworkcore/7.0.19/microsoft.entityframeworkcore.7.0.19.nupkg.sha512",
+    "/Users/macs/.nuget/packages/microsoft.entityframeworkcore.abstractions/7.0.19/microsoft.entityframeworkcore.abstractions.7.0.19.nupkg.sha512",
+    "/Users/macs/.nuget/packages/microsoft.entityframeworkcore.analyzers/7.0.19/microsoft.entityframeworkcore.analyzers.7.0.19.nupkg.sha512",
     "/Users/macs/.nuget/packages/microsoft.entityframeworkcore.design/7.0.18/microsoft.entityframeworkcore.design.7.0.18.nupkg.sha512",
     "/Users/macs/.nuget/packages/microsoft.entityframeworkcore.relational/7.0.18/microsoft.entityframeworkcore.relational.7.0.18.nupkg.sha512",
     "/Users/macs/.nuget/packages/microsoft.entityframeworkcore.sqlserver/7.0.18/microsoft.entityframeworkcore.sqlserver.7.0.18.nupkg.sha512",
@@ -122,10 +122,7 @@
     "/Users/macs/.nuget/packages/system.threading.channels/8.0.0/system.threading.channels.8.0.0.nupkg.sha512",
     "/Users/macs/.nuget/packages/system.threading.tasks/4.3.0/system.threading.tasks.4.3.0.nupkg.sha512",
     "/Users/macs/.nuget/packages/system.threading.tasks.extensions/4.5.4/system.threading.tasks.extensions.4.5.4.nupkg.sha512",
-    "/Users/macs/.nuget/packages/system.windows.extensions/6.0.0/system.windows.extensions.6.0.0.nupkg.sha512",
-    "/Users/macs/.nuget/packages/microsoft.netcore.app.ref/7.0.17/microsoft.netcore.app.ref.7.0.17.nupkg.sha512",
-    "/Users/macs/.nuget/packages/microsoft.aspnetcore.app.ref/7.0.17/microsoft.aspnetcore.app.ref.7.0.17.nupkg.sha512",
-    "/Users/macs/.nuget/packages/microsoft.netcore.app.host.osx-arm64/7.0.17/microsoft.netcore.app.host.osx-arm64.7.0.17.nupkg.sha512"
+    "/Users/macs/.nuget/packages/system.windows.extensions/6.0.0/system.windows.extensions.6.0.0.nupkg.sha512"
   ],
   "logs": [
     {
