@@ -1,5 +1,11 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
+using Microsoft.EntityFrameworkCore;
+using TaskManagementSystem.Data;
+using TaskManagementSystem.Hubs;
+using TaskManagementSystem.Models;
 
 namespace TaskManagementSystem.Controllers
 {
@@ -7,10 +13,14 @@ namespace TaskManagementSystem.Controllers
     {
         private readonly HttpClient _httpClient;
         private readonly string api_gateway = "http://localhost:5250/api/members";
+        private readonly IHubContext<NotificationHub> _hubContext;
+        private readonly ApplicationDbContext _dbContext;
 
-        public MembersController(HttpClient httpClient) 
+        public MembersController(HttpClient httpClient, IHubContext<NotificationHub> hubContext, ApplicationDbContext dbContext) 
         {
             _httpClient = httpClient;
+            _hubContext = hubContext;
+            _dbContext = dbContext;
         }
 
         [HttpGet]
@@ -35,17 +45,51 @@ namespace TaskManagementSystem.Controllers
         public async Task<IActionResult> AddUserToProject(int projectId, string userName)
         {
             var response = await _httpClient.PostAsync($"{api_gateway}?projectId={projectId}&userName={userName}", null);
+            var user = await _dbContext.Users.SingleOrDefaultAsync(u => u.UserName == userName);
+            var project = await _dbContext.Projects.SingleOrDefaultAsync(p => p.Project_id == projectId);
+
+            if (user != null)
+            {
+                Console.WriteLine("HAHHA"+user);
+
+            } else
+            {
+                Console.WriteLine("Failed");
+            }
 
             if (!response.IsSuccessStatusCode)
             {
                 var errorContent = await response.Content.ReadAsStringAsync();
                 return StatusCode((int)response.StatusCode, errorContent);
             }
+            var message = $"Bạn đã được thêm  project <a href='/Projects/Details/{project.Project_id}' target='_blank'>View Project</a> {project.Name}";
+            var notification = new Notification
+            {
+                User_id = user.Id,
+                Notification_text = message,
+                CreateAt = DateTime.Now,
+                IsRead = false
+            };
+            if (userName != null)
+            {
+                await _hubContext.Clients.User(user.Id).SendAsync("ReceiveNotification", message);
+                _dbContext.Notifications.Add(notification);
+                await _dbContext.SaveChangesAsync();
+                 
+            } else
+            {
+                Console.WriteLine("Failed");
+            }
+
 
             var data = await response.Content.ReadFromJsonAsync<dynamic>();
 
             return Ok(data);
         }
+
+
+
+       
 
 
 

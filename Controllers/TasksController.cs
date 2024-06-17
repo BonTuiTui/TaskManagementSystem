@@ -185,9 +185,26 @@ namespace TaskManagementSystem.Controllers
         public IActionResult UpdateStatus([FromBody] UpdateStatusModel model)
         {
             var task = _dbContext.Task.Find(model.TaskId);
+            var project = _dbContext.Projects.SingleOrDefault(p => p.Project_id == task.Project_Id);
+            var message = $"The task {task.Title} has been changed status into {task.Status}";
+            var notification = new Notification
+            {
+                User_id = task.AssignedTo,
+                Notification_text = message,
+                CreateAt = DateTime.Now,
+                IsRead = false
+            };
+
             if (task == null)
             {
                 return NotFound();
+            }
+            else
+
+            {
+                _hubContext.Clients.User(project.User_id).SendAsync("ReceiveNotification", message);
+                _dbContext.Notifications.Add(notification);
+                //_dbContext.SaveChanges();
             }
 
             task.Status = model.Status;
