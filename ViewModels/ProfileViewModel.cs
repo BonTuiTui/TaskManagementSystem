@@ -14,5 +14,7 @@ namespace TaskManagementSystem.ViewModels
 
         [Display(Name = "Full Name")]
         public string FullName { get; set; }
+        public AddPasswordViewModel AddPassword { get; set; }
+
     }
 }

@@ -2,6 +2,7 @@
 using TaskManagementSystem.ViewModels;
 using TaskManagementSystem.Proxies;
 using System.Linq;
+using Microsoft.AspNetCore.Identity;
 
 namespace TaskManagementSystem.Controllers
 {
@@ -28,7 +29,8 @@ namespace TaskManagementSystem.Controllers
                     UserName = user.UserName,
                     Email = user.Email,
                     Comfirmed = user.EmailConfirmed,
-                    Roles = userRoles.ToList()
+                    Roles = userRoles.ToList(),
+                    LockoutEnd = user.LockoutEnd
                 };
                 userViewModels.Add(userViewModel);
             }
@@ -37,8 +39,8 @@ namespace TaskManagementSystem.Controllers
             {
                 searchTerm = searchTerm.ToLower();
                 userViewModels = userViewModels
-                    .Where(u => u.UserName.ToLower().Contains(searchTerm) || u.Email.ToLower().Contains(searchTerm))
-                    .ToList();
+                  .Where(u => u.UserName.ToLower().Contains(searchTerm) || u.Email.ToLower().Contains(searchTerm))
+                  .ToList();
             }
 
             ViewBag.SearchTerm = searchTerm;
@@ -61,7 +63,7 @@ namespace TaskManagementSystem.Controllers
             {
                 UserId = user.Id,
                 UserName = user.UserName,
-                Roles = (List<string>)allRoles,
+                Roles = allRoles.ToList(),
                 UserRoles = userRoles.ToList()
             };
 
@@ -90,6 +92,72 @@ namespace TaskManagementSystem.Controllers
             if (!result.Succeeded)
             {
                 // Handle error
+            }
+
+            return RedirectToAction("ManageUsers");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> LockUser(string userId)
+        {
+            var user = await _userManagementProxy.GetUserAsync(userId);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            var model = new UsersViewModel
+            {
+                UserId = user.Id,
+                UserName = user.UserName,
+                Email = user.Email
+            };
+
+            return View("LockUserConfirmation", model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> LockUserConfirmed(string userId)
+        {
+            var user = await _userManagementProxy.GetUserAsync(userId);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            var result = await _userManagementProxy.LockUserAsync(userId);
+            if (result.Succeeded)
+            {
+                TempData["Message"] = "User has been successfully locked.";
+            }
+            else
+            {
+                TempData["Error"] = "An error occurred while locking the user.";
+            }
+
+            return RedirectToAction("ManageUsers");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> UnlockUser(string userId)
+        {
+            var user = await _userManagementProxy.GetUserAsync(userId);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            var result = await _userManagementProxy.UnlockUserAsync(userId);
+            if (result.Succeeded)
+            {
+                TempData["SuccessMessage"] = "User has been successfully unlocked.";
+            }
+            else
+            {
+                TempData["ErrorMessage"] = "An error occurred while unlocking the user.";
             }
 
             return RedirectToAction("ManageUsers");

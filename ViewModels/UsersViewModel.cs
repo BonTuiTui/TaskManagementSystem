@@ -16,5 +16,9 @@ namespace TaskManagementSystem.ViewModels
 
         [Display(Name = "Roles")]
         public IList<string> Roles { get; set; }
+        public bool? LockoutEnabled { get; set; }
+        public DateTimeOffset? LockoutEnd { get; set; }
+
+
     }
 }

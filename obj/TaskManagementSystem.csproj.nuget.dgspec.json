@@ -1,25 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem.csproj": {}
+    "D:\\Sa2\\Hihi\\TaskManagementSystem.csproj": {}
   },
   "projects": {
-    "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem.csproj": {
+    "D:\\Sa2\\Hihi\\TaskManagementSystem.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem.csproj",
+        "projectUniqueName": "D:\\Sa2\\Hihi\\TaskManagementSystem.csproj",
         "projectName": "TaskManagementSystem",
-        "projectPath": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/TaskManagementSystem.csproj",
-        "packagesPath": "/Users/macs/.nuget/packages/",
-        "outputPath": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/obj/",
+        "projectPath": "D:\\Sa2\\Hihi\\TaskManagementSystem.csproj",
+        "packagesPath": "C:\\Users\\vuobg\\.nuget\\packages\\",
+        "outputPath": "D:\\Sa2\\Hihi\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/macs/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\vuobg\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -32,11 +34,6 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -58,6 +55,14 @@
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
               "version": "[7.0.18, )"
+            },
+            "Microsoft.AspNetCore.SignalR": {
+              "target": "Package",
+              "version": "[1.1.0, )"
+            },
+            "Microsoft.AspNetCore.SignalR.Client": {
+              "target": "Package",
+              "version": "[8.0.6, )"
             },
             "Microsoft.CodeAnalysis.Analyzers": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
@@ -91,20 +96,6 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[7.0.17, 7.0.17]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Host.osx-arm64",
-              "version": "[7.0.17, 7.0.17]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Ref",
-              "version": "[7.0.17, 7.0.17]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -113,7 +104,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.203/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }

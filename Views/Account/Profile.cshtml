@@ -1,9 +1,15 @@
-﻿@{
-    ViewBag.Title = "Profile Page";
+﻿@model TaskManagementSystem.ViewModels.ProfileViewModel
+@using TaskManagementSystem.Areas.Identity.Data
+@using TaskManagementSystem.Proxies
+@inject UserManagementProxy _realService
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<ApplicationUser> _userManager
+
+@{
+    var user = await _userManager.GetUserAsync(User);
+    var hasPassword = await _realService.HasPasswordAsync(user);
+
 }
-
-@model TaskManagementSystem.ViewModels.ProfileViewModel
-
 <h1>User Profile</h1>
 
 <form asp-action="Profile" method="post">
@@ -27,6 +33,33 @@
     <button type="submit" class="btn btn-primary">Save</button>
 </form>
 
+<div class="form-group">
+    <a class="btn btn-primary" asp-controller="Account"
+       asp-action="ResendConfirmationEmail">Confirm Email</a>
+</div>
+
+
+
+@if (User.Identity.IsAuthenticated && !hasPassword)
+{
+    <div class="alert alert-warning" role="alert">
+        You are using an external login account that hasn't registered a password yet.
+        Please set your password to continue using our services.
+    </div>
+
+    <h2>Set Password</h2>
+    <form asp-action="AddPassword" method="post">
+        <div class="form-group">
+            <label for="newPassword">New Password:</label>
+            <input type="password" id="newPassword" name="NewPassword" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="confirmPassword">Confirm New Password:</label>
+            <input type="password" id="confirmPassword" name="ConfirmPassword" class="form-control" />
+        </div>
+        <button type="submit" class="btn btn-primary">Set Password</button>
+    </form>
+}
 
 @if (!ViewData.ModelState.IsValid)
 {
