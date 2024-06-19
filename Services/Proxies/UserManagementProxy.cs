@@ -259,5 +259,10 @@ namespace TaskManagementSystem.Services.Proxies
         {
             return await _realService.UnlockUserAsync(userId);
         }
+
+        public async Task SignOutAsync()
+        {
+            await _realService.SignOutUserAsync();
+        }
     }
 }

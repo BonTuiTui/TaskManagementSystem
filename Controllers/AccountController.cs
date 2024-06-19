@@ -455,6 +455,11 @@ namespace TaskManagementSystem.Controllers
                 if (email != null)
                 {
                     var user = await _userManagementProxy.GetUserByEmailAsync(email);
+                    if (user != null && user.LockoutEnd > DateTime.Now)
+                    {
+                        await _userManagementProxy.SignOutAsync();
+                        return RedirectToAction("Lockout");
+                    }
                     if (user == null)
                     {
                         Console.WriteLine("User not found, creating new user");
