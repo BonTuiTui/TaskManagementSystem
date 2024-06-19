@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using TaskManagementSystem.Data;
+using TaskManagementSystem.Hubs;
+using TaskManagementSystem.Interfaces;
 using TaskManagementSystem.Models;
 
 namespace TaskManagementSystem.Controllers
@@ -8,10 +11,13 @@ namespace TaskManagementSystem.Controllers
     public class TaskCommentsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IHubContext<NotificationHub> _hubContext;
 
-        public TaskCommentsController(ApplicationDbContext context)
+
+        public TaskCommentsController(ApplicationDbContext context, IHubContext<NotificationHub> hubContext)
         {
             _context = context;
+            _hubContext = hubContext;
         }
 
         [HttpGet]
@@ -58,19 +64,23 @@ namespace TaskManagementSystem.Controllers
                 var notifications = new List<Notification>();
                 var userName = User.Identity.Name;
                 var userRole = User.IsInRole("admin") ? "Admin" : User.IsInRole("manager") ? "Manager" : "Employee";
+                var project = await _context.Projects.SingleOrDefaultAsync(p => p.Project_id == task.Project_Id);
 
                 if (User.IsInRole("employee"))
                 {
                     Console.WriteLine("User role detected");
                     var managerId = task.Project?.User_id;
+                    var message = $"New comment on your task (Task ID: {task.Task_id} - <a href='/Projects/Details/{task.Project_Id}?taskId={task.Task_id}' target='_blank'>View Task</a>) from {userName} ({userRole}): {taskComment.Comment_text}";
                     if (managerId != null)
                     {
                         notifications.Add(new Notification
                         {
+
                             User_id = managerId,
-                            Notification_text = $"New comment on your task (Task ID: {task.Task_id} - <a href='/Projects/Details/{task.Project_Id}?taskId={task.Task_id}' target='_blank'>View Task</a>) from {userName} ({userRole}): {taskComment.Comment_text}",
+                            Notification_text = message,
                             CreateAt = DateTime.UtcNow
                         });
+                        _hubContext.Clients.User(project.User_id).SendAsync("ReceiveNotification", message);
                         Console.WriteLine($"Notification for manager {managerId} added");
                     }
                     else
@@ -82,15 +92,17 @@ namespace TaskManagementSystem.Controllers
                 {
                     Console.WriteLine("Manager role detected");
                     var userId = task.AssignedUser?.Id;
+                    var message = $"New comment on your task (Task ID: {task.Task_id} - <a href='/Projects/Details/{task.Project_Id}?taskId={task.Task_id}' target='_blank'>View Task</a>) from {userName} ({userRole}): {taskComment.Comment_text}";
                     if (userId != null)
                     {
                         notifications.Add(new Notification
                         {
                             User_id = userId,
-                            Notification_text = $"New comment on your task (Task ID: {task.Task_id} - <a href='/Projects/Details/{task.Project_Id}?taskId={task.Task_id}' target='_blank'>View Task</a>) from {userName} ({userRole}): {taskComment.Comment_text}",
+                            Notification_text = message,
                             CreateAt = DateTime.UtcNow
                         });
                         Console.WriteLine($"Notification for user {userId} added");
+                        await _hubContext.Clients.User(userId).SendAsync("ReceiveNotification", message);
                     }
                     else
                     {
@@ -102,16 +114,19 @@ namespace TaskManagementSystem.Controllers
                     Console.WriteLine("Admin role detected");
                     var managerId = task.Project?.User_id;
                     var userId = task.AssignedUser?.Id;
+                    var message = $"New comment on your task (Task ID: {task.Task_id} - <a href='/Projects/Details/{task.Project_Id}?taskId={task.Task_id}' target='_blank'>View Task</a>) from {userName} ({userRole}): {taskComment.Comment_text}";
 
                     if (managerId != null)
                     {
                         notifications.Add(new Notification
                         {
                             User_id = managerId,
-                            Notification_text = $"New comment on a task in your project (Task ID: {task.Task_id} - <a href='/Projects/Details/{task.Project_Id}?taskId={task.Task_id}' target='_blank'>View Task</a>) from {userName} ({userRole}): {taskComment.Comment_text}",
+                            Notification_text = message,
                             CreateAt = DateTime.UtcNow
-                        });
+                        }); ; ;
                         Console.WriteLine($"Notification for manager {managerId} added");
+                        await _hubContext.Clients.User(userId).SendAsync("ReceiveNotification", message);
+
                     }
                     else
                     {
