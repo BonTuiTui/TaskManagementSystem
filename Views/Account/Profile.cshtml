@@ -10,33 +10,34 @@
     var hasPassword = await _realService.HasPasswordAsync(user);
 
 }
-<h1>User Profile</h1>
+<h1 class="profile-header">User Profile</h1>
+<hr class="profile-divider" />
+<div class="profile-container">
+    
+    <form asp-action="Profile" method="post" class="form-custom">
+        <input type="hidden" asp-for="UserId" />
 
-<form asp-action="Profile" method="post">
-    <input type="hidden" asp-for="UserId" />
-
-    <div class="form-group">
-        <label asp-for="UserName"></label>
-        <input asp-for="UserName" class="form-control" />
-        <span asp-validation-for="UserName" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Email"></label>
-        <input asp-for="Email" class="form-control" />
-        <span asp-validation-for="Email" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="FullName"></label>
-        <input asp-for="FullName" class="form-control" />
-        <span asp-validation-for="FullName" class="text-danger"></span>
-    </div>
-    <button type="submit" class="btn btn-primary">Save</button>
-</form>
-
-<div class="form-group">
-    <a class="btn btn-primary" asp-controller="Account"
-       asp-action="ResendConfirmationEmail">Confirm Email</a>
+        <div class="form-group-profile">
+            <label asp-for="UserName" class="label-profile"></label>
+            <input asp-for="UserName" class="input-profile" />
+            <span asp-validation-for="UserName" class="error-profile"></span>
+        </div>
+        <div class="form-group-profile">
+            <label asp-for="Email" class="label-profile"></label>
+            <input asp-for="Email" class="input-profile" />
+            <span asp-validation-for="Email" class="error-profile"></span>
+        </div>
+        <div class="form-group-profile">
+            <label asp-for="FullName" class="label-profile"></label>
+            <input asp-for="FullName" class="input-profile" />
+            <span asp-validation-for="FullName" class="error-profile"></span>
+        </div>
+        <button type="submit" class="btn-profile">Save</button>
+        <a class="btn-profile" asp-controller="Account" asp-action="ResendConfirmationEmail">Confirm Email</a>
+    </form>
 </div>
+
+
 
 
 
@@ -63,15 +64,15 @@
 
 @if (!ViewData.ModelState.IsValid)
 {
-    <div class="alert alert-danger" role="alert">
-        <strong>Error:</strong> There was a problem with your profile save.
-        <ul>
-            @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
-            {
-                <li>@error.ErrorMessage</li>
-            }
-        </ul>
-    </div>
+<div class="alert-profile" role="alert">
+    <strong>Error:</strong> There was a problem with your profile save.
+    <ul class="alert-list-profile">
+        @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+        {
+        <li class="alert-item-profile">@error.ErrorMessage</li>
+        }
+    </ul>
+</div>
 }
 
 @section Scripts {

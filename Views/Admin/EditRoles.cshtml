@@ -3,23 +3,23 @@
 }
 
 @model TaskManagementSystem.ViewModels.EditUserRolesViewModel
+<h1 class="edit-roles-header">Edit Roles for @Model.UserName</h1>
 
-<h1>Edit Roles for @Model.UserName</h1>
-
-<form asp-action="EditRoles" method="post">
+<form asp-action="EditRoles" method="post" class="form-edit-roles">
     <input type="hidden" asp-for="UserId" />
-    <div class="form-group">
-        <label asp-for="UserName"></label>
-        <input asp-for="UserName" class="form-control" readonly />
+    <div class="form-group-edit-roles">
+        <label asp-for="UserName" class="label-edit-roles"></label>
+        <input asp-for="UserName" class="input-edit-roles" readonly />
     </div>
-    <div class="form-group">
-        <label asp-for="UserRoles">Roles</label>
+    <div class="form-group-edit-roles">
+        <label asp-for="UserRoles" class="label-edit-roles">Roles</label>
         @foreach (var role in Model.Roles)
         {
-            <div>
-                <input type="radio" name="UserRoles" value="@role" @(Model.UserRoles.Contains(role) ? "checked=\"checked\"" : "" ) /> @role
-            </div>
+        <div class="radio-group-edit-roles">
+            <input type="radio" name="UserRoles" value="@role" class="radio-edit-roles" @(Model.UserRoles.Contains(role) ? "checked=\"checked\"" : "" ) /> @role
+        </div>
         }
     </div>
-    <button type="submit" class="btn btn-primary">Save</button>
+    <button type="submit" class="btn-edit-roles">Save</button>
 </form>
+

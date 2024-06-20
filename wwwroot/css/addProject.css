@@ -1,0 +1,71 @@
+/* styles.css */
+
+/* Reset default margins and paddings */
+.add-custom-form,
+.add-custom-group {
+    margin: 0;
+    padding: 0;
+}
+
+/* Form header */
+.add-header {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Form divider */
+.add-divider {
+    border: none;
+    height: 1px;
+    background-color: #ccc;
+    margin-bottom: 20px;
+}
+
+/* Form label */
+.add-custom-label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+/* Form input */
+.add-custom-input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-bottom: 15px;
+}
+
+/* Form button */
+.add-custom-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.add-custom-button:hover {
+    background-color: #0056b3;
+}
+
+/* Optional: Form container */
+.add-custom-form {
+    max-width: 500px;
+    margin: auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}

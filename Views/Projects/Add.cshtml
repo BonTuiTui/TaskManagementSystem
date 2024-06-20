@@ -4,24 +4,26 @@
 }
 
 @model TaskManagementSystem.ViewModels.AddProjectViewModel
+<h1 class="add-header">Add Project</h1>
+<hr class="add-divider" />
 
-<h1>Add Project</h1>
-
-<form asp-action="Add" method="post">
+<form asp-action="Add" method="post" class="add-custom-form">
 
     <input type="hidden" asp-for="User_id" value="@userId" />
 
-    <div class="mt-3">
-        <label class="form-label">Name</label>
-        <input type="text" class="form-control" asp-for="Name" />
+    <div class="add-custom-group">
+        <label class="add-custom-label">Name</label>
+        <input type="text" class="add-custom-input" asp-for="Name" />
     </div>
 
-    <div class="mt-3">
-        <label class="form-label">Description</label>
-        <input type="text" class="form-control" asp-for="Description" />
+    <div class="add-custom-group">
+        <label class="add-custom-label">Description</label>
+        <input type="text" class="add-custom-input" asp-for="Description" />
     </div>
 
-    <div class="mt-3">
-        <button type="submit" class="btn btn-primary">Add Project</button>
+    <div class="add-custom-group">
+        <button type="submit" class="add-custom-button">Add Project</button>
     </div>
 </form>
+
+

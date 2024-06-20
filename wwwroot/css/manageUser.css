@@ -1,0 +1,97 @@
+/* Stylesheet: manage-user-custom.css */
+
+.manage-user-custom-header {
+    font-size: 2em;
+    margin-bottom: 1em;
+}
+
+.manage-user-custom-divider {
+    margin-bottom: 1.5em;
+}
+
+.manage-user-custom-form {
+    margin-bottom: 2em;
+}
+
+.manage-user-custom-input-group {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1em;
+}
+
+.manage-user-custom-input {
+    padding: 0.5em;
+    margin-right: 0.5em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 300px;
+}
+
+.manage-user-custom-button {
+    padding: 0.5em 1em;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.manage-user-custom-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1em;
+}
+
+.manage-user-custom-thead th {
+    background-color: #f8f9fa;
+    padding: 0.75em;
+    border: 1px solid #dee2e6;
+}
+
+.manage-user-custom-tbody td {
+    padding: 0.75em;
+    border: 1px solid #dee2e6;
+}
+
+.manage-user-custom-action-icon {
+    margin-right: 0.5em;
+}
+
+.manage-user-custom-locked {
+    color: red;
+}
+
+.manage-user-custom-unlocked {
+    color: green;
+}
+
+.manage-user-custom-edit-link {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.manage-user-custom-edit-link:hover {
+    text-decoration: underline;
+}
+
+.manage-user-custom-admin-actions {
+    display: flex;
+    justify-content: center;
+}
+
+.manage-user-custom-admin-button {
+    padding: 0.25em 0.5em;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.manage-user-custom-admin-button-success {
+    background-color: #28a745;
+    color: white;
+}
+
+.manage-user-custom-admin-button-danger {
+    background-color: #dc3545;
+    color: white;
+}

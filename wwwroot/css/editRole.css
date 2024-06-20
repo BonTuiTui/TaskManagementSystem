@@ -1,0 +1,58 @@
+.edit-roles-header {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.form-edit-roles {
+    width: 50%;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #FFFED380;
+}
+
+.form-group-edit-roles {
+    margin-bottom: 15px;
+}
+
+.label-edit-roles {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+}
+
+.input-edit-roles {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: #e9ecef;
+}
+
+.radio-group-edit-roles {
+    margin-bottom: 10px;
+}
+
+.radio-edit-roles {
+    margin-right: 10px;
+}
+
+.btn-edit-roles {
+    width: 100%;
+    padding: 10px 0;
+    border: none;
+    border-radius: 4px;
+    background-color: #FFF455;
+    color: black;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+.btn-edit-roles:hover {
+    background-color: #0056b3;
+}

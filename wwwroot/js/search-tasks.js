@@ -1,6 +1,6 @@
 ﻿$(document).ready(function () {
     var projectId = window.projectId;
-
+    console.log("Project Id: " + projectId);
     // Lấy danh sách thành viên của dự án
     $.ajax({
         url: '/Members/GetProjectMembers?projectId=' + projectId,

@@ -14,8 +14,20 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="~/css/addProject.css"/>
+    <link rel="stylesheet" href="~/css/projectDetail.css"/>
+    <link rel="stylesheet" href="~/css/manageUser.css"/>
+    <link rel="stylesheet" href="~/css/editRole.css"/>
+    <link rel="stylesheet" href="~/css/changePassword.css"/>
+    <link rel="stylesheet" href="~/css/detail.css"/>
+    <link rel="stylesheet" href="~/css/profile.css"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"></script>
 </head>
+<style>
+    html{
+
+    }
+</style>
 <body>
     <div class="d-flex">
         <div class="border-end border-light">
@@ -36,9 +48,9 @@ workspace</pre>
                 </form>
             </div>*@
             <div class="align-items-center">
-                <div class="align-items-center border-bottom">
+                <div class="align-items-center border-bottom ">
                     <div class="justify-content-between mb-3">
-                        <button class="h4 btn btn-toggle d-inline-flex align-items-center collapsed"
+                        <button class="ms-3 h4 btn btn-toggle d-inline-flex align-items-center collapsed"
                                 data-bs-toggle="collapse" data-bs-target="#projects-collapse" aria-expanded="false">
                             Projects
                         </button>
@@ -50,7 +62,7 @@ workspace</pre>
                     </div>
                 </div>
                 <div class="align-items-center mt-3">
-                    <button class="h4 btn btn-toggle d-inline-flex align-items-center collapsed"
+                    <button class="ms-3 h4 btn btn-toggle d-inline-flex align-items-center collapsed"
                             data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="true">
                         Account
                     </button>
@@ -102,7 +114,7 @@ workspace</pre>
         </div>
         <div class="flex-grow-1">
             <!-- Main content here -->
-            <main role="main" class="p-4">
+            <main role="main" class="p-4" style="padding:0;">
                 @RenderBody()
             </main>
         </div>

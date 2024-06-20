@@ -3,69 +3,67 @@
 }
 
 @model List<TaskManagementSystem.ViewModels.UsersViewModel>
+<h1 class="manage-user-custom-header">Manage Users</h1>
+<hr class="manage-user-custom-divider" />
 
-<h1>Manage Users</h1>
-
-<form method="get" asp-controller="Admin" asp-action="ManageUsers">
-    <div class="input-group mb-3">
-        <input type="text" class="form-control" placeholder="Search by username or email" aria-label="Search by username or email" aria-describedby="button-search" name="searchTerm" value="@ViewBag.SearchTerm">
-        <button class="btn btn-outline-secondary" type="submit" id="button-search">Search</button>
+<form method="get" asp-controller="Admin" asp-action="ManageUsers" class="manage-user-custom-form">
+    <div class="manage-user-custom-input-group">
+        <input type="text" class="manage-user-custom-input" placeholder="Search by username or email" aria-label="Search by username or email" aria-describedby="button-search" name="searchTerm" value="@ViewBag.SearchTerm">
+        <button class="manage-user-custom-button" type="submit" id="button-search">Search</button>
     </div>
 </form>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Username</th>
-            <th>Email</th>
-            <th>Confirmed</th>
-            <th>Roles</th>
-            <th>Lock Status</th>
-            <th>Actions</th>
-            <th>Block User</th>
-        </tr>
+<table class="manage-user-custom-table">
+    <thead class="manage-user-custom-thead">
+    <tr>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Confirmed</th>
+        <th>Roles</th>
+        <th>Status</th>
+        <th>Edit role</th>
+        <th>Action</th>
+    </tr>
     </thead>
-    <tbody>
-        @foreach (var user in Model)
+    <tbody class="manage-user-custom-tbody">
+    @foreach (var user in Model)
+    {
+    <tr>
+        <td>@user.UserName</td>
+        <td>@user.Email</td>
+        <td>@user.Comfirmed</td>
+        <td>@string.Join(", ", user.Roles)</td>
+        <td>
+            @if (user.LockoutEnd > DateTimeOffset.UtcNow)
+            {
+            <i class="fas fa-lock manage-user-custom-action-icon manage-user-custom-locked"></i> <span class="manage-user-custom-locked">Locked</span>
+            }
+            else
+            {
+            <i class="fas fa-unlock manage-user-custom-action-icon manage-user-custom-unlocked"></i> <span class="manage-user-custom-unlocked">Unlocked</span>
+            }
+        </td>
+        <td>
+            <a asp-controller="Admin" asp-action="EditRoles" asp-route-userId="@user.UserId" class="manage-user-custom-edit-link">Edit Roles</a>
+        </td>
+        @if (User.IsInRole("admin"))
         {
-            <tr>
-                <td>@user.UserName</td>
-                <td>@user.Email</td>
-                <td>@user.Comfirmed</td>
-                <td>@string.Join(", ", user.Roles)</td>
-                <td>
+        <td class="manage-user-custom-admin-actions">
+            <form method="post" asp-action="@(user.LockoutEnd > DateTimeOffset.UtcNow ? "UnlockUser" : "LockUser")" asp-route-userId="@user.UserId">
+                <button type="submit" class="manage-user-custom-admin-button manage-user-custom-admin-button-@(user.LockoutEnd > DateTimeOffset.UtcNow ? "success" : "danger")">
                     @if (user.LockoutEnd > DateTimeOffset.UtcNow)
                     {
-                        <i class="fas fa-lock" style="color:red;"></i> <span style="color: red;">Locked</span>
+                    <i class="fas fa-unlock"></i>
                     }
                     else
                     {
-                        <i class="fas fa-unlock" style="color:green;"></i> <span style="color: green;">Unlocked</span>
+                    <i class="fas fa-lock"></i>
                     }
-                </td>
-                <td>
-                    <a asp-controller="Admin" asp-action="EditRoles" asp-route-userId="@user.UserId">Edit Roles</a>
-                </td>
-                @if (User.IsInRole("admin"))
-                {
-                    <td class="d-flex justify-content-center">
-                        <form method="post" asp-action="@(user.LockoutEnd > DateTimeOffset.UtcNow ? "UnlockUser" : "LockUser")" asp-route-userId="@user.UserId">
-                            <button type="submit" class="btn btn-sm btn-@(user.LockoutEnd > DateTimeOffset.UtcNow ? "success" : "danger")">
-                                @if (user.LockoutEnd > DateTimeOffset.UtcNow)
-                                {
-                                    <i class="fas fa-unlock"></i>
-                                }
-                                else
-                                {
-                                    <i class="fas fa-lock"></i>
-                                }
-                            </button>
-                        </form>
-                    </td>
-                }
-
-            </tr>
+                </button>
+            </form>
+        </td>
         }
+    </tr>
+    }
     </tbody>
 </table>
-

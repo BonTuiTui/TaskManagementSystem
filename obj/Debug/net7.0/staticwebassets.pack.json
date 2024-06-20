@@ -9,12 +9,40 @@
       "PackagePath": "staticwebassets/.DS_Store"
     },
     {
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/Gotham Light Regular.otf",
+      "PackagePath": "staticwebassets/Gotham Light Regular.otf"
+    },
+    {
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/css/addProject.css",
+      "PackagePath": "staticwebassets/css/addProject.css"
+    },
+    {
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/css/changePassword.css",
+      "PackagePath": "staticwebassets/css/changePassword.css"
+    },
+    {
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/css/detail.css",
+      "PackagePath": "staticwebassets/css/detail.css"
+    },
+    {
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/css/editRole.css",
+      "PackagePath": "staticwebassets/css/editRole.css"
+    },
+    {
       "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/css/login.css",
       "PackagePath": "staticwebassets/css/login.css"
     },
     {
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/css/manageUser.css",
+      "PackagePath": "staticwebassets/css/manageUser.css"
+    },
+    {
       "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/css/notifications.css",
       "PackagePath": "staticwebassets/css/notifications.css"
+    },
+    {
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/css/profile.css",
+      "PackagePath": "staticwebassets/css/profile.css"
     },
     {
       "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/css/sidebarStyle.css",
@@ -79,6 +107,10 @@
     {
       "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/js/view-members.js",
       "PackagePath": "staticwebassets/js/view-members.js"
+    },
+    {
+      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/lib/.DS_Store",
+      "PackagePath": "staticwebassets/lib/.DS_Store"
     },
     {
       "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/lib/bootstrap/LICENSE",
