@@ -1,20 +1,19 @@
 ﻿<Properties StartupConfiguration="{57D7654E-C7C7-4A61-B0BB-D1C9EA7A07E3}|https">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Views/Account/Profile.cshtml">
-    <Files>
-      <File FileName="Views/Account/Profile.cshtml" Line="11" Column="30" />
-    </Files>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="TaskManagementSystem">
             <Node name="TaskManagementSystem">
               <Node name="Views" expanded="True">
-                <Node name="Account" expanded="True">
-                  <Node name="Profile.cshtml" selected="True" />
-                </Node>
-                <Node name="Admin" expanded="True" />
-                <Node name="Home" expanded="True" />
+                <Node name="Account" expanded="True" />
                 <Node name="Projects" expanded="True" />
+              </Node>
+              <Node name="wwwroot" expanded="True">
+                <Node name="js" expanded="True">
+                  <Node name="search-tasks.js" selected="True" />
+                </Node>
               </Node>
             </Node>
           </Node>
@@ -22,11 +21,10 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.ItemProperties.TaskManagementSystem PreferredExecutionTarget="/Applications/Arc.app" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.TaskManagementSystem PreferredExecutionTarget="/Applications/Arc.app" />
 </Properties>

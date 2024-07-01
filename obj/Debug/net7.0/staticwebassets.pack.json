@@ -5,10 +5,6 @@
       "PackagePath": "staticwebassets/TaskManagementSystem.bundle.scp.css"
     },
     {
-      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/.DS_Store",
-      "PackagePath": "staticwebassets/.DS_Store"
-    },
-    {
       "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/Gotham Light Regular.otf",
       "PackagePath": "staticwebassets/Gotham Light Regular.otf"
     },
@@ -57,10 +53,6 @@
       "PackagePath": "staticwebassets/favicon.ico"
     },
     {
-      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/js/.DS_Store",
-      "PackagePath": "staticwebassets/js/.DS_Store"
-    },
-    {
       "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/js/add-user-to-project.js",
       "PackagePath": "staticwebassets/js/add-user-to-project.js"
     },
@@ -107,10 +99,6 @@
     {
       "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/js/view-members.js",
       "PackagePath": "staticwebassets/js/view-members.js"
-    },
-    {
-      "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/lib/.DS_Store",
-      "PackagePath": "staticwebassets/lib/.DS_Store"
     },
     {
       "Id": "/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/wwwroot/lib/bootstrap/LICENSE",

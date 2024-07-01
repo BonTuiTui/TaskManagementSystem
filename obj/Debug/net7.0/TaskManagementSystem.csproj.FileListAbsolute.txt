@@ -96,9 +96,10 @@
 /Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/obj/Debug/net7.0/scopedcss/Views/Shared/_Layout.cshtml.rz.scp.css
 /Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/obj/Debug/net7.0/scopedcss/bundle/TaskManagementSystem.styles.css
 /Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/obj/Debug/net7.0/scopedcss/projectbundle/TaskManagementSystem.bundle.scp.css
-/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/obj/Debug/net7.0/TaskManagementSystem.csproj.CopyComplete
 /Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/obj/Debug/net7.0/TaskManagementSystem.dll
 /Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/obj/Debug/net7.0/refint/TaskManagementSystem.dll
 /Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/obj/Debug/net7.0/TaskManagementSystem.pdb
 /Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/obj/Debug/net7.0/TaskManagementSystem.genruntimeconfig.cache
 /Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/obj/Debug/net7.0/ref/TaskManagementSystem.dll
+/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/obj/Debug/net7.0/TaskManagementSystem.sourcelink.json
+/Users/macs/Documents/HSU/SA/MainProject/TaskManagementSystem/obj/Debug/net7.0/TaskMana.27CB023B.Up2Date
