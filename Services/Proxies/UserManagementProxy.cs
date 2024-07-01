@@ -50,7 +50,10 @@ namespace TaskManagementSystem.Services.Proxies
                 throw new UnauthorizedAccessException("Only manager can perform this action.");
             }
         }
-
+        public async Task<IdentityResult> RegisterUserAsync1(ApplicationUser user, string password)
+        {
+            return await _realService.RegisterUserAsync1(user, password);
+        }
         // Đăng ký người dùng mới
         public async Task<IdentityResult> RegisterUserAsync(ApplicationUser user)
         {

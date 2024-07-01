@@ -38,5 +38,7 @@ namespace TaskManagementSystem.Interfaces
         Task<IdentityResult> AddPasswordAsync(ApplicationUser user, string newPassword);
         Task<IdentityResult> LockUserAsync(string userId);
         Task<IdentityResult> UnlockUserAsync(string userId);
+        Task<IdentityResult> RegisterUserAsync1(ApplicationUser user, string password);
+
     }
 }

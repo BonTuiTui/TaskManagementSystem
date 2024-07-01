@@ -45,9 +45,8 @@ namespace TaskManagementSystem.Controllers
                     return View(model);
                 }
 
-                // Tách tên người dùng từ địa chỉ email
                 var userName = model.Email.Split('@')[0];
-                var fullName = model.Email.Split('@')[0]; // Giả sử fullname là phần trước @ của email
+                var fullName = model.Email.Split('@')[0];
 
                 var user = new ApplicationUser
                 {
@@ -56,7 +55,7 @@ namespace TaskManagementSystem.Controllers
                     FullName = fullName
                 };
 
-                var result = await _userManagementProxy.RegisterUserAsync(user);
+                var result = await _userManagementProxy.RegisterUserAsync1(user, model.Password);
 
                 if (result.Succeeded)
                 {
@@ -75,7 +74,6 @@ namespace TaskManagementSystem.Controllers
             model.ExternalLogins = (await _userManagementProxy.GetExternalAuthenticationSchemesAsync()).ToList();
             return View(model);
         }
-
         [HttpGet]
         [AllowAnonymous]
         public async Task<IActionResult> Login(string? ReturnUrl = null)

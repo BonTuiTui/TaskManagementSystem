@@ -27,7 +27,12 @@ namespace TaskManagementSystem.Services.Proxies
             var userId = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
             return await _userManager.FindByIdAsync(userId);
         }
-
+        public async Task<IdentityResult> RegisterUserAsync1(ApplicationUser user, string password)
+        {
+            var passwordHasher = new PasswordHasher<ApplicationUser>(); // Use the built-in hasher
+            user.PasswordHash = passwordHasher.HashPassword(user, password);
+            return await _userManager.CreateAsync(user);
+        }
         public async Task<IdentityResult> RegisterUserAsync(ApplicationUser user)
         {
             return await _userManager.CreateAsync(user);
